@@ -50,8 +50,6 @@ Portfolio development in progress.
 
 Individual projects will be documented with their objectives, implementation details, tests, and evaluation results.
 
-## Author
-
 Ajay Kumar Ojha
 
 GitHub: https://github.com/ajaysoftdev
