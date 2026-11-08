@@ -4,7 +4,7 @@
 
 **Domain:** Cloud data engineering, lakehouse architecture and data operations.  
 **Technology direction:** Python-based pipeline components, object-storage/lakehouse patterns, SQL transformations and orchestration adapters; concrete services will be selected through ADRs.  
-**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+**Status:** First executable local batch-pipeline prototype added — CI execution pending.
 
 ## Business capabilities
 - Ingest batch and incremental data from files, APIs and databases.
@@ -31,6 +31,24 @@ Ingest synthetic sales and product files, validate schemas, quarantine malformed
 
 ## Guardrails
 Keep raw data immutable, make processing idempotent, protect sensitive fields and record schema changes. Avoid hard-coding cloud credentials or claiming cloud deployment before it is verified.
+
+## First executable slice
+
+The current prototype accepts synthetic sales rows, persists idempotent pipeline runs, validates required fields and value ranges, quarantines malformed/duplicate rows, calculates curated silver-level line totals and produces a product-level gold summary. It includes API tests, OpenAPI, synthetic input, Docker and a GitHub Actions workflow.
+
+**Limitations:** this is a local SQLite/Python demonstration, not a cloud deployment or distributed lakehouse. There are no S3/ADLS connectors, Spark/Databricks, ADF/Airflow orchestration, CDC, schema registry, incremental checkpoints, immutable bronze object storage, access governance, lineage service, observability or FinOps measurement. Tests have been added but have not yet been executed in CI. No scale or performance claim is made.
+
+## Run locally
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+uvicorn cloudpipeline.main:app --reload --app-dir src
+pytest
+```
+
+Docker: `docker compose up --build`. API contract: [openapi.yaml](openapi.yaml). Synthetic input: [examples/synthetic-sales.json](examples/synthetic-sales.json).
 
 ## Project documentation
 - [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
