@@ -1,0 +1,29 @@
+name: Breach Resilience Prototype CI
+
+on:
+  push:
+    paths:
+      - "projects/breach-resilient-enterprise/**"
+      - ".github/workflows/breach-resilience.yml"
+  pull_request:
+    paths:
+      - "projects/breach-resilient-enterprise/**"
+      - ".github/workflows/breach-resilience.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/breach-resilient-enterprise
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: projects/breach-resilient-enterprise/pyproject.toml
+      - run: python -m pip install --upgrade pip
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
