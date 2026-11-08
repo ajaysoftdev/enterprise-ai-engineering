@@ -79,7 +79,8 @@ Avoid creating a central framework prematurely. Extract shared libraries only af
 - This evidence verifies the current synthetic/local prototype slices only. It does not establish production readiness, live enterprise integration, security certification, GxP validation, cloud deployment, performance or regulatory compliance.
 - Every project README records its own CI run, test count and explicit limitations.
 - The Starlette TestClient deprecation warning was resolved by adding `httpx2` to the development dependencies; the latest CI reruns complete without that warning.
-- A portfolio-wide Bandit and pip-audit security workflow has been added; its first run is pending. See [Portfolio Security Baseline](PORTFOLIO_SECURITY_BASELINE.md).
+- Portfolio Bandit scans passed for all 15 projects. The initial dependency audit found a vulnerability in the old pytest 8.4.2; all projects were upgraded to pytest 9.0.3 and a clean `pip-audit --skip-editable` rerun is pending. See [Portfolio Security Baseline](PORTFOLIO_SECURITY_BASELINE.md).
+- Request correlation middleware, bounded caller-provided IDs, generated fallback IDs and baseline response headers have been added across all 15 APIs; the new regression tests await CI.
 - MDM stewardship decisions now use a single SQLite transaction for candidate state, decision record and golden-record update; a regression test covers duplicate decisions without partial mutation. CI rerun is pending.
 - Next engineering milestone: resolve security-scan findings, add authentication/authorization and tenant-isolation controls, test concurrent requests and recovery, and add operational telemetry and reproducible deployment verification. Do not create the sixteenth integration project until the fifteen interfaces and controls are sufficiently stable.
 
