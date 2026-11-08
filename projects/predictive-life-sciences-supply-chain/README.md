@@ -1,49 +1,41 @@
 # Predictive Life Sciences Supply Chain
 
-**Domain:** Regulated supply chain visibility and exception prediction  
-**Status:** Architecture specification; implementation and runtime verification pending.
+**Purpose:** Improve visibility of material availability, lot status and delivery risk across regulated life-sciences supply chains.
 
-## Start here
-- [Project blueprint](docs/PROJECT_BLUEPRINT.md)
-- [Source-code structure and implementation boundaries](src/README.md)
-- [Test strategy and definition of done](tests/README.md)
+**Domain:** Life-sciences operations, supply chain analytics and predictive risk.  
+**Technology direction:** Domain APIs, event ingestion, governed analytical data and explainable risk models; implementation choices will be recorded as ADRs.  
+**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+
+## Business capabilities
+- Represent materials, suppliers, purchase orders, inventory, lots and shipments.
+- Ingest ERP, WMS, manufacturing, quality and logistics events.
+- Track lot genealogy, expiry, quality holds and release status.
+- Identify shortages, delays and material constraints.
+- Calculate explainable risk indicators and scenario impacts.
+- Present planner work queues and recommended next actions.
+
+## Reference workflow
+Operational source events → canonical supply-chain model → lot and order reconciliation → availability calculation → risk feature generation → prediction/scenario analysis → planner review → action and outcome capture.
+
+## Key modules
+- **Domain model:** material, supplier, order, lot, shipment and site.
+- **Ingestion:** synthetic ERP/WMS/MES/QMS and logistics adapters.
+- **Traceability:** lot genealogy, status and event history.
+- **Planning:** demand/supply balance, constraints and exception queues.
+- **Risk analytics:** delay/shortage features and explainable risk scoring.
+- **Planner workflow:** review, action assignment and outcome feedback.
+
+## Expected demonstration
+Use synthetic pharmaceutical supply data to identify a lot on quality hold that affects a planned production order, calculate downstream shortage exposure and route the issue to a planner.
+
+## Guardrails
+Preserve lot-level traceability and data provenance. Predictions support planning decisions; they do not release batches, change quality status or replace authorised quality processes.
+
+## Project documentation
+- [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
+- [Source-code boundaries](src/README.md)
+- [Test strategy](tests/README.md)
 - [Local deployment and operations](infra/README.md)
 
-## Planned repository layout
-```text
-predictive-life-sciences-supply-chain/
-├── docs/PROJECT_BLUEPRINT.md
-├── docs/adr/
-├── src/
-│   ├── app/
-│   ├── api/
-│   ├── domain/
-│   ├── application/
-│   ├── infrastructure/
-│   └── observability/
-├── tests/
-│   ├── unit/
-│   ├── integration/
-│   ├── contract/
-│   └── e2e/
-├── infra/
-│   ├── Dockerfile
-│   ├── compose.yaml
-│   └── deploy/
-├── scripts/
-├── .github/workflows/
-├── .env.example
-├── pyproject.toml
-└── README.md
-```
-
-The layout is a target structure. Implementation increments will add tracked source and deployment files; empty folders cannot be committed by Git alone.
-
-## Engineering status
-- Architecture and module boundaries: documented.
-- Executable application: pending.
-- Automated tests: planned; not yet run.
-- Container/CI verification: pending.
-- Production deployment: not claimed.
-
-See the [project blueprint](docs/PROJECT_BLUEPRINT.md) for business flow, domain model, interfaces, security, NFRs, delivery increments and acceptance criteria.
+## Delivery status
+Use synthetic data and clearly labelled simulated events. No validated GxP system, regulated production use or forecast accuracy is claimed.
