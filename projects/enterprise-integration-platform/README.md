@@ -4,7 +4,7 @@
 
 **Domain:** Enterprise integration, API management, event-driven architecture and workflow orchestration.  
 **Technology direction:** REST APIs, asynchronous messaging, canonical contracts and adapter-based connectors; specific broker/runtime choices will be documented as ADRs.  
-**Status:** First executable reliability prototype added — CI execution pending.
+**Status:** Reliability prototype CI verified — 6 tests passed on Python 3.12 (GitHub Actions run 42454847474, commit 1030523). This verifies local simulated delivery, retry, idempotency and DLQ tests only; it does not verify a production broker or exactly-once delivery.
 
 ## Business capabilities
 - Expose and consume versioned APIs with consistent error contracts.
