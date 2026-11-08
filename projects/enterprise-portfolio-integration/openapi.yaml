@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  title: Enterprise Portfolio Integration
+  version: 0.1.0
+  description: Synthetic supplier invoice orchestration across Document Intelligence and MDM.
+servers:
+  - url: http://127.0.0.1:8003
+paths:
+  /health:
+    get:
+      summary: Health check
+      responses:
+        "200": {description: Healthy}
+  /v1/supplier-onboarding:
+    post:
+      summary: Start idempotent supplier invoice onboarding
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: {type: string, minLength: 4, maxLength: 120}
+        - in: header
+          name: X-Request-ID
+          required: false
+          schema: {type: string, maxLength: 64}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [source_system, source_key, filename, text_content]
+              properties:
+                source_system: {type: string, minLength: 2, maxLength: 80}
+                source_key: {type: string, minLength: 1, maxLength: 120}
+                filename: {type: string, minLength: 1, maxLength: 255}
+                text_content: {type: string, minLength: 1, maxLength: 200000}
+      responses:
+        "202": {description: Workflow accepted}
+        "409": {description: Idempotency key reused with different payload}
+  /v1/workflows/{workflow_id}:
+    get:
+      summary: Retrieve workflow state
+      parameters:
+        - in: path
+          name: workflow_id
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Workflow found}
+        "404": {description: Workflow not found}
+  /v1/workflows/{workflow_id}/refresh:
+    post:
+      summary: Refresh MDM stewardship outcome
+      parameters:
+        - in: path
+          name: workflow_id
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Workflow refreshed}
+        "409": {description: Workflow is not waiting for stewardship}
+  /v1/workflows/{workflow_id}/audit:
+    get:
+      summary: Retrieve workflow audit events
+      parameters:
+        - in: path
+          name: workflow_id
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Audit events}
+        "404": {description: Workflow not found}
