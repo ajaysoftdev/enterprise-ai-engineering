@@ -1,49 +1,42 @@
 # Cloud Data Engineering Platform
 
-**Domain:** Reusable lakehouse-style ingestion and transformation foundation  
-**Status:** Architecture specification; implementation and runtime verification pending.
+**Purpose:** Provide a repeatable foundation for reliable ingestion, transformation, quality enforcement, lineage and cost-aware data delivery.
 
-## Start here
-- [Project blueprint](docs/PROJECT_BLUEPRINT.md)
-- [Source-code structure and implementation boundaries](src/README.md)
-- [Test strategy and definition of done](tests/README.md)
+**Domain:** Cloud data engineering, lakehouse architecture and data operations.  
+**Technology direction:** Python-based pipeline components, object-storage/lakehouse patterns, SQL transformations and orchestration adapters; concrete services will be selected through ADRs.  
+**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+
+## Business capabilities
+- Ingest batch and incremental data from files, APIs and databases.
+- Define and validate data contracts at ingestion boundaries.
+- Separate raw, standardised and curated data zones.
+- Apply transformation, deduplication and schema evolution rules.
+- Run data quality checks and quarantine invalid records.
+- Track lineage, freshness, pipeline health and processing cost.
+- Publish curated datasets for BI, analytics and AI workloads.
+
+## Reference workflow
+Source → landing/raw → contract validation → bronze/silver/gold transformations → quality gates → curated serving → lineage, metrics and cost monitoring.
+
+## Key modules
+- **Connectors:** batch, API and CDC-style ingestion adapters.
+- **Contracts:** schema definitions, compatibility and validation.
+- **Transformations:** reusable SQL/Python processing components.
+- **Quality:** completeness, uniqueness, validity and reconciliation checks.
+- **Orchestration:** dependencies, retries, backfills and run state.
+- **Governance and FinOps:** lineage, access, freshness and cost attribution.
+
+## Expected demonstration
+Ingest synthetic sales and product files, validate schemas, quarantine malformed rows, transform curated outputs and inspect lineage and pipeline run metrics.
+
+## Guardrails
+Keep raw data immutable, make processing idempotent, protect sensitive fields and record schema changes. Avoid hard-coding cloud credentials or claiming cloud deployment before it is verified.
+
+## Project documentation
+- [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
+- [Source-code boundaries](src/README.md)
+- [Test strategy](tests/README.md)
 - [Local deployment and operations](infra/README.md)
 
-## Planned repository layout
-```text
-cloud-data-engineering-platform/
-├── docs/PROJECT_BLUEPRINT.md
-├── docs/adr/
-├── src/
-│   ├── app/
-│   ├── api/
-│   ├── domain/
-│   ├── application/
-│   ├── infrastructure/
-│   └── observability/
-├── tests/
-│   ├── unit/
-│   ├── integration/
-│   ├── contract/
-│   └── e2e/
-├── infra/
-│   ├── Dockerfile
-│   ├── compose.yaml
-│   └── deploy/
-├── scripts/
-├── .github/workflows/
-├── .env.example
-├── pyproject.toml
-└── README.md
-```
-
-The layout is a target structure. Implementation increments will add tracked source and deployment files; empty folders cannot be committed by Git alone.
-
-## Engineering status
-- Architecture and module boundaries: documented.
-- Executable application: pending.
-- Automated tests: planned; not yet run.
-- Container/CI verification: pending.
-- Production deployment: not claimed.
-
-See the [project blueprint](docs/PROJECT_BLUEPRINT.md) for business flow, domain model, interfaces, security, NFRs, delivery increments and acceptance criteria.
+## Delivery status
+The documents define the intended design and acceptance criteria. No cloud account deployment, measured performance or production data pipeline is claimed.
