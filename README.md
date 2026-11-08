@@ -28,7 +28,7 @@ See the [engineering documentation portal](docs/README.md) for architecture refe
 
 ## Independent project catalogue
 
-The fifteen core projects are maintained as independent workstreams, with a sixteenth project composing them through explicit contracts. Each project README describes its business purpose, capabilities, reference workflow, key modules, demonstration scenario, guardrails, documentation and delivery status. Each also has a runnable prototype slice and project-level CI evidence. The portfolio integration project has now started its first vertical slice: supplier invoice intake → Document Intelligence → MDM, with idempotency and a human-stewardship pause.
+The fifteen core projects are maintained as independent workstreams, with a sixteenth project composing them through explicit contracts. Each project README describes its business purpose, capabilities, reference workflow, key modules, demonstration scenario, guardrails, documentation and delivery status. Each also has a runnable prototype slice and project-level CI evidence. The portfolio integration project now has a CI-verified authenticated HTTP vertical slice: supplier invoice intake → Document Intelligence → MDM, with idempotency, a human-stewardship pause and workflow refresh.
 
 | # | Independent project | Main capability | Status |
 |---:|---|---|---|
@@ -58,7 +58,7 @@ The earlier six project briefs remain in the repository as additional engineerin
 1. Establish the individual project structure, domain contracts and acceptance criteria.
 2. Implement each project independently, including source code, tests, security and local deployment.
 3. Run and record project-level verification and demo evidence.
-4. The portfolio integration project is now started; expand its vertical slices only after the relevant domain contracts, adapter behaviour and end-to-end verification are stable.
+4. The first authenticated HTTP vertical slice is verified; expand further vertical slices only after the relevant domain contracts, adapter behaviour and end-to-end verification are stable.
 
 ## Repository structure
 
