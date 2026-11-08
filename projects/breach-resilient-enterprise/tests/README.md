@@ -20,5 +20,8 @@ Generate synthetic examples for Asset, Identity, TrustBoundary, ThreatScenario, 
 - CI retains test reports; failures are not silently ignored.
 - Performance thresholds are declared before performance claims.
 
+## Current executable test slice
+The current API tests cover health, sensitive-target reachability from a synthetic compromised identity, unknown-principal behaviour, default-deny secret access, human approval gating and the guarantee that containment remains simulation-only. Real identity, network, workload, cloud and SOC integrations are not tested.
+
 ## Evidence record
 For each run record commit, runtime/tool versions, command, result, test count and exclusions. Until executed, a test is **planned**, not passed.
