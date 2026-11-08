@@ -38,10 +38,8 @@ async def request_context(request: Request, call_next):
     return response
 
 
-@app.on_event("startup")
-def configure_adapters():
-    app.state.document_adapter = getattr(app.state, "document_adapter", DocumentIntelligenceAdapter())
-    app.state.mdm_adapter = getattr(app.state, "mdm_adapter", MdmAdapter())
+app.state.document_adapter = DocumentIntelligenceAdapter()
+app.state.mdm_adapter = MdmAdapter()
 
 
 @app.get("/health")
