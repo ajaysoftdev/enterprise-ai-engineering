@@ -72,11 +72,13 @@ Avoid creating a central framework prematurely. Extract shared libraries only af
 
 ## Current status
 
-- All 15 project folders and their project-specific SOURCES.md files exist.
-- All 15 project READMEs link to their reference sources.
-- All 15 project folders now contain IMPLEMENTATION_ARCHITECTURE.md and their READMEs link to it.
-- The architecture documents are baselines; they are not proof of runnable implementations.
-- Next engineering milestone: complete and verify Project 1 (Enterprise Document Intelligence) as the reference implementation, then reuse proven patterns in the remaining projects.
+- All 15 project folders retain their project-specific scope, reference sources, implementation architecture, domain contracts and delivery guidance.
+- All 15 projects now have a first executable local prototype slice, API contracts, Docker configuration, automated tests and project-specific GitHub Actions workflows.
+- All 15 GitHub Actions test workflows completed successfully on Python 3.12: **93 tests passed across the portfolio**.
+- This evidence verifies the current synthetic/local prototype slices only. It does not establish production readiness, live enterprise integration, security certification, GxP validation, cloud deployment, performance or regulatory compliance.
+- Every project README records its own CI run, test count and explicit limitations.
+- A shared Starlette/httpx deprecation warning remains in the test-client dependency set and should be addressed before expanding the test framework.
+- Next engineering milestone: strengthen the prototypes with authentication/authorization, concurrency and transactional tests, real adapter contracts, security scanning, operational telemetry, and reproducible deployment verification. Do not create the sixteenth integration project until the fifteen interfaces and controls are sufficiently stable.
 
 ## Current official architecture references
 
