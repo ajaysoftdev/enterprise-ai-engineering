@@ -18,6 +18,7 @@ def extract_fields(text: str) -> dict[str, ExtractedField]:
         "document_date": _field(r"(?:date|invoice date)\s*[:\-]?\s*(\d{4}-\d{2}-\d{2})", text),
         "total_amount": _field(r"(?:total|amount due)\s*[:\-]?\s*([A-Z]{0,3}\s?\d[\d,]*(?:\.\d{2})?)", text),
         "supplier": _field(r"(?:supplier|vendor)\s*[:\-]?\s*([^\r\n]{2,100})", text),
+        "supplier_tax_id": _field(r"(?:supplier\s+)?(?:tax\s+id|tax identifier|gstin|vat id)\s*[:\-]?\s*([A-Z0-9-]{4,40})", text),
     }
 
 
