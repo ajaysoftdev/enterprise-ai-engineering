@@ -4,7 +4,7 @@
 
 **Domain:** Business-impact observability, event correlation and decision prioritisation.  
 **Planned stack:** Python 3.12, FastAPI, PostgreSQL, Redis, event adapters and OpenTelemetry.  
-**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+**Status:** First executable prototype added — CI execution pending.
 
 ## Business capabilities
 - Ingest alerts, service metrics, business KPIs and operational events.
@@ -30,6 +30,24 @@ Feed synthetic infrastructure and business events, correlate multiple alerts int
 
 ## Guardrails
 Avoid opaque priority scores. Preserve original signals, explain correlations and allow authorised operators to override or correct recommendations.
+
+## First executable slice
+
+The current prototype provides signal ingestion, SQLite persistence, a deterministic weighted impact score, P1–P4 priority bands, correlation-key grouping, an explanation of score factors and operator acknowledgement. It includes API tests, OpenAPI, Docker and a GitHub Actions workflow.
+
+**Limitations:** signals are synthetic/manual API submissions; there are no Prometheus, OpenTelemetry, cloud-monitoring or ticketing connectors, service dependency graph, time-window correlation, SLO evaluation, escalation scheduler, role-based access control or multi-tenant controls. The scoring weights are illustrative and require business-owner calibration. No incident reduction or operational performance claim is made. Tests have been added but have not yet been executed in CI.
+
+## Run locally
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+uvicorn attention.main:app --reload --app-dir src
+pytest
+```
+
+Docker: `docker compose up --build`. API contract: [openapi.yaml](openapi.yaml).
 
 ## Project documentation
 - [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
