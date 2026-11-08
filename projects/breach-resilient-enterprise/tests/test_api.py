@@ -5,9 +5,12 @@ client = TestClient(app)
 
 
 def test_health():
-    response = client.get("/health")
+    response = client.get("/health", headers={"X-Request-ID": "test-request-01"})
     assert response.status_code == 200
     assert response.json()["status"] == "ok"
+    assert response.headers["x-request-id"] == "test-request-01"
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert response.headers["cache-control"] == "no-store"
 
 
 def test_compromised_contractor_reaches_sensitive_resources():
@@ -52,3 +55,10 @@ def test_approved_plan_still_does_not_execute_controls():
     assert response.status_code == 200
     assert response.json()["status"] == "APPROVED_DRY_RUN"
     assert response.json()["execution_mode"] == "SIMULATION_ONLY"
+
+
+def test_malformed_request_id_is_replaced():
+    response = client.get("/health", headers={"X-Request-ID": "invalid request id"})
+    assert response.status_code == 200
+    assert response.headers["x-request-id"] != "invalid request id"
+    assert len(response.headers["x-request-id"]) == 32
