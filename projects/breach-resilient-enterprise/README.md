@@ -5,6 +5,7 @@
 **Domain:** Zero-trust security architecture, attack-path containment and cyber resilience.  
 **Planned stack:** Python 3.12, FastAPI, OPA/Rego policy examples, Docker Compose and OpenTelemetry.  
 **Status:** Defensive simulation CI + Docker verified — 6 tests passed on Python 3.12 (GitHub Actions run 42456379871, commit ccf1a74). This verifies the synthetic graph/API tests only; no live security control is deployed.
+**Latest revision note:** Request correlation IDs and baseline security response headers have been added; the new middleware tests are awaiting CI verification.
 
 ## Business capabilities
 - Represent identities, workloads, resources, trust boundaries and access paths.
