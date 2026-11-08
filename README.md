@@ -4,6 +4,10 @@ A practical engineering portfolio exploring enterprise software development, AI 
 
 The portfolio is organised around end-to-end projects. Each project starts with a problem statement and acceptance criteria, then progresses through implementation, testing, review and evidence-based reporting.
 
+## Documentation
+
+See the [engineering documentation portal](docs/README.md) for architecture references, local setup, configuration, testing, operations, troubleshooting and project walkthroughs.
+
 ## Portfolio areas
 
 | Area | Focus | Project links |
