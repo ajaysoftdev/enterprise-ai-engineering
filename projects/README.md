@@ -23,7 +23,7 @@ The project folders are maintained inside this repository; they are not separate
 | 13 | [Third-Party Risk Management](third-party-risk-management/README.md) | Vendor lifecycle, due diligence and fourth-party risk | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086751) |
 | 14 | [SAP S/4HANA Data Modernisation](sap-s4-data-modernisation/README.md) | SAP-like master data migration and reconciliation | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086801) |
 | 15 | [Enterprise Architecture Assessment Toolkit](enterprise-architecture-assessment-toolkit/README.md) | Capability-led assessment and target-state roadmapping | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086760) |
-| 16 | [Enterprise Portfolio Integration](enterprise-portfolio-integration/README.md) | Cross-project orchestration and contract-based workflows | CI + Docker + HTTP E2E verified — 10 tests passed (GitHub Actions run 42462678787) |
+| 16 | [Enterprise Portfolio Integration](enterprise-portfolio-integration/README.md) | Cross-project orchestration and contract-based workflows | CI + Docker + HTTP E2E verified — 10 tests passed (GitHub Actions run 42462904962) |
 
 ## Earlier engineering exercises
 
