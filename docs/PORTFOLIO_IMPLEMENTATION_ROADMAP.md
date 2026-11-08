@@ -77,7 +77,7 @@ Avoid creating a central framework prematurely. Extract shared libraries only af
 - All 15 GitHub Actions test workflows completed successfully on Python 3.12: **93 tests passed across the portfolio**.
 - This evidence verifies the current synthetic/local prototype slices only. It does not establish production readiness, live enterprise integration, security certification, GxP validation, cloud deployment, performance or regulatory compliance.
 - Every project README records its own CI run, test count and explicit limitations.
-- A shared Starlette/httpx deprecation warning remains in the test-client dependency set and should be addressed before expanding the test framework.
+- The Starlette TestClient deprecation warning was resolved by adding `httpx2` to the development dependencies; the latest CI reruns complete without that warning.
 - Next engineering milestone: strengthen the prototypes with authentication/authorization, concurrency and transactional tests, real adapter contracts, security scanning, operational telemetry, and reproducible deployment verification. Do not create the sixteenth integration project until the fifteen interfaces and controls are sufficiently stable.
 
 ## Current official architecture references
