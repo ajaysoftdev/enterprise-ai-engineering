@@ -4,7 +4,7 @@
 
 **Domain:** AI-assisted software engineering, agent evaluation and developer productivity.  
 **Technology direction:** Python orchestration, isolated worktrees/containers, provider-neutral model adapters and automated quality tools; concrete choices will be recorded as ADRs.  
-**Status:** Current prototype CI + Docker verified — 8 tests passed on Python 3.12 (GitHub Actions run 42461086821, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Status:** Current prototype CI + Docker + security verified — 8 tests passed on Python 3.12 (GitHub Actions run 42461086821, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
