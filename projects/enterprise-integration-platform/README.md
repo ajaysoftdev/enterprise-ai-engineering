@@ -36,7 +36,7 @@ Keep business rules out of transport adapters where possible. Version contracts 
 
 The current prototype includes a versioned event envelope, schema allow-list, idempotency-key handling, SQLite message persistence, bounded delivery retries, dead-letter routing, explicit replay and delivery audit events. It includes API tests, OpenAPI, a synthetic order event, Docker and a GitHub Actions workflow.
 
-**Limitations:** delivery is simulated by an API call; there is no Kafka, Service Bus, RabbitMQ, API gateway, schema registry, external producer/consumer, distributed transaction, outbox relay, authentication, authorization, tenant isolation or production-grade broker semantics. Retry and DLQ state is local SQLite state, and replay is not concurrency-safe. Exactly-once delivery is not claimed. Tests have been added but have not yet been executed in CI.
+**Limitations:** delivery is simulated by an API call; there is no Kafka, Service Bus, RabbitMQ, API gateway, schema registry, external producer/consumer, distributed transaction, outbox relay, authentication, authorization, tenant isolation or production-grade broker semantics. Retry and DLQ state is local SQLite state, and replay is not concurrency-safe. Exactly-once delivery is not claimed. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. One Starlette/httpx deprecation warning remains.
 
 ## Run locally
 
