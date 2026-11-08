@@ -1,0 +1,15 @@
+{
+  "source_system": "SYNTHETIC-LIMS",
+  "source_record_id": "ASSAY-RESULT-1001",
+  "study_id": "STUDY-SYN-01",
+  "record_type": "ASSAY_RESULT",
+  "record_name": "Synthetic Assay Result 1001",
+  "schema_version": "1.0",
+  "parent_record_ids": [],
+  "payload": {
+    "sample_id": "SAMPLE-SYN-01",
+    "method_id": "METHOD-SYN-01",
+    "result_value": 4.2,
+    "unit": "mg/L"
+  }
+}
