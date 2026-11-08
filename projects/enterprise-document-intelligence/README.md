@@ -1,5 +1,5 @@
 # Enterprise Document Intelligence
-**Latest revision note:** Supplier tax-identifier extraction and its portfolio-integration test have been added; CI verification of this extension is pending.
+**Latest revision verified:** Supplier tax-identifier extraction and its integration handoff test passed in the latest CI run.
 
 ## Purpose
 
@@ -7,7 +7,7 @@ A document intake and validation demonstrator that receives synthetic plain-text
 
 ## Current implementation status
 
-**Previous prototype CI + Docker verified — 7 tests passed on Python 3.12 (GitHub Actions run 42461086822, commit 05b8198).** The latest supplier tax-identifier extension is awaiting its own CI rerun; production readiness is not claimed.
+**Current prototype CI + Docker verified — 7 tests passed on Python 3.12 (GitHub Actions run 42462168881, commit 6dfd2b3).** This verifies the current synthetic text-only API test slice; production readiness is not claimed.
 
 The first executable slice is now present:
 - FastAPI service with health, document create/list/read, review and audit-read endpoints
@@ -16,7 +16,7 @@ The first executable slice is now present:
 - Required-field validation and NEEDS_REVIEW routing
 - API tests, Dockerfile, Docker Compose profile and synthetic sample input
 
-**Important limitations:** this version accepts only text/plain input. It does not yet parse PDF/image files, call an OCR or LLM provider, authenticate users, implement tenant isolation or idempotency keys, publish events, or provide production-grade file storage. The audit table is append-only through this prototype API but is not tamper-proof against direct database modification. The previous API suite passed 7 tests; the latest supplier tax-identifier change has not yet been re-verified. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. Do not treat this prototype as production-ready or as a validated document-processing control.
+**Important limitations:** this version accepts only text/plain input. It does not yet parse PDF/image files, call an OCR or LLM provider, authenticate users, implement tenant isolation or idempotency keys, publish events, or provide production-grade file storage. The audit table is append-only through this prototype API but is not tamper-proof against direct database modification. GitHub Actions executed the current API suite successfully: 7 passed, 0 failed. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. Do not treat this prototype as production-ready or as a validated document-processing control.
 
 ## Run locally
 
