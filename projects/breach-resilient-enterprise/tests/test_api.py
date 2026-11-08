@@ -62,3 +62,9 @@ def test_malformed_request_id_is_replaced():
     assert response.status_code == 200
     assert response.headers["x-request-id"] != "invalid request id"
     assert len(response.headers["x-request-id"]) == 32
+
+def test_protected_api_rejects_missing_api_key():
+    unauthenticated = TestClient(app)
+    response = unauthenticated.get("/openapi.json")
+    assert response.status_code == 401
+
