@@ -15,5 +15,8 @@ Generate Source, Pipeline, Dataset, DataContract, Run, Checkpoint, QualityResult
 ## Definition of done
 Schema checks run before processing; invalid rows are quarantined; reruns are idempotent; lineage is queryable; output is deterministic; CI retains test and quality reports.
 
+## Current executable test slice
+The current API suite covers health, silver transformation and gold aggregation, invalid-row quarantine, duplicate business-key quarantine, idempotent run submission and run retrieval. It does not test cloud object storage, Spark, CDC, orchestration, incremental checkpoints, access controls, lineage services or large-scale throughput.
+
 ## Evidence
 Record commit, runtime versions, command, input fixture version, output counts, test results and exclusions. Untested checks remain planned.
