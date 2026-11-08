@@ -47,3 +47,7 @@ See [SOURCES.md](SOURCES.md) for curated official documentation, standards, refe
 ## Implementation architecture
 
 See [IMPLEMENTATION_ARCHITECTURE.md](IMPLEMENTATION_ARCHITECTURE.md) for the proposed logical architecture, workflow, API/event contracts, data model, security, operational requirements, acceptance tests and delivery sequence.
+
+## Domain contracts and data model
+
+See [DOMAIN_CONTRACTS.md](DOMAIN_CONTRACTS.md) for proposed domain entities, REST endpoints, event names, workflow, invariants and contract-test scenarios.
