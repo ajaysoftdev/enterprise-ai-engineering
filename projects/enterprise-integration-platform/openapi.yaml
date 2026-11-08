@@ -1,0 +1,62 @@
+openapi: 3.1.0
+info:
+  title: Enterprise Integration Platform
+  version: 0.1.0
+  description: Synthetic event intake, idempotent delivery, retries and DLQ replay.
+servers:
+  - url: http://127.0.0.1:8000
+paths:
+  /health:
+    get:
+      summary: Service health
+      responses:
+        "200": {description: Healthy}
+  /v1/messages:
+    post:
+      summary: Publish an event using an idempotency key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/MessageCreate"}
+      responses:
+        "202": {description: Accepted or existing idempotent message returned}
+  /v1/messages/{message_id}/process:
+    post:
+      summary: Attempt synthetic delivery
+      parameters:
+        - in: path
+          name: message_id
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Delivery attempt result}
+        "409": {description: Message not eligible for processing}
+  /v1/dead-letters:
+    get:
+      summary: List dead-letter messages
+      responses:
+        "200": {description: Dead-letter list}
+  /v1/dead-letters/{message_id}/replay:
+    post:
+      summary: Reset an eligible dead-letter message for replay
+      parameters:
+        - in: path
+          name: message_id
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Message reset to pending}
+        "409": {description: Message is not in the dead-letter state}
+components:
+  schemas:
+    MessageCreate:
+      type: object
+      required: [idempotency_key, producer, event_type, schema_version, correlation_id, payload]
+      properties:
+        idempotency_key: {type: string, minLength: 4}
+        producer: {type: string}
+        event_type: {type: string, enum: [OrderCreated, InventoryReserved, ShipmentDispatched]}
+        schema_version: {type: string, enum: ["1.0"]}
+        correlation_id: {type: string}
+        payload: {type: object}
