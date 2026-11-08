@@ -9,7 +9,7 @@ The project folders are maintained inside this repository; they are not separate
 | # | Project | Primary business capability | Status |
 |---:|---|---|---|
 | 1 | [Enterprise Information Resilience](enterprise-information-resilience/README.md) | Digital trust, information integrity and reputation resilience | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086794) |
-| 2 | [Enterprise Document Intelligence](enterprise-document-intelligence/README.md) | Document extraction, validation and human exception handling | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086822) |
+| 2 | [Enterprise Document Intelligence](enterprise-document-intelligence/README.md) | Document extraction, validation and human exception handling | CI + Docker verified — 7 tests passed (GitHub Actions run 42462168881) |
 | 3 | [Breach-Resilient Enterprise](breach-resilient-enterprise/README.md) | Zero-trust architecture and attack-path containment | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086819) |
 | 4 | [Enterprise Data Protection](enterprise-data-protection/README.md) | Data classification, minimisation, masking and access governance | CI + Docker verified — 8 tests passed (GitHub Actions run 42461086755) |
 | 5 | [Enterprise Attention and Intelligence Hub](enterprise-attention-intelligence-hub/README.md) | Business-impact observability and decision prioritisation | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086772) |
