@@ -2,6 +2,11 @@
 
 ```text
 src/
+  rndspine/
+    main.py              # record intake, lineage and audit API
+    models.py            # typed research record and provenance contracts
+    quality.py           # record-type-specific metadata checks
+    repository.py        # SQLite records, lineage edges and audit persistence
   app/                  # config, composition, health
   contracts/            # versioned schemas and data contracts
   domain/
