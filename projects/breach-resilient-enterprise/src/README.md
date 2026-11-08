@@ -4,6 +4,10 @@ Intended implementation boundary:
 
 ```text
 src/
+  breach/
+    main.py              # FastAPI endpoints: attack paths, policy evaluation, dry-run containment
+    graph.py             # synthetic trust graph and breadth-first path traversal
+    models.py            # typed API contracts
   app/
     main.py              # application composition/startup
     config.py            # typed environment configuration
