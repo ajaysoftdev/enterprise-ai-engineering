@@ -1,0 +1,11 @@
+services:
+  attention-hub:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      ATTENTION_DB: /app/data/attention.db
+    volumes:
+      - attention-data:/app/data
+volumes:
+  attention-data:
