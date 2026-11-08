@@ -4,7 +4,7 @@
 
 **Domain:** Enterprise architecture, business capability assessment and technology transformation.  
 **Technology direction:** Metadata-driven assessment workflows, structured architecture records, evidence links and report generation; specific implementation choices will be recorded as ADRs.  
-**Status:** Current prototype CI + Docker + security verified — 7 tests passed on Python 3.12 (GitHub Actions run 42461086760, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Status:** CI + Docker build verified — 8 tests passed on Python 3.12 (GitHub Actions run 42478101324, commit d74ee2f). Authentication is enforced for protected API routes; the test suite includes a missing-key rejection check. This verifies synthetic/local prototype behaviour only, not production readiness.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
@@ -37,7 +37,7 @@ Keep evidence, assumptions and recommendations distinct. Record confidence and s
 
 The current prototype captures business objectives, capability maturity and evidence references; calculates current/target maturity averages; identifies capability gaps; flags duplicate and unresolved dependency relationships; prioritises gap-based roadmap initiatives; and persists assessment reports. It includes API tests, OpenAPI, Docker and GitHub Actions.
 
-**Limitations:** maturity ratings and evidence are stakeholder-supplied and not independently verified. The roadmap uses maturity gap only; it does not yet model cost, strategic value, risk, resource capacity, transition architecture, business capability maps, application portfolios, data models or ArchiMate/TOGAF exports. Dependency findings are descriptive, not a verified graph. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. No client assessment or transformation outcome is claimed.
+**Limitations:** maturity ratings and evidence are stakeholder-supplied and not independently verified. The roadmap uses maturity gap only; it does not yet model cost, strategic value, risk, resource capacity, transition architecture, business capability maps, application portfolios, data models or ArchiMate/TOGAF exports. Dependency findings are descriptive, not a verified graph. GitHub Actions executed the API suite successfully: 8 passed, 0 failed, including the protected-route authentication test. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. No client assessment or transformation outcome is claimed.
 
 ## Run locally
 
