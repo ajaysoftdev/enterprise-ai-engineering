@@ -4,7 +4,7 @@
 
 **Domain:** Enterprise architecture, business capability assessment and technology transformation.  
 **Technology direction:** Metadata-driven assessment workflows, structured architecture records, evidence links and report generation; specific implementation choices will be recorded as ADRs.  
-**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+**Status:** First executable synthetic assessment prototype added — CI execution pending.
 
 ## Business capabilities
 - Capture assessment scope, objectives, stakeholders and constraints.
@@ -31,6 +31,24 @@ Assess a synthetic enterprise scenario, map a business capability to its support
 
 ## Guardrails
 Keep evidence, assumptions and recommendations distinct. Record confidence and source for assessments. Do not present generated maturity scores as objective facts without an agreed assessment method.
+
+## First executable slice
+
+The current prototype captures business objectives, capability maturity and evidence references; calculates current/target maturity averages; identifies capability gaps; flags duplicate and unresolved dependency relationships; prioritises gap-based roadmap initiatives; and persists assessment reports. It includes API tests, OpenAPI, Docker and GitHub Actions.
+
+**Limitations:** maturity ratings and evidence are stakeholder-supplied and not independently verified. The roadmap uses maturity gap only; it does not yet model cost, strategic value, risk, resource capacity, transition architecture, business capability maps, application portfolios, data models or ArchiMate/TOGAF exports. Dependency findings are descriptive, not a verified graph. Tests have been added but have not yet been executed in CI. No client assessment or transformation outcome is claimed.
+
+## Run locally
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+uvicorn eatoolkit.main:app --reload --app-dir src
+pytest
+```
+
+Docker: `docker compose up --build`. API contract: [openapi.yaml](openapi.yaml).
 
 ## Project documentation
 - [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
