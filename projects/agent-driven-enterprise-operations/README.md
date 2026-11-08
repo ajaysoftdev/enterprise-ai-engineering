@@ -1,49 +1,41 @@
 # Agent-Driven Enterprise Operations
 
-**Domain:** Bounded agent autonomy and human exception operations  
-**Status:** Architecture specification; implementation and runtime verification pending.
+**Purpose:** Coordinate enterprise tasks through AI agents with bounded authority, explicit policy checks, durable workflows and human approval for consequential actions.
 
-## Start here
-- [Project blueprint](docs/PROJECT_BLUEPRINT.md)
-- [Source-code structure and implementation boundaries](src/README.md)
-- [Test strategy and definition of done](tests/README.md)
+**Domain:** Agentic AI, workflow orchestration and enterprise operations.  
+**Technology direction:** Provider-neutral LLM and tool adapters, policy enforcement, durable workflow state and auditable APIs; concrete choices will be captured in ADRs.  
+**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+
+## Business capabilities
+- Register agents, tools, scopes and permitted actions.
+- Convert requests into bounded, observable work plans.
+- Enforce identity, policy, budget and tool-use constraints.
+- Execute long-running workflows with retries and persisted state.
+- Pause for human approval before sensitive or irreversible actions.
+- Record prompts, tool calls, decisions, outcomes and exceptions.
+
+## Reference workflow
+Request intake → intent and scope validation → plan proposal → policy evaluation → bounded tool execution → approval checkpoint → completion or exception → audit and outcome review.
+
+## Key modules
+- **Agent registry:** agent identity, role, version and allowed capabilities.
+- **Tool registry:** schemas, permissions, rate limits and risk classification.
+- **Policy gateway:** authorisation, approval and execution constraints.
+- **Orchestrator:** durable state, retries, deadlines and compensation.
+- **Human review:** approval, rejection, escalation and override.
+- **Audit and evaluation:** trace, cost, quality and policy-compliance evidence.
+
+## Expected demonstration
+Run a synthetic procurement or service-desk workflow in which an agent can gather information and prepare an action but must obtain explicit approval before committing a purchase or changing a business record.
+
+## Guardrails
+Treat retrieved content and tool output as untrusted. Prevent prompt injection from granting authority. Apply least privilege, sandbox tools, cap cost/time, maintain idempotency and provide a kill switch.
+
+## Project documentation
+- [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
+- [Source-code boundaries](src/README.md)
+- [Test strategy](tests/README.md)
 - [Local deployment and operations](infra/README.md)
 
-## Planned repository layout
-```text
-agent-driven-enterprise-operations/
-├── docs/PROJECT_BLUEPRINT.md
-├── docs/adr/
-├── src/
-│   ├── app/
-│   ├── api/
-│   ├── domain/
-│   ├── application/
-│   ├── infrastructure/
-│   └── observability/
-├── tests/
-│   ├── unit/
-│   ├── integration/
-│   ├── contract/
-│   └── e2e/
-├── infra/
-│   ├── Dockerfile
-│   ├── compose.yaml
-│   └── deploy/
-├── scripts/
-├── .github/workflows/
-├── .env.example
-├── pyproject.toml
-└── README.md
-```
-
-The layout is a target structure. Implementation increments will add tracked source and deployment files; empty folders cannot be committed by Git alone.
-
-## Engineering status
-- Architecture and module boundaries: documented.
-- Executable application: pending.
-- Automated tests: planned; not yet run.
-- Container/CI verification: pending.
-- Production deployment: not claimed.
-
-See the [project blueprint](docs/PROJECT_BLUEPRINT.md) for business flow, domain model, interfaces, security, NFRs, delivery increments and acceptance criteria.
+## Delivery status
+The documents define the intended design and acceptance criteria. No autonomous production actions, enterprise agent deployment or measured productivity gain is claimed.
