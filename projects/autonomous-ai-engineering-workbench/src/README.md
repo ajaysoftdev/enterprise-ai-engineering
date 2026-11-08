@@ -2,6 +2,12 @@
 
 ```text
 src/
+  aiworkbench/
+    main.py              # task catalogue and evaluation API
+    models.py            # typed patch and report contracts
+    tasks.py             # versioned deterministic benchmark registry
+    evaluator.py         # static acceptance and security-pattern checks
+    repository.py        # SQLite evaluation report persistence
   app/                  # config, composition and health
   api/
     routes/             # versioned endpoints
