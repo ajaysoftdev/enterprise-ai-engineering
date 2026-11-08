@@ -1,6 +1,16 @@
 # Evaluation Reports
 
-This area will contain evidence-based reports from coding-agent and engineering-task evaluations.
+This area contains evidence-based reports from coding-agent and engineering-task evaluations.
+
+## Report sources
+
+Reports may be produced from work on:
+
+- [Spring PetClinic service enhancement](../projects/java-spring-petclinic/README.md)
+- [Python batch data pipeline](../projects/python-batch-data-pipeline/README.md)
+- [Data quality framework](../projects/data-quality-framework/README.md)
+- [AI agent evaluation workbench](../projects/ai-agent-evaluation-workbench/README.md)
+- [Quality automation pipeline](../projects/quality-automation-pipeline/README.md)
 
 ## Report requirements
 
@@ -24,4 +34,4 @@ Do not publish unsupported performance claims. Separate observed facts, reviewer
 
 ## Status
 
-Report structure prepared; no evaluation results are claimed yet.
+Report structure and project links prepared; no evaluation results are claimed yet.
