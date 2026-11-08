@@ -2,6 +2,7 @@
 import json
 import os
 import sqlite3
+from contextlib import closing
 from pathlib import Path
 from .models import DocumentRecord
 
@@ -43,7 +44,7 @@ def connect() -> sqlite3.Connection:
 
 
 def save(record: DocumentRecord) -> None:
-    with connect() as db:
+    with closing(connect()) as db, db:
         db.execute("""
             INSERT INTO documents
             (id, filename, content_type, status, extracted_fields,
