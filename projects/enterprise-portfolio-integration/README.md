@@ -81,3 +81,8 @@ Docker: `docker compose up --build`. API contract: [openapi.yaml](openapi.yaml).
 - [Source layout](src/README.md)
 - [Test strategy](tests/README.md)
 - [Operations](infra/README.md)
+
+
+## API authentication and local secrets
+
+All non-health endpoints require an API key. Copy `.env.example` to `.env` and set three distinct secrets: `API_KEY` for this integration API, `DOCINT_API_KEY` matching the Document Intelligence service key, and `MDM_API_KEY` matching the MDM service key. Keep populated `.env` files out of source control. The HTTP adapters forward the appropriate downstream key; CI uses disposable test-only keys.
