@@ -4,7 +4,7 @@
 
 **Domain:** Digital trust, information integrity, reputation resilience and AI governance.  
 **Planned stack:** Python 3.12, FastAPI, PostgreSQL, Redis and OpenTelemetry; optional provider-neutral LLM adapter.  
-**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+**Status:** First executable synthetic signal and case-review prototype added — CI execution pending.
 
 ## Business capabilities
 - Ingest signals from approved public, internal and partner sources.
@@ -30,6 +30,24 @@ Use synthetic scenarios to show how multiple weak signals are correlated, priori
 
 ## Guardrails
 Do not automate public statements or consequential reputational decisions. Preserve source provenance, distinguish fact from allegation, support corrections and appeals, and require authorised human approval.
+
+## First executable slice
+
+The current prototype ingests evidence-linked synthetic signals, calculates an explainable weighted risk score, groups signals by a shared case key, adds a capped corroboration increment, supports a single human review decision and records audit events. It includes API tests, OpenAPI, SQLite persistence, Docker and GitHub Actions.
+
+**Limitations:** signals are manually submitted and correlation uses a supplied case key; there is no web monitoring, claim extraction, entity resolution, semantic clustering, source reputation service, LLM, misinformation classifier, fact verification, legal review workflow or external response connector. Risk scores are prioritisation aids, not truth assessments. Public statements and consequential actions are not automated. Tests have been added but have not yet been executed in CI. Synthetic evidence only.
+
+## Run locally
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+uvicorn inforesilience.main:app --reload --app-dir src
+pytest
+```
+
+Docker: `docker compose up --build`. API contract: [openapi.yaml](openapi.yaml).
 
 ## Project documentation
 - [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
