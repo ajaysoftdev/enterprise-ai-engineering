@@ -1,0 +1,11 @@
+{
+  "material": "Sterile Vial 10ml",
+  "lot_id": "LOT-SYN-1001",
+  "site": "Plant-A",
+  "available_quantity": 200,
+  "daily_demand": 100,
+  "replenishment_lead_days": 5,
+  "production_order_due_days": 8,
+  "quality_status": "RELEASED",
+  "planner_owner": "supply-planning"
+}
