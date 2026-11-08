@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: Enterprise Data Protection
+  version: 0.1.0
+  description: Synthetic data classification, access policy and masking API.
+servers:
+  - url: http://127.0.0.1:8000
+paths:
+  /health:
+    get:
+      summary: Service health
+      responses:
+        "200": {description: Healthy}
+  /v1/datasets:
+    post:
+      summary: Register a dataset and field classifications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/DatasetCreate"}
+      responses:
+        "201": {description: Dataset registered}
+    get:
+      summary: List registered datasets
+      responses:
+        "200": {description: Dataset list}
+  /v1/access/evaluate:
+    post:
+      summary: Evaluate role, purpose and classification policy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/AccessRequest"}
+      responses:
+        "200": {description: Access decision}
+  /v1/datasets/{dataset_id}/mask:
+    post:
+      summary: Apply deterministic classification-based masking
+      parameters:
+        - in: path
+          name: dataset_id
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Masked synthetic records}
+components:
+  schemas:
+    DatasetCreate:
+      type: object
+      required: [name, owner, purpose, fields]
+      properties:
+        name: {type: string}
+        owner: {type: string}
+        purpose: {type: string}
+        fields:
+          type: array
+          items:
+            type: object
+            required: [name, classification]
+            properties:
+              name: {type: string}
+              classification:
+                type: string
+                enum: [PUBLIC, INTERNAL, CONFIDENTIAL, PERSONAL, FINANCIAL]
+    AccessRequest:
+      type: object
+      required: [dataset_id, actor, role, purpose, requested_fields]
+      properties:
+        dataset_id: {type: string}
+        actor: {type: string}
+        role: {type: string, enum: [data-analyst, finance-operator, data-owner, privacy-officer]}
+        purpose: {type: string}
+        requested_fields:
+          type: array
+          items: {type: string}
+        mode: {type: string, enum: [RAW, MASKED], default: MASKED}
