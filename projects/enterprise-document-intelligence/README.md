@@ -70,3 +70,7 @@ docker compose up --build
 - [Implementation architecture](IMPLEMENTATION_ARCHITECTURE.md)
 - [Reference sources](SOURCES.md)
 - [Project blueprint](docs/PROJECT_BLUEPRINT.md)
+
+## Domain contracts and data model
+
+See [DOMAIN_CONTRACTS.md](DOMAIN_CONTRACTS.md) for proposed domain entities, REST endpoints, event names, workflow, invariants and contract-test scenarios.
