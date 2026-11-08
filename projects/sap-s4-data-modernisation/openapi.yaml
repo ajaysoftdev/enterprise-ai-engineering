@@ -1,0 +1,52 @@
+openapi: 3.1.0
+info:
+  title: SAP S/4HANA Data Modernisation
+  version: 0.1.0
+  description: Synthetic SAP-like source mapping, validation and migration reconciliation API.
+servers:
+  - url: http://127.0.0.1:8000
+paths:
+  /health:
+    get:
+      summary: Service health
+      responses:
+        "200": {description: Healthy}
+  /v1/migrations:
+    post:
+      summary: Execute a synthetic master-data migration batch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/MigrationCreate"}
+      responses:
+        "201": {description: Migration report}
+  /v1/migrations/{migration_id}:
+    get:
+      summary: Retrieve migration and reconciliation report
+      parameters:
+        - in: path
+          name: migration_id
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Migration report}
+        "404": {description: Not found}
+components:
+  schemas:
+    MigrationCreate:
+      type: object
+      required: [idempotency_key, source_system, mapping_version, records]
+      properties:
+        idempotency_key: {type: string}
+        source_system: {type: string}
+        mapping_version: {type: string}
+        records:
+          type: array
+          items:
+            type: object
+            required: [record_type, source_key, payload]
+            properties:
+              record_type: {type: string, enum: [BUSINESS_PARTNER, MATERIAL_MASTER]}
+              source_key: {type: string}
+              payload: {type: object}
