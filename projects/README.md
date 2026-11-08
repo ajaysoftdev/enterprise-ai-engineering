@@ -12,7 +12,7 @@ The project folders are maintained inside this repository; they are not separate
 | 2 | [Enterprise Document Intelligence](enterprise-document-intelligence/README.md) | Document extraction, validation and human exception handling | CI verified — 6 tests passed; text-only prototype limitations remain |
 | 3 | [Breach-Resilient Enterprise](breach-resilient-enterprise/README.md) | Zero-trust architecture and attack-path containment | CI verified — 6 simulation tests passed; no live controls connected |
 | 4 | [Enterprise Data Protection](enterprise-data-protection/README.md) | Data classification, minimisation, masking and access governance | CI verified — 7 synthetic policy/masking tests passed; limitations remain |
-| 5 | [Enterprise Attention and Intelligence Hub](enterprise-attention-intelligence-hub/README.md) | Business-impact observability and decision prioritisation | Specified |
+| 5 | [Enterprise Attention and Intelligence Hub](enterprise-attention-intelligence-hub/README.md) | Business-impact observability and decision prioritisation | CI verified — 6 synthetic scoring/correlation tests passed; limitations remain |
 | 6 | [Enterprise MDM and Data Governance](enterprise-mdm-data-governance/README.md) | Matching, survivorship, stewardship and golden records | CI verified — 6 tests passed; prototype limitations remain |
 | 7 | [Agent-Driven Enterprise Operations](agent-driven-enterprise-operations/README.md) | Bounded agents, policy checks and human approvals | Specified |
 | 8 | [Enterprise Integration Platform](enterprise-integration-platform/README.md) | APIs, events, routing, orchestration and reliability | Specified |
