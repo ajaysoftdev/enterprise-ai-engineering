@@ -1,0 +1,11 @@
+services:
+  mdm:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      MDM_DATABASE: /app/data/mdm.db
+    volumes:
+      - mdm-data:/app/data
+volumes:
+  mdm-data:
