@@ -33,7 +33,7 @@ The fifteen projects are maintained as independent workstreams inside this singl
 | # | Independent project | Main capability | Status |
 |---:|---|---|---|
 | 1 | [Enterprise Information Resilience](projects/enterprise-information-resilience/README.md) | Digital trust, information integrity, reputation resilience | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086794) |
-| 2 | [Enterprise Document Intelligence](projects/enterprise-document-intelligence/README.md) | Document extraction, validation, human exception handling | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086822) |
+| 2 | [Enterprise Document Intelligence](projects/enterprise-document-intelligence/README.md) | Document extraction, validation, human exception handling | CI + Docker verified — 7 tests passed (GitHub Actions run 42462168881) |
 | 3 | [Breach-Resilient Enterprise](projects/breach-resilient-enterprise/README.md) | Zero trust, attack-path containment, response | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086819) |
 | 4 | [Enterprise Data Protection](projects/enterprise-data-protection/README.md) | Classification, minimisation, masking, access governance | CI + Docker verified — 8 tests passed (GitHub Actions run 42461086755) |
 | 5 | [Enterprise Attention and Intelligence Hub](projects/enterprise-attention-intelligence-hub/README.md) | Business-impact observability and prioritisation | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086772) |
