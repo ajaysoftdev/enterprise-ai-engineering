@@ -2,6 +2,11 @@
 
 ```text
 src/
+  agentops/
+    main.py              # workflow API and human decision endpoints
+    models.py            # typed workflow and approval contracts
+    policy.py            # fixed allow-list, risk classification and plan selection
+    repository.py        # SQLite workflow and audit persistence
   app/                  # application factory, config, dependency wiring, health
   api/
     routes/             # versioned HTTP endpoints
