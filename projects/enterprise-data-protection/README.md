@@ -39,3 +39,7 @@ Use synthetic data. Keep keys and secrets outside source control. Separate polic
 
 ## Delivery status
 The documents define the intended design and acceptance criteria. No regulatory certification, production data processing or deployed privacy control is claimed.
+
+## Reference sources
+
+See [SOURCES.md](SOURCES.md) for curated official documentation, standards, reference architectures and implementation resources, with notes on how each applies to this project.
