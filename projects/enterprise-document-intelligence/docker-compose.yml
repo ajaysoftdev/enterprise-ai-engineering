@@ -1,0 +1,15 @@
+services:
+  document-intelligence:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DOCUMENT_INTELLIGENCE_DB: /app/data/documents.db
+    volumes:
+      - document-data:/app/data
+    read_only: true
+    tmpfs:
+      - /tmp
+
+volumes:
+  document-data:
