@@ -19,13 +19,14 @@ def test_create_and_retrieve_document(tmp_path, monkeypatch):
     payload = {
         "filename": "sample-invoice.txt",
         "content_type": "text/plain",
-        "text_content": "Supplier: Northwind Supplies\nInvoice Number: INV-2026-0042\nDate: 2026-11-08\nTotal: USD 1250.00",
+        "text_content": "Supplier: Northwind Supplies\nSupplier Tax ID: GST-AB1234\nInvoice Number: INV-2026-0042\nDate: 2026-11-08\nTotal: USD 1250.00",
     }
     created = client.post("/v1/documents", json=payload)
     assert created.status_code == 201
     body = created.json()
     assert body["extracted_fields"]["document_number"]["value"] == "INV-2026-0042"
     assert body["extracted_fields"]["total_amount"]["value"] == "USD 1250.00"
+    assert body["extracted_fields"]["supplier_tax_id"]["value"] == "GST-AB1234"
     assert body["status"] == "RECEIVED"
 
     fetched = client.get(f"/v1/documents/{body['id']}")
