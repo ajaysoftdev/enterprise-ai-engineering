@@ -1,49 +1,42 @@
 # SAP S/4HANA Data Modernisation
 
-**Domain:** SAP master data, governance and analytics modernisation  
-**Status:** Architecture specification; implementation and runtime verification pending.
+**Purpose:** Demonstrate governed master-data migration and synchronisation patterns between SAP-like source domains, modern platforms and analytics consumers.
 
-## Start here
-- [Project blueprint](docs/PROJECT_BLUEPRINT.md)
-- [Source-code structure and implementation boundaries](src/README.md)
-- [Test strategy and definition of done](tests/README.md)
+**Domain:** SAP S/4HANA data architecture, migration, data quality and integration.  
+**Technology direction:** Synthetic SAP-like extracts, mapping/validation services, API or CDC-style adapters and reconciliation controls. No live SAP connection is assumed.  
+**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+
+## Business capabilities
+- Model representative business partners, products/materials and organisational data.
+- Ingest synthetic source extracts and change events.
+- Map legacy structures to target domain contracts.
+- Validate mandatory fields, code lists and cross-object dependencies.
+- Detect duplicates and route ambiguous records to stewardship.
+- Load target-shaped records and reconcile counts and values.
+- Preserve migration lineage, exceptions and restartability.
+
+## Reference workflow
+SAP-like extract/change event → staging → mapping and validation → duplicate resolution/stewardship → target load/API → reconciliation → lineage and exception reporting.
+
+## Key modules
+- **Source simulator:** representative SAP-style master and transactional records.
+- **Mapping catalogue:** source-to-target field mappings and transformation rules.
+- **Validation:** mandatory fields, referential integrity and domain checks.
+- **Migration orchestration:** batch, checkpoints, restart and error handling.
+- **Reconciliation:** count, amount, key and sample-level comparisons.
+- **Governance:** ownership, lineage, approvals and exception reporting.
+
+## Expected demonstration
+Migrate synthetic business-partner and material records, inject invalid and duplicate records, resolve exceptions and produce a reconciliation report with traceable source-to-target mappings.
+
+## Guardrails
+Do not imply access to SAP systems or SAP certification. Use synthetic SAP-like data, document assumptions and keep migration execution separate from reconciliation approval.
+
+## Project documentation
+- [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
+- [Source-code boundaries](src/README.md)
+- [Test strategy](tests/README.md)
 - [Local deployment and operations](infra/README.md)
 
-## Planned repository layout
-```text
-sap-s4-data-modernisation/
-├── docs/PROJECT_BLUEPRINT.md
-├── docs/adr/
-├── src/
-│   ├── app/
-│   ├── api/
-│   ├── domain/
-│   ├── application/
-│   ├── infrastructure/
-│   └── observability/
-├── tests/
-│   ├── unit/
-│   ├── integration/
-│   ├── contract/
-│   └── e2e/
-├── infra/
-│   ├── Dockerfile
-│   ├── compose.yaml
-│   └── deploy/
-├── scripts/
-├── .github/workflows/
-├── .env.example
-├── pyproject.toml
-└── README.md
-```
-
-The layout is a target structure. Implementation increments will add tracked source and deployment files; empty folders cannot be committed by Git alone.
-
-## Engineering status
-- Architecture and module boundaries: documented.
-- Executable application: pending.
-- Automated tests: planned; not yet run.
-- Container/CI verification: pending.
-- Production deployment: not claimed.
-
-See the [project blueprint](docs/PROJECT_BLUEPRINT.md) for business flow, domain model, interfaces, security, NFRs, delivery increments and acceptance criteria.
+## Delivery status
+The documents define the intended design and acceptance criteria. No SAP tenant integration, production migration or customer data processing is claimed.
