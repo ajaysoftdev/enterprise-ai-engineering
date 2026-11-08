@@ -15,5 +15,8 @@ Generate Integration, Endpoint, Message, Schema, Mapping, Route, Subscription, D
 ## Definition of done
 Schemas validate; transformations have positive/negative tests; delivery is idempotent; retry/DLQ/replay are tested; end-to-end run is reproducible; CI retains evidence. Do not claim delivery guarantees without tests.
 
+## Current executable test slice
+The current API suite covers health, idempotent message publication, successful delivery, retry exhaustion, dead-letter replay, invalid event-type rejection and delivery audit. It does not exercise a real broker, cross-system exactly-once semantics, concurrent consumers, schema-registry compatibility, authentication or distributed tracing.
+
 ## Evidence
 Record commit, tool versions, commands, test counts, results and exclusions. Untested checks remain planned.
