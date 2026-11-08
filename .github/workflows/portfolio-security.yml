@@ -11,6 +11,10 @@ on:
       - ".github/workflows/portfolio-security.yml"
   workflow_dispatch:
 
+concurrency:
+  group: portfolio-security-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   security:
     runs-on: ubuntu-latest
