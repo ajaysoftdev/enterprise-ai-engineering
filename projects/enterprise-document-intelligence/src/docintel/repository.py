@@ -16,6 +16,16 @@ def connect() -> sqlite3.Connection:
     db = sqlite3.connect(path)
     db.row_factory = sqlite3.Row
     db.execute("""
+        CREATE TABLE IF NOT EXISTS audit_events (
+            id TEXT PRIMARY KEY,
+            resource_id TEXT NOT NULL,
+            action TEXT NOT NULL,
+            actor TEXT NOT NULL,
+            details TEXT NOT NULL,
+            created_at TEXT NOT NULL
+        )
+    """)
+    db.execute("""
         CREATE TABLE IF NOT EXISTS documents (
             id TEXT PRIMARY KEY,
             filename TEXT NOT NULL,
@@ -75,3 +85,21 @@ def update_review(record: DocumentRecord) -> None:
             UPDATE documents SET status = ?, reviewed_by = ?, review_note = ?
             WHERE id = ?
         """, (record.status, record.reviewed_by, record.review_note, record.id))
+
+
+def append_audit(event_id: str, resource_id: str, action: str, actor: str, details: str, created_at: str) -> None:
+    """Append an application audit event; there is intentionally no update/delete API."""
+    with connect() as db:
+        db.execute(
+            "INSERT INTO audit_events (id, resource_id, action, actor, details, created_at) VALUES (?, ?, ?, ?, ?, ?)",
+            (event_id, resource_id, action, actor, details, created_at),
+        )
+
+
+def list_audit(resource_id: str) -> list[dict[str, str]]:
+    with connect() as db:
+        rows = db.execute(
+            "SELECT id, resource_id, action, actor, details, created_at FROM audit_events WHERE resource_id = ? ORDER BY created_at ASC",
+            (resource_id,),
+        ).fetchall()
+    return [dict(row) for row in rows]
