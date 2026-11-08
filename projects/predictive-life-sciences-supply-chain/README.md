@@ -35,7 +35,7 @@ Preserve lot-level traceability and data provenance. Predictions support plannin
 
 The current prototype accepts synthetic material/lot availability inputs, calculates days of cover and projected quantity at replenishment, flags quality holds and pre-replenishment shortages, assigns explainable P1–P3 risk bands, persists scenarios and records an assessment audit event. It includes API tests, OpenAPI, a synthetic fixture, Docker and GitHub Actions.
 
-**Limitations:** risk scoring is deterministic and illustrative, not a trained or validated predictive model. There are no ERP/WMS/MES/QMS/logistics connectors, lot genealogy, batch release workflow, demand forecast, supplier lead-time model, GxP validation, access controls or production data. Recommendations are planner guidance only and never change quality status or release material. Tests have been added but have not yet been executed in CI. Synthetic data only.
+**Limitations:** risk scoring is deterministic and illustrative, not a trained or validated predictive model. There are no ERP/WMS/MES/QMS/logistics connectors, lot genealogy, batch release workflow, demand forecast, supplier lead-time model, GxP validation, access controls or production data. Recommendations are planner guidance only and never change quality status or release material. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. One Starlette/httpx deprecation warning remains. Synthetic data only.
 
 ## Run locally
 
