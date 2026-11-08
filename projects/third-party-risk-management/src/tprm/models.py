@@ -40,4 +40,6 @@ class VendorRecord(BaseModel):
     inherent_score: int
     risk_tier: Literal["HIGH", "MEDIUM", "LOW"]
     status: Literal["DUE_DILIGENCE_REQUIRED", "APPROVED", "REJECTED"]
+    risk_factors: dict[str, int]
+    required_controls: list[str]
     created_at: str
