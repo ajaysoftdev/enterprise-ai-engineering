@@ -79,3 +79,12 @@ def decide_match(candidate_id: str, payload: StewardDecision) -> dict:
                             detail=str(exc))
     except ValueError as exc:
         raise HTTPException(status_code=409, detail=str(exc))
+
+
+@app.get("/v1/golden-records", response_model=list[GoldenRecord])
+def list_golden_records():
+    import json
+    return [
+        {**item, "source_record_ids": json.loads(item["source_record_ids"])}
+        for item in repository.list_golden()
+    ]
