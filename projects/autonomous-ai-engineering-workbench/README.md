@@ -4,7 +4,7 @@
 
 **Domain:** AI-assisted software engineering, agent evaluation and developer productivity.  
 **Technology direction:** Python orchestration, isolated worktrees/containers, provider-neutral model adapters and automated quality tools; concrete choices will be recorded as ADRs.  
-**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+**Status:** First executable static-evaluation prototype added — CI execution pending.
 
 ## Business capabilities
 - Define benchmark tasks with scope, acceptance criteria and test fixtures.
@@ -30,6 +30,24 @@ Run the same bounded bug-fix task with two agent configurations in isolated work
 
 ## Guardrails
 Never expose host secrets or unrestricted shell access. Treat repository content and tool output as untrusted. Require human review before merging or deploying agent-generated changes.
+
+## First executable slice
+
+The current prototype contains a versioned benchmark-task registry, a static patch evaluator, acceptance-marker checks, secret-pattern and unsafe-execution-pattern detection, weighted evidence scoring, SQLite report persistence, API tests, OpenAPI, Docker and GitHub Actions.
+
+**Important limitations:** submitted source is inspected as text and is never executed. No LLM provider, coding agent, Git worktree, container sandbox, shell runner, test runner, cost/token budget enforcement or human code-review workflow is connected. The report explicitly marks test execution as `NOT_RUN`; a high static score is not proof that code works or is safe to merge. The security patterns are illustrative and are not a substitute for a security scanner. Tests have been added but have not yet been executed in CI.
+
+## Run locally
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+uvicorn aiworkbench.main:app --reload --app-dir src
+pytest
+```
+
+Docker: `docker compose up --build`. API contract: [openapi.yaml](openapi.yaml).
 
 ## Project documentation
 - [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
