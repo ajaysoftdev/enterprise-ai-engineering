@@ -4,7 +4,7 @@
 
 **Domain:** Cloud data engineering, lakehouse architecture and data operations.  
 **Technology direction:** Python-based pipeline components, object-storage/lakehouse patterns, SQL transformations and orchestration adapters; concrete services will be selected through ADRs.  
-**Status:** Current prototype CI + Docker + security verified — 7 tests passed on Python 3.12 (GitHub Actions run 42461086770, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Status:** CI + Docker build verified — 8 tests passed on Python 3.12 (GitHub Actions run 42477990796, commit 634bf9e). Authentication is enforced for protected API routes; the test suite includes a missing-key rejection check. This verifies synthetic/local prototype behaviour only, not production readiness.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
@@ -37,7 +37,7 @@ Keep raw data immutable, make processing idempotent, protect sensitive fields an
 
 The current prototype accepts synthetic sales rows, persists idempotent pipeline runs, validates required fields and value ranges, quarantines malformed/duplicate rows, calculates curated silver-level line totals and produces a product-level gold summary. It includes API tests, OpenAPI, synthetic input, Docker and a GitHub Actions workflow.
 
-**Limitations:** this is a local SQLite/Python demonstration, not a cloud deployment or distributed lakehouse. There are no S3/ADLS connectors, Spark/Databricks, ADF/Airflow orchestration, CDC, schema registry, incremental checkpoints, immutable bronze object storage, access governance, lineage service, observability or FinOps measurement. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. No scale or performance claim is made.
+**Limitations:** this is a local SQLite/Python demonstration, not a cloud deployment or distributed lakehouse. There are no S3/ADLS connectors, Spark/Databricks, ADF/Airflow orchestration, CDC, schema registry, incremental checkpoints, immutable bronze object storage, access governance, lineage service, observability or FinOps measurement. GitHub Actions executed the API suite successfully: 8 passed, 0 failed, including the protected-route authentication test. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. No scale or performance claim is made.
 
 ## Run locally
 
