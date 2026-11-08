@@ -83,6 +83,20 @@ paths:
           description: Document not found
         "409":
           description: Document has already been reviewed
+  /v1/documents/{document_id}/audit:
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get application audit events for a document
+      responses:
+        "200":
+          description: Ordered audit events
+        "404":
+          description: Document not found
 components:
   schemas:
     DocumentCreate:
