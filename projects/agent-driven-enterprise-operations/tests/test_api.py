@@ -96,4 +96,11 @@ def test_protected_api_rejects_missing_api_key():
     unauthenticated = TestClient(app)
     response = unauthenticated.get("/openapi.json")
     assert response.status_code == 401
+    wrong_key = TestClient(app, headers={"X-API-Key": "incorrect-test-key"})
+    assert wrong_key.get("/openapi.json").status_code == 401
 
+
+def test_api_fails_closed_when_server_key_is_unconfigured(monkeypatch):
+    monkeypatch.delenv("API_KEY", raising=False)
+    response = TestClient(app).get("/openapi.json")
+    assert response.status_code == 503
