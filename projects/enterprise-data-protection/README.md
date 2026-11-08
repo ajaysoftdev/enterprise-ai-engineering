@@ -35,7 +35,7 @@ Use synthetic data. Keep keys and secrets outside source control. Separate polic
 
 The current prototype includes dataset registration with field-level classifications, a SQLite metadata store, purpose/role/classification-aware access evaluation, deterministic masking, policy-decision audit records, API tests, OpenAPI, Docker and a GitHub Actions workflow.
 
-**Limitations:** policy rules are illustrative and hard-coded; no identity provider, attribute-based access engine, external catalogue, token vault, encryption/key management, lineage integration, retention scheduler or tenant isolation is connected. The masking examples are deterministic transformations, not anonymisation guarantees. Authentication, authorization enforcement at a data gateway, concurrency testing and security assessment remain pending. GitHub Actions executed the API suite successfully: 7 passed, 0 failed. One Starlette/httpx deprecation warning remains. Do not use real personal or financial data.
+**Limitations:** policy rules are illustrative and hard-coded; no identity provider, attribute-based access engine, external catalogue, token vault, encryption/key management, lineage integration, retention scheduler or tenant isolation is connected. The masking examples are deterministic transformations, not anonymisation guarantees. Authentication, authorization enforcement at a data gateway, concurrency testing and security assessment remain pending. GitHub Actions executed the API suite successfully: 7 passed, 0 failed. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. Do not use real personal or financial data.
 
 ## Run locally
 
