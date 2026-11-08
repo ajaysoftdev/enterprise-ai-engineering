@@ -49,7 +49,7 @@ The fifteen core projects are maintained as independent workstreams, with a sixt
 | 15 | [Enterprise Architecture Assessment Toolkit](projects/enterprise-architecture-assessment-toolkit/README.md) | Capability-led assessment and target-state roadmap | CI + Docker + security verified — 7 tests passed (GitHub Actions run 42461086760) |
 | 16 | [Enterprise Portfolio Integration](projects/enterprise-portfolio-integration/README.md) | Cross-project orchestration, idempotency and workflow traceability | CI + Docker + HTTP E2E + security verified — 11 tests passed (GitHub Actions run 42462914331) |
 
-**Status meaning:** CI + Docker + security verified means the project's current synthetic prototype test suite passed and its container image built in GitHub Actions. It does not mean production readiness, live enterprise integration, penetration-test clearance, regulatory validation or deployment to a customer environment.
+**Status meaning:** CI + Docker + security verified means the project's automated tests passed, its container image built, and Bandit plus pip-audit completed successfully in GitHub Actions. It does not mean production readiness, live enterprise integration beyond the documented HTTP slice, penetration-test clearance, regulatory validation or deployment to a customer environment.
 
 The earlier six project briefs remain in the repository as additional engineering exercises. They are not substitutes for the sixteen portfolio projects above.
 
