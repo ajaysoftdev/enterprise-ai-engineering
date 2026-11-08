@@ -40,3 +40,7 @@ Keep business rules out of transport adapters where possible. Version contracts 
 
 ## Delivery status
 The documents define the intended design and acceptance criteria. No live middleware, production connector or throughput/SLA claim is made.
+
+## Reference sources
+
+See [SOURCES.md](SOURCES.md) for curated official documentation, standards, reference architectures and implementation resources, with notes on how each applies to this project.
