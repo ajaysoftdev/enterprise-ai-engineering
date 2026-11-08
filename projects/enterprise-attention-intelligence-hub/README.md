@@ -4,7 +4,7 @@
 
 **Domain:** Business-impact observability, event correlation and decision prioritisation.  
 **Planned stack:** Python 3.12, FastAPI, PostgreSQL, Redis, event adapters and OpenTelemetry.  
-**Status:** Current prototype CI + Docker + security verified — 7 tests passed on Python 3.12 (GitHub Actions run 42461086772, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Status:** CI + Docker build verified — 8 tests passed on Python 3.12 (GitHub Actions run 42477948623, commit 1f71ab0). Authentication is enforced for protected API routes; the test suite includes a missing-key rejection check. This verifies synthetic/local prototype behaviour only, not production readiness.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
@@ -36,7 +36,7 @@ Avoid opaque priority scores. Preserve original signals, explain correlations an
 
 The current prototype provides signal ingestion, SQLite persistence, a deterministic weighted impact score, P1–P4 priority bands, correlation-key grouping, an explanation of score factors and operator acknowledgement. It includes API tests, OpenAPI, Docker and a GitHub Actions workflow.
 
-**Limitations:** signals are synthetic/manual API submissions; there are no Prometheus, OpenTelemetry, cloud-monitoring or ticketing connectors, service dependency graph, time-window correlation, SLO evaluation, escalation scheduler, role-based access control or multi-tenant controls. The scoring weights are illustrative and require business-owner calibration. No incident reduction or operational performance claim is made. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning.
+**Limitations:** signals are synthetic/manual API submissions; there are no Prometheus, OpenTelemetry, cloud-monitoring or ticketing connectors, service dependency graph, time-window correlation, SLO evaluation, escalation scheduler, role-based access control or multi-tenant controls. The scoring weights are illustrative and require business-owner calibration. No incident reduction or operational performance claim is made. GitHub Actions executed the API suite successfully: 8 passed, 0 failed, including the protected-route authentication test. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning.
 
 ## Run locally
 
