@@ -4,7 +4,16 @@
 
 **Domain:** Master data management, data quality, stewardship and governance.  
 **Technology direction:** API-based domain services, relational persistence, configurable matching and survivorship rules; concrete implementation choices will be recorded as architecture decisions.  
-**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+**Status:** First executable prototype added — test execution and CI verification pending.
+
+The initial code slice provides:
+- FastAPI health, source-record ingestion, candidate listing, steward decision and golden-record listing endpoints
+- SQLite persistence for source records, match candidates, golden records and steward decisions
+- Deterministic exact matching on normalized tax identifiers
+- Human confirmation/rejection before a candidate is merged or kept separate
+- Synthetic supplier fixtures, API tests and a GitHub Actions workflow
+
+**Important limitations:** matching is exact normalized tax-ID comparison only; there is no fuzzy matching, configurable survivorship, source-system connector, event publishing, authentication, tenant isolation, authorization, unmerge/version history, production-grade audit integrity or enterprise data-quality profiling. Tests have been added but have not yet been executed in CI or a local runtime. This is a local demonstrator, not a production MDM platform.
 
 ## Business capabilities
 - Ingest master records from ERP, CRM, procurement and operational systems.
@@ -38,7 +47,7 @@ Do not silently merge ambiguous records. Preserve source values, explain match d
 - [Local deployment and operations](infra/README.md)
 
 ## Delivery status
-The documents define the intended design and acceptance criteria. No live MDM deployment, data-quality improvement or enterprise source connection is claimed.
+The implementation is limited to the synthetic local workflow described above. No live MDM deployment, data-quality improvement or enterprise source connection is claimed.
 
 ## Reference sources
 
