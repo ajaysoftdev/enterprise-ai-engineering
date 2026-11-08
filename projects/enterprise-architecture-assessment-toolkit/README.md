@@ -4,7 +4,7 @@
 
 **Domain:** Enterprise architecture, business capability assessment and technology transformation.  
 **Technology direction:** Metadata-driven assessment workflows, structured architecture records, evidence links and report generation; specific implementation choices will be recorded as ADRs.  
-**Status:** Current prototype CI + Docker verified — 7 tests passed on Python 3.12 (GitHub Actions run 42461086760, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Status:** Current prototype CI + Docker + security verified — 7 tests passed on Python 3.12 (GitHub Actions run 42461086760, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
