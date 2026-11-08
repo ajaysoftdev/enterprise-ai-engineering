@@ -2,7 +2,7 @@ from fastapi.testclient import TestClient
 from agentops.main import app
 from agentops import repository
 
-client = TestClient(app)
+client = TestClient(app, headers={"X-API-Key": "ci-test-key"})
 
 
 def use_database(tmp_path, monkeypatch):
