@@ -35,7 +35,7 @@ Protect confidential vendor evidence, restrict access by role and record evidenc
 
 The current prototype registers synthetic vendors, calculates explainable inherent-risk scores and HIGH/MEDIUM/LOW tiers, defines tier-specific due-diligence controls, tracks evidence validity dates and blocks approval until required evidence is current. It includes API tests, OpenAPI, SQLite persistence, Docker and a GitHub Actions workflow.
 
-**Limitations:** risk weights and required controls are illustrative. There are no vendor questionnaire integrations, document storage/scanning, external risk feeds, fourth-party graph, access inventory, identity provider, contract lifecycle, continuous monitoring, role-based approval authority or regulatory/legal review. Evidence references are metadata only; evidence files are not verified. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. One Starlette/httpx deprecation warning remains. Synthetic vendors only.
+**Limitations:** risk weights and required controls are illustrative. There are no vendor questionnaire integrations, document storage/scanning, external risk feeds, fourth-party graph, access inventory, identity provider, contract lifecycle, continuous monitoring, role-based approval authority or regulatory/legal review. Evidence references are metadata only; evidence files are not verified. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. Synthetic vendors only.
 
 ## Run locally
 
