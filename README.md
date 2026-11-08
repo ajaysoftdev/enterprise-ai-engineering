@@ -47,7 +47,7 @@ The fifteen core projects are maintained as independent workstreams, with a sixt
 | 13 | [Third-Party Risk Management](projects/third-party-risk-management/README.md) | Vendor lifecycle, evidence, access and fourth-party risk | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086751) |
 | 14 | [SAP S/4HANA Data Modernisation](projects/sap-s4-data-modernisation/README.md) | SAP master data, migration, CDC and reconciliation | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086801) |
 | 15 | [Enterprise Architecture Assessment Toolkit](projects/enterprise-architecture-assessment-toolkit/README.md) | Capability-led assessment and target-state roadmap | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086760) |
-| 16 | [Enterprise Portfolio Integration](projects/enterprise-portfolio-integration/README.md) | Cross-project orchestration, idempotency and workflow traceability | CI + Docker + HTTP E2E verified — 10 tests passed (GitHub Actions run 42462678787) |
+| 16 | [Enterprise Portfolio Integration](projects/enterprise-portfolio-integration/README.md) | Cross-project orchestration, idempotency and workflow traceability | CI + Docker + HTTP E2E verified — 10 tests passed (GitHub Actions run 42462904962) |
 
 **Status meaning:** CI + Docker verified means the project's current synthetic prototype test suite passed and its container image built in GitHub Actions. It does not mean production readiness, live enterprise integration, penetration-test clearance, regulatory validation or deployment to a customer environment.
 
