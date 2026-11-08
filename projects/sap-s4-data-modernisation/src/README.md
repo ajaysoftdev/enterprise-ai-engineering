@@ -2,6 +2,11 @@
 
 ```text
 src/
+  sapmodern/
+    main.py              # migration batch intake, retrieval and report API
+    models.py            # typed source-record and migration contracts
+    mapping.py           # deterministic Business Partner/Material mapping and checks
+    repository.py        # SQLite migration report and idempotency persistence
   app/                  # config, composition and health
   contracts/
     sap/                # SAP-facing interface schemas
