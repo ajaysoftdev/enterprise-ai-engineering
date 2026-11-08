@@ -4,7 +4,7 @@
 
 **Domain:** Data protection, privacy engineering and information governance.  
 **Planned stack:** Python 3.12, FastAPI, PostgreSQL, SQLAlchemy, policy adapter and synthetic data.  
-**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+**Status:** First executable prototype added — CI execution pending.
 
 ## Business capabilities
 - Discover and register datasets, fields, owners and processing purposes.
@@ -30,6 +30,24 @@ Register synthetic customer and transaction datasets, classify sensitive fields,
 
 ## Guardrails
 Use synthetic data. Keep keys and secrets outside source control. Separate policy administration from policy enforcement and ensure denied access, exceptions and overrides are auditable.
+
+## First executable slice
+
+The current prototype includes dataset registration with field-level classifications, a SQLite metadata store, purpose/role/classification-aware access evaluation, deterministic masking, policy-decision audit records, API tests, OpenAPI, Docker and a GitHub Actions workflow.
+
+**Limitations:** policy rules are illustrative and hard-coded; no identity provider, attribute-based access engine, external catalogue, token vault, encryption/key management, lineage integration, retention scheduler or tenant isolation is connected. The masking examples are deterministic transformations, not anonymisation guarantees. Authentication, authorization enforcement at a data gateway, concurrency testing and security assessment remain pending. Tests have been added but have not yet been executed in CI. Do not use real personal or financial data.
+
+## Run locally
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+uvicorn dataprotection.main:app --reload --app-dir src
+pytest
+```
+
+Docker: `docker compose up --build`. API contract: [openapi.yaml](openapi.yaml).
 
 ## Project documentation
 - [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
