@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  title: Enterprise Information Resilience
+  version: 0.1.0
+  description: Synthetic signal scoring, case grouping and human review API.
+servers:
+  - url: http://127.0.0.1:8000
+paths:
+  /health:
+    get:
+      summary: Service health
+      responses:
+        "200": {description: Healthy}
+  /v1/signals:
+    post:
+      summary: Ingest and score an evidence-linked signal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/SignalCreate"}
+      responses:
+        "201": {description: Signal stored}
+  /v1/cases/{case_key}:
+    get:
+      summary: Retrieve correlated signals and case risk
+      parameters:
+        - in: path
+          name: case_key
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Case summary}
+        "404": {description: Case not found}
+  /v1/cases/{case_key}/review:
+    post:
+      summary: Record authorised human review decision
+      parameters:
+        - in: path
+          name: case_key
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/ReviewDecision"}
+      responses:
+        "200": {description: Review recorded; no external response executed}
+        "409": {description: Review already recorded}
+components:
+  schemas:
+    SignalCreate:
+      type: object
+      required: [case_key, source_id, source_type, evidence_reference, claim_text, source_reliability, reach, velocity, corroboration, business_impact]
+      properties:
+        case_key: {type: string}
+        source_id: {type: string}
+        source_type: {type: string, enum: [PUBLIC_WEB, INTERNAL, PARTNER]}
+        evidence_reference: {type: string}
+        claim_text: {type: string}
+        source_reliability: {type: number, minimum: 0, maximum: 1}
+        reach: {type: integer, minimum: 0, maximum: 5}
+        velocity: {type: integer, minimum: 0, maximum: 5}
+        corroboration: {type: integer, minimum: 0, maximum: 5}
+        business_impact: {type: integer, minimum: 0, maximum: 5}
+    ReviewDecision:
+      type: object
+      required: [reviewer, decision, rationale]
+      properties:
+        reviewer: {type: string}
+        decision: {type: string, enum: [CONFIRM_RISK, DISMISS, NEEDS_EVIDENCE]}
+        rationale: {type: string}
