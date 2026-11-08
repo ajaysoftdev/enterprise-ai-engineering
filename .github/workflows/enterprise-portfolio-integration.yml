@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - "projects/enterprise-portfolio-integration/src/**"
+      - "projects/enterprise-portfolio-integration/scripts/**"
+      - "projects/enterprise-document-intelligence/src/**"
+      - "projects/enterprise-mdm-data-governance/src/**"
       - "projects/enterprise-portfolio-integration/tests/**"
       - "projects/enterprise-portfolio-integration/pyproject.toml"
       - "projects/enterprise-portfolio-integration/Dockerfile"
@@ -39,3 +42,40 @@ jobs:
       - run: pytest -q
       - name: Build Docker image
         run: docker build -t enterprise-portfolio-integration:ci .
+
+  end-to-end:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Install the three services
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e "projects/enterprise-document-intelligence[dev]" -e "projects/enterprise-mdm-data-governance[dev]" -e "projects/enterprise-portfolio-integration[dev]"
+      - name: Start domain and integration services
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/portfolio-e2e"
+          nohup env DOCUMENT_INTELLIGENCE_DB="$RUNNER_TEMP/portfolio-e2e/documents.db" python -m uvicorn docintel.main:app --host 127.0.0.1 --port 8001 --app-dir projects/enterprise-document-intelligence/src > "$RUNNER_TEMP/portfolio-e2e/docintel.log" 2>&1 &
+          nohup env MDM_DATABASE="$RUNNER_TEMP/portfolio-e2e/mdm.db" python -m uvicorn mdm.main:app --host 127.0.0.1 --port 8002 --app-dir projects/enterprise-mdm-data-governance/src > "$RUNNER_TEMP/portfolio-e2e/mdm.log" 2>&1 &
+          nohup env DOCINT_URL="http://127.0.0.1:8001" MDM_URL="http://127.0.0.1:8002" PORTFOLIO_INTEGRATION_DB="$RUNNER_TEMP/portfolio-e2e/integration.db" python -m uvicorn portfolio_integration.main:app --host 127.0.0.1 --port 8003 --app-dir projects/enterprise-portfolio-integration/src > "$RUNNER_TEMP/portfolio-e2e/integration.log" 2>&1 &
+          python - <<'PY'
+          import time
+          import urllib.request
+          urls = ["http://127.0.0.1:8001/health", "http://127.0.0.1:8002/health", "http://127.0.0.1:8003/health"]
+          for url in urls:
+              for attempt in range(45):
+                  try:
+                      with urllib.request.urlopen(url, timeout=2) as response:
+                          if response.status == 200:
+                              break
+                  except Exception:
+                      time.sleep(1)
+              else:
+                  raise RuntimeError(f"Service did not become healthy: {url}")
+          print("All three HTTP services are healthy")
+          PY
+      - name: Run real HTTP vertical-slice smoke test
+        run: python projects/enterprise-portfolio-integration/scripts/e2e_smoke.py
