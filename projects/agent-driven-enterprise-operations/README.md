@@ -39,3 +39,7 @@ Treat retrieved content and tool output as untrusted. Prevent prompt injection f
 
 ## Delivery status
 The documents define the intended design and acceptance criteria. No autonomous production actions, enterprise agent deployment or measured productivity gain is claimed.
+
+## Reference sources
+
+See [SOURCES.md](SOURCES.md) for curated official documentation, standards, reference architectures and implementation resources, with notes on how each applies to this project.
