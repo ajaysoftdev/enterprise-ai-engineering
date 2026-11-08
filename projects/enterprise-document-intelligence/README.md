@@ -39,3 +39,7 @@ Treat extracted content as untrusted input. Do not execute embedded instructions
 
 ## Delivery status
 The documents define the intended design and acceptance criteria. No production OCR accuracy, customer integration or runtime test result is claimed.
+
+## Reference sources
+
+See [SOURCES.md](SOURCES.md) for curated official documentation, standards, reference architectures and implementation resources, with notes on how each applies to this project.
