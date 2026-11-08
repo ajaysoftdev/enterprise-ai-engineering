@@ -2,6 +2,11 @@
 
 ```text
 src/
+  lifesupply/
+    main.py              # scenario registration, retrieval and audit API
+    models.py            # synthetic lot and supply scenario contracts
+    risk.py              # explainable days-of-cover and replenishment risk rules
+    repository.py        # SQLite scenario and audit persistence
   app/                  # composition, configuration, health
   api/                  # REST routes and request schemas
   contracts/
