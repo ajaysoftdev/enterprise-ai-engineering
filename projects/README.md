@@ -1,10 +1,10 @@
 # Project Catalogue
 
-This directory contains fifteen independently scoped enterprise project workstreams, plus six earlier engineering exercises. The fifteen portfolio projects each have a project overview, detailed blueprint, curated reference sources, implementation architecture, domain contracts/data model and delivery/test guidance.
+This directory contains fifteen independently scoped core enterprise workstreams, one portfolio integration project, plus six earlier engineering exercises. The fifteen portfolio projects each have a project overview, detailed blueprint, curated reference sources, implementation architecture, domain contracts/data model and delivery/test guidance.
 
 The project folders are maintained inside this repository; they are not separate GitHub repositories.
 
-## Fifteen enterprise portfolio projects
+## Sixteen enterprise portfolio projects
 
 | # | Project | Primary business capability | Status |
 |---:|---|---|---|
@@ -23,6 +23,7 @@ The project folders are maintained inside this repository; they are not separate
 | 13 | [Third-Party Risk Management](third-party-risk-management/README.md) | Vendor lifecycle, due diligence and fourth-party risk | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086751) |
 | 14 | [SAP S/4HANA Data Modernisation](sap-s4-data-modernisation/README.md) | SAP-like master data migration and reconciliation | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086801) |
 | 15 | [Enterprise Architecture Assessment Toolkit](enterprise-architecture-assessment-toolkit/README.md) | Capability-led assessment and target-state roadmapping | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086760) |
+| 16 | [Enterprise Portfolio Integration](enterprise-portfolio-integration/README.md) | Cross-project orchestration and contract-based workflows | CI + Docker verified — 10 tests passed (GitHub Actions run 42462133940); live HTTP interoperability pending |
 
 ## Earlier engineering exercises
 
