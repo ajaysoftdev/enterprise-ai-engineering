@@ -2,6 +2,7 @@
 
 ```text
 src/
+src/mdm/              # current executable prototype: API, Pydantic contracts and SQLite repository
   app/                  # application factory, config, dependency wiring, health
   api/
     routes/             # versioned HTTP endpoints
