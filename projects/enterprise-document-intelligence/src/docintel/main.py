@@ -32,6 +32,11 @@ def create_document(payload: DocumentCreate) -> DocumentRecord:
         created_at=datetime.now(timezone.utc),
     )
     repository.save(record)
+    repository.append_audit(
+        event_id=str(uuid4()), resource_id=record.id, action="DOCUMENT_RECEIVED",
+        actor="system", details="Document submitted to local text-only prototype",
+        created_at=record.created_at.isoformat(),
+    )
     return record
 
 
@@ -62,4 +67,16 @@ def review_document(document_id: str, payload: ReviewRequest) -> DocumentRecord:
     record.reviewed_by = payload.reviewer
     record.review_note = payload.note
     repository.update_review(record)
+    repository.append_audit(
+        event_id=str(uuid4()), resource_id=record.id, action=f"REVIEW_{payload.decision}",
+        actor=payload.reviewer, details=payload.note,
+        created_at=datetime.now(timezone.utc).isoformat(),
+    )
     return record
+
+
+@app.get("/v1/documents/{document_id}/audit")
+def get_document_audit(document_id: str) -> list[dict[str, str]]:
+    if repository.get(document_id) is None:
+        raise HTTPException(status_code=404, detail="Document not found")
+    return repository.list_audit(document_id)
