@@ -2,6 +2,11 @@
 
 ```text
 src/
+  cloudpipeline/
+    main.py              # pipeline run and retrieval API
+    models.py            # batch request and run-result contracts
+    transform.py         # deterministic validation, quarantine, silver and gold transforms
+    repository.py        # SQLite run metadata and output snapshots
   app/                  # config, composition, health
   contracts/            # versioned schemas and data contracts
   domain/
