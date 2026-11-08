@@ -4,6 +4,11 @@ Intended implementation boundary:
 
 ```text
 src/
+  attention/
+    main.py              # signal ingestion, correlation, acknowledgement API
+    models.py            # typed signal and acknowledgement contracts
+    scoring.py           # explainable weighted impact and priority calculation
+    repository.py        # SQLite signal persistence
   app/
     main.py              # application composition/startup
     config.py            # typed environment configuration
