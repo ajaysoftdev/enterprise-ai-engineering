@@ -17,9 +17,12 @@ def workflow(action, request_text="Prepare a purchase order for synthetic suppli
 
 
 def test_health():
-    response = client.get("/health")
+    response = client.get("/health", headers={"X-Request-ID": "test-request-01"})
     assert response.status_code == 200
     assert response.json()["status"] == "ok"
+    assert response.headers["x-request-id"] == "test-request-01"
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert response.headers["cache-control"] == "no-store"
 
 
 def test_read_only_supplier_lookup_is_ready_without_approval(tmp_path, monkeypatch):
@@ -81,3 +84,10 @@ def test_workflow_creation_and_decision_are_audited(tmp_path, monkeypatch):
     })
     events = client.get(f"/v1/workflows/{created['id']}/audit").json()
     assert [event["event_type"] for event in events] == ["WORKFLOW_CREATED", "WORKFLOW_APPROVE"]
+
+
+def test_malformed_request_id_is_replaced():
+    response = client.get("/health", headers={"X-Request-ID": "invalid request id"})
+    assert response.status_code == 200
+    assert response.headers["x-request-id"] != "invalid request id"
+    assert len(response.headers["x-request-id"]) == 32
