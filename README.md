@@ -107,3 +107,7 @@ See [third-party notices](docs/THIRD_PARTY_NOTICES.md) for attribution informati
 ## Current status
 
 All fifteen project folders and their core specification files are present. The individual project overviews and the portfolio catalogue are documented. Executable application code, automated test runs, container builds, CI verification and deployment evidence remain pending unless explicitly recorded in a project.
+
+## Portfolio implementation roadmap
+
+See [docs/PORTFOLIO_IMPLEMENTATION_ROADMAP.md](docs/PORTFOLIO_IMPLEMENTATION_ROADMAP.md) for the delivery sequence, implementation gates, shared engineering standards and evidence required before a project is marked verified.
