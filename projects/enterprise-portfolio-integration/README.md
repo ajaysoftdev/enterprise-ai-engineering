@@ -2,7 +2,7 @@
 
 **Purpose:** Connect the fifteen independently implemented enterprise prototypes through versioned contracts, provider-neutral adapters, durable workflow state and end-to-end traceability.
 
-**Status:** First vertical slice CI + Docker + real HTTP E2E + security verified — 13 tests passed on Python 3.12 (GitHub Actions run 42478896221). Authentication rejects missing/incorrect keys and fails closed when the server key is not configured. The integration API now requires an API key and forwards distinct downstream keys to Document Intelligence and MDM.. The workflow starts Document Intelligence, MDM and Integration as separate HTTP services, exercises the steward decision and refresh path, and builds the integration Docker image.
+**Status:** First vertical slice CI + Docker + real HTTP E2E + security verified — 13 tests passed on Python 3.12 (GitHub Actions run 42478896221). Authentication rejects missing/incorrect keys and fails closed when the server key is not configured. The integration API now requires an API key and forwards distinct downstream keys to Document Intelligence and MDM. The workflow starts Document Intelligence, MDM and Integration as separate HTTP services, exercises the steward decision and refresh path, and builds the integration Docker image.
 
 ## Initial vertical slice
 
