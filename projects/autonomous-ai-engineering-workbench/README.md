@@ -4,7 +4,7 @@
 
 **Domain:** AI-assisted software engineering, agent evaluation and developer productivity.  
 **Technology direction:** Python orchestration, isolated worktrees/containers, provider-neutral model adapters and automated quality tools; concrete choices will be recorded as ADRs.  
-**Status:** Current prototype CI + Docker + security verified — 8 tests passed on Python 3.12 (GitHub Actions run 42461086821, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Status:** CI + Docker build verified — 9 tests passed on Python 3.12 (GitHub Actions run 42477994079, commit cede6e6). Authentication is enforced for protected API routes; the test suite includes a missing-key rejection check. This verifies synthetic/local prototype behaviour only, not production readiness.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
@@ -36,7 +36,7 @@ Never expose host secrets or unrestricted shell access. Treat repository content
 
 The current prototype contains a versioned benchmark-task registry, a static patch evaluator, acceptance-marker checks, secret-pattern and unsafe-execution-pattern detection, weighted evidence scoring, SQLite report persistence, API tests, OpenAPI, Docker and GitHub Actions.
 
-**Important limitations:** submitted source is inspected as text and is never executed. No LLM provider, coding agent, Git worktree, container sandbox, shell runner, test runner, cost/token budget enforcement or human code-review workflow is connected. The report explicitly marks test execution as `NOT_RUN`; a high static score is not proof that code works or is safe to merge. The security patterns are illustrative and are not a substitute for a security scanner. GitHub Actions executed the API suite successfully: 7 passed, 0 failed. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning.
+**Important limitations:** submitted source is inspected as text and is never executed. No LLM provider, coding agent, Git worktree, container sandbox, shell runner, test runner, cost/token budget enforcement or human code-review workflow is connected. The report explicitly marks test execution as `NOT_RUN`; a high static score is not proof that code works or is safe to merge. The security patterns are illustrative and are not a substitute for a security scanner. GitHub Actions executed the API suite successfully: 9 passed, 0 failed, including the protected-route authentication test. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning.
 
 ## Run locally
 
