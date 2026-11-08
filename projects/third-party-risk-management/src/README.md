@@ -2,6 +2,11 @@
 
 ```text
 src/
+  tprm/
+    main.py              # vendor intake, evidence, assessment and decision API
+    models.py            # typed vendor, evidence and approval contracts
+    risk.py              # explainable inherent-risk tiers and evidence freshness rules
+    repository.py        # SQLite vendor, evidence and decision persistence
   app/                  # config, composition and health
   api/
     routes/             # versioned endpoints
