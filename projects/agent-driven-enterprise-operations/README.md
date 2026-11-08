@@ -4,7 +4,7 @@
 
 **Domain:** Agentic AI, workflow orchestration and enterprise operations.  
 **Technology direction:** Provider-neutral LLM and tool adapters, policy enforcement, durable workflow state and auditable APIs; concrete choices will be captured in ADRs.  
-**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+**Status:** First executable prototype added — CI execution pending.
 
 ## Business capabilities
 - Register agents, tools, scopes and permitted actions.
@@ -30,6 +30,24 @@ Run a synthetic procurement or service-desk workflow in which an agent can gathe
 
 ## Guardrails
 Treat retrieved content and tool output as untrusted. Prevent prompt injection from granting authority. Apply least privilege, sandbox tools, cap cost/time, maintain idempotency and provide a kill switch.
+
+## First executable slice
+
+The current prototype implements an allow-listed procurement workflow planner, a fixed tool registry, risk classification, policy decisions, SQLite workflow/audit persistence and human approval/rejection. Read-only supplier lookup can be prepared; purchase-order drafting/submission pauses for approval; destructive supplier deletion is blocked. Approval changes state to `APPROVED_DRY_RUN` only and never submits an order.
+
+**Limitations:** there is no LLM/agent runtime, live tool execution, enterprise identity, role-based approver authorization, tenant isolation, durable distributed orchestration, budget enforcement, external procurement connector or production kill switch. The policy is a deterministic prototype. Request text is stored as untrusted input and does not grant tools or permissions. Tests have been added but have not yet been executed in CI.
+
+## Run locally
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+uvicorn agentops.main:app --reload --app-dir src
+pytest
+```
+
+Docker: `docker compose up --build`. API contract: [openapi.yaml](openapi.yaml).
 
 ## Project documentation
 - [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
