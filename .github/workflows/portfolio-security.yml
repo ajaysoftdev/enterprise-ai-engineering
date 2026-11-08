@@ -41,6 +41,7 @@ jobs:
           - third-party-risk-management
           - sap-s4-data-modernisation
           - enterprise-architecture-assessment-toolkit
+          - enterprise-portfolio-integration
     defaults:
       run:
         working-directory: projects/${{ matrix.project }}
