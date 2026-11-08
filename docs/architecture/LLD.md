@@ -4,7 +4,7 @@
 - Parent: [HLD](HLD.md)
 
 ## 1. Scope
-Define illustrative contracts and runtime behaviour for the fictional order scenario. These examples are not implemented APIs.
+Define illustrative contracts and runtime behaviour for the fictional order scenario. These are not implemented APIs.
 
 ## 2. Order intake example
 
@@ -16,7 +16,7 @@ Define illustrative contracts and runtime behaviour for the fictional order scen
       "idempotencyKey": "WEB-100045-v1"
     }
 
-Validation: mandatory unique external ID within source scope, supported currency, at least one item, positive integer quantity, resolvable SKU/customer and deterministic duplicate handling.
+Validate unique external ID within source scope, supported currency, non-empty items, positive integer quantity, resolvable references and deterministic duplicate handling.
 
 ## 3. Proposed order states
 
@@ -27,7 +27,7 @@ Validation: mandatory unique external ID within source scope, supported currency
     Accepted / ReleasedToWarehouse -> CancelRequested
     CancelRequested -> Cancelled or Rejected
 
-Confirm partial shipments and cancellation rules with business owners before implementation.
+Confirm partial shipment and cancellation rules with business owners.
 
 ## 4. Event envelope example
 
@@ -58,7 +58,7 @@ Consumers validate schema version, deduplicate event identity and persist proces
 | Poison message | Dead-letter after bounded attempts |
 
 ## 6. Security and observability
-Use service identities, TLS, least privilege, payload validation, size limits, redaction and audit for replay. Correlate by event ID, order surrogate, source, destination, attempt, outcome and duration. Do not log credentials or sensitive payloads.
+Use service identities, TLS, least privilege, payload validation, size limits, redaction and audit for replay. Correlate event ID, order surrogate, source, destination, attempt, outcome and duration. Never log credentials or sensitive payloads.
 
 ## 7. Required tests
 Contract validation, idempotent command replay, duplicate/out-of-order events, retry exhaustion, dead-letter routing, timeout recovery and reconciliation.
