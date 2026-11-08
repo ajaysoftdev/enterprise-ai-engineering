@@ -1,0 +1,67 @@
+openapi: 3.1.0
+info:
+  title: Agent-Driven Enterprise Operations
+  version: 0.1.0
+  description: Allow-listed procurement workflow planning and human approval.
+servers:
+  - url: http://127.0.0.1:8000
+paths:
+  /health:
+    get:
+      summary: Service health
+      responses:
+        "200": {description: Healthy}
+  /v1/workflows:
+    post:
+      summary: Create a bounded workflow plan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/WorkflowCreate"}
+      responses:
+        "201": {description: Workflow created}
+  /v1/workflows/{workflow_id}:
+    get:
+      summary: Get workflow state
+      parameters:
+        - in: path
+          name: workflow_id
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Workflow state}
+        "404": {description: Not found}
+  /v1/workflows/{workflow_id}/decision:
+    post:
+      summary: Approve or reject a pending workflow
+      parameters:
+        - in: path
+          name: workflow_id
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/ApprovalDecision"}
+      responses:
+        "200": {description: Decision recorded; approval remains dry-run only}
+        "409": {description: Workflow is not awaiting approval}
+components:
+  schemas:
+    WorkflowCreate:
+      type: object
+      required: [workflow_type, requested_action, requester, request_text]
+      properties:
+        workflow_type: {type: string, enum: [PROCUREMENT]}
+        requested_action: {type: string, enum: [gather_supplier_info, draft_purchase_order, submit_purchase_order, delete_supplier]}
+        requester: {type: string}
+        request_text: {type: string, maxLength: 2000}
+    ApprovalDecision:
+      type: object
+      required: [decision, approver]
+      properties:
+        decision: {type: string, enum: [APPROVE, REJECT]}
+        approver: {type: string}
+        note: {type: string, maxLength: 1000}
