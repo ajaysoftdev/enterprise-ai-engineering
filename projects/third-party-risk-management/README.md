@@ -4,7 +4,7 @@
 
 **Domain:** Third-party cyber risk, supplier governance and operational resilience.  
 **Technology direction:** Workflow/API services, evidence metadata, risk rules and audit records; specific implementation choices will be captured in ADRs.  
-**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+**Status:** First executable synthetic vendor-risk prototype added — CI execution pending.
 
 ## Business capabilities
 - Maintain vendor, service, contract and fourth-party dependency records.
@@ -30,6 +30,24 @@ Onboard a synthetic SaaS provider, classify its risk based on data and service c
 
 ## Guardrails
 Protect confidential vendor evidence, restrict access by role and record evidence freshness. Risk scores support accountable decisions; they do not replace contractual, legal or security review.
+
+## First executable slice
+
+The current prototype registers synthetic vendors, calculates explainable inherent-risk scores and HIGH/MEDIUM/LOW tiers, defines tier-specific due-diligence controls, tracks evidence validity dates and blocks approval until required evidence is current. It includes API tests, OpenAPI, SQLite persistence, Docker and a GitHub Actions workflow.
+
+**Limitations:** risk weights and required controls are illustrative. There are no vendor questionnaire integrations, document storage/scanning, external risk feeds, fourth-party graph, access inventory, identity provider, contract lifecycle, continuous monitoring, role-based approval authority or regulatory/legal review. Evidence references are metadata only; evidence files are not verified. Tests have been added but have not yet been executed in CI. Synthetic vendors only.
+
+## Run locally
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+uvicorn tprm.main:app --reload --app-dir src
+pytest
+```
+
+Docker: `docker compose up --build`. API contract: [openapi.yaml](openapi.yaml).
 
 ## Project documentation
 - [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
