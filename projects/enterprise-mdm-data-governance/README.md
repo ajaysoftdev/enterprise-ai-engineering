@@ -39,3 +39,7 @@ Do not silently merge ambiguous records. Preserve source values, explain match d
 
 ## Delivery status
 The documents define the intended design and acceptance criteria. No live MDM deployment, data-quality improvement or enterprise source connection is claimed.
+
+## Reference sources
+
+See [SOURCES.md](SOURCES.md) for curated official documentation, standards, reference architectures and implementation resources, with notes on how each applies to this project.
