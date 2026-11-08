@@ -7,8 +7,6 @@
 - Validate required settings at startup.
 - Document defaults, allowed values and operational impact.
 
-## Configuration inventory
-
 | Setting | Example | Handling |
 |---|---|---|
 | Runtime version | Java 17+ | Document per project |
