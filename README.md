@@ -2,7 +2,7 @@
 
 A practical engineering portfolio exploring enterprise software development, AI coding agents, software quality, testing, Python data engineering and enterprise architecture.
 
-This repository contains fifteen separately scoped project folders under `projects/` (not fifteen separate GitHub repositories). Each folder has a project overview, detailed blueprint, source-code boundaries, test strategy and local deployment plan. These documents establish the implementation scope; executable code and verification are tracked separately as they are completed.
+This repository contains fifteen separately scoped enterprise project folders under `projects/` (within this single GitHub repository). Each project now includes its own executable synthetic prototype, API contract, automated tests, Docker configuration and CI workflow, alongside its architecture and domain documentation. Current verification is limited to the documented prototype scope; production integrations and security assurance remain separate delivery gates.
 
 ## Integrated enterprise architecture
 
@@ -10,7 +10,7 @@ The portfolio's target-state architecture connects business strategy and operati
 
 ## Documentation
 
-See the [engineering documentation portal](docs/README.md) for architecture references, local setup, configuration, testing, operations, troubleshooting and project walkthroughs.
+See the [engineering documentation portal](docs/README.md) for architecture references, local setup, configuration, testing, operations, troubleshooting and project walkthroughs. Also see the [portfolio implementation roadmap](docs/PORTFOLIO_IMPLEMENTATION_ROADMAP.md) and [portfolio security baseline](docs/PORTFOLIO_SECURITY_BASELINE.md).
 
 ## Portfolio areas
 
@@ -28,7 +28,7 @@ See the [engineering documentation portal](docs/README.md) for architecture refe
 
 ## Independent project catalogue
 
-The fifteen projects are maintained as independent workstreams inside this single repository. Each project README now describes its business purpose, capabilities, reference workflow, key modules, demonstration scenario, guardrails, documentation and delivery status. Their blueprints define detailed architecture and acceptance criteria. Projects will be implemented and verified individually before a separate final project is designed to connect them.
+The fifteen projects are maintained as independent workstreams inside this single repository. Each project README describes its business purpose, capabilities, reference workflow, key modules, demonstration scenario, guardrails, documentation and delivery status. Each also has a runnable prototype slice and project-level CI evidence. The separate portfolio integration project remains deferred until these individual services have stronger security, operational and contract verification.
 
 | # | Independent project | Main capability | Status |
 |---:|---|---|---|
@@ -48,7 +48,7 @@ The fifteen projects are maintained as independent workstreams inside this singl
 | 14 | [SAP S/4HANA Data Modernisation](projects/sap-s4-data-modernisation/README.md) | SAP master data, migration, CDC and reconciliation | CI + Docker verified — 6 tests passed; no SAP connection |
 | 15 | [Enterprise Architecture Assessment Toolkit](projects/enterprise-architecture-assessment-toolkit/README.md) | Capability-led assessment and target-state roadmap | CI + Docker verified — 6 tests passed |
 
-**Status meaning:** Specified means architecture and implementation guidance are documented. It does not mean executable implementation, tests, deployment or client integration are complete.
+**Status meaning:** CI + Docker verified means the project's current synthetic prototype test suite passed and its container image built in GitHub Actions. It does not mean production readiness, live enterprise integration, penetration-test clearance, regulatory validation or deployment to a customer environment.
 
 The earlier six project briefs remain in the repository as additional engineering exercises. They are not substitutes for the fifteen independent projects above.
 
@@ -106,7 +106,7 @@ See [third-party notices](docs/THIRD_PARTY_NOTICES.md) for attribution informati
 
 ## Current status
 
-All fifteen project folders and their core specification files are present. The individual project overviews and the portfolio catalogue are documented. Executable application code, automated test runs, container builds, CI verification and deployment evidence remain pending unless explicitly recorded in a project.
+All fifteen prototype CI suites passed (93 tests across the portfolio), and all fifteen Docker images built successfully in GitHub Actions. A portfolio-wide Bandit and pip-audit security workflow has now been added; its first results are pending. The prototypes use synthetic data and local SQLite-backed demonstrations where applicable. No production deployment, external system connection, independent security assessment or compliance validation is claimed.
 
 ## Portfolio implementation roadmap
 
