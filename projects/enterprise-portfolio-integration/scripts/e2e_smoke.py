@@ -58,6 +58,7 @@ def main():
     workflow = first["workflow"]
     assert workflow["state"] == "COMPLETED", workflow
     assert workflow["golden_record_id"], workflow
+    assert workflow["correlation_id"] == "e2e-flow-001"
 
     duplicate_status, duplicate = call(
         "/v1/supplier-onboarding", "POST", first_payload, {"Idempotency-Key": key}
