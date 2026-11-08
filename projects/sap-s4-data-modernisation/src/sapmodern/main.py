@@ -23,7 +23,20 @@ async def request_context(request: Request, call_next):
     supplied = request.headers.get("X-Request-ID", "")
     request_id = supplied if re.fullmatch(r"[A-Za-z0-9._-]{1,64}", supplied) else secrets.token_hex(16)
     request.state.request_id = request_id
-    response = await call_next(request)
+    import hmac
+    import os
+    from fastapi.responses import JSONResponse
+    expected_key = os.getenv("API_KEY")
+    provided_key = request.headers.get("X-API-Key", "")
+    if request.url.path != "/health":
+        if not expected_key:
+            response = JSONResponse(status_code=503, content={"detail": "API authentication is not configured"})
+        elif not hmac.compare_digest(provided_key, expected_key):
+            response = JSONResponse(status_code=401, content={"detail": "Missing or invalid API key"})
+        else:
+            response = await call_next(request)
+    else:
+        response = await call_next(request)
     response.headers["X-Request-ID"] = request_id
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["Referrer-Policy"] = "no-referrer"
