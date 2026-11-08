@@ -8,21 +8,21 @@ The project folders are maintained inside this repository; they are not separate
 
 | # | Project | Primary business capability | Status |
 |---:|---|---|---|
-| 1 | [Enterprise Information Resilience](enterprise-information-resilience/README.md) | Digital trust, information integrity and reputation resilience | CI verified — 6 synthetic signal/review tests passed; no live monitoring |
-| 2 | [Enterprise Document Intelligence](enterprise-document-intelligence/README.md) | Document extraction, validation and human exception handling | CI verified — 6 tests passed; text-only prototype limitations remain |
-| 3 | [Breach-Resilient Enterprise](breach-resilient-enterprise/README.md) | Zero-trust architecture and attack-path containment | CI verified — 6 simulation tests passed; no live controls connected |
-| 4 | [Enterprise Data Protection](enterprise-data-protection/README.md) | Data classification, minimisation, masking and access governance | CI verified — 7 synthetic policy/masking tests passed; limitations remain |
-| 5 | [Enterprise Attention and Intelligence Hub](enterprise-attention-intelligence-hub/README.md) | Business-impact observability and decision prioritisation | CI verified — 6 synthetic scoring/correlation tests passed; limitations remain |
-| 6 | [Enterprise MDM and Data Governance](enterprise-mdm-data-governance/README.md) | Matching, survivorship, stewardship and golden records | CI verified — 6 tests passed; prototype limitations remain |
-| 7 | [Agent-Driven Enterprise Operations](agent-driven-enterprise-operations/README.md) | Bounded agents, policy checks and human approvals | CI verified — 7 policy/approval tests passed; no live agent tools connected |
-| 8 | [Enterprise Integration Platform](enterprise-integration-platform/README.md) | APIs, events, routing, orchestration and reliability | CI verified — 6 delivery/retry/DLQ tests passed; no live broker connected |
-| 9 | [Predictive Life Sciences Supply Chain](predictive-life-sciences-supply-chain/README.md) | Supply visibility, lot traceability and risk prediction | CI verified — 6 synthetic risk tests passed; no GxP or live source integration |
-| 10 | [Pharma R&D Data Spine](pharma-rnd-data-spine/README.md) | Research data harmonisation, traceability and lineage | CI verified — 6 synthetic metadata/lineage tests passed; no GxP validation |
-| 11 | [Cloud Data Engineering Platform](cloud-data-engineering-platform/README.md) | Ingestion, lakehouse transformations, quality and FinOps | CI verified — 6 local batch/quality tests passed; no cloud deployment |
-| 12 | [Autonomous AI Engineering Workbench](autonomous-ai-engineering-workbench/README.md) | Sandboxed coding-agent evaluation and evidence reporting | CI verified — 7 static evaluation tests passed; no sandbox/agent execution |
-| 13 | [Third-Party Risk Management](third-party-risk-management/README.md) | Vendor lifecycle, due diligence and fourth-party risk | CI verified — 6 synthetic vendor/evidence tests passed; no external evidence integration |
-| 14 | [SAP S/4HANA Data Modernisation](sap-s4-data-modernisation/README.md) | SAP-like master data migration and reconciliation | CI verified — 6 synthetic mapping/reconciliation tests passed; no SAP connection |
-| 15 | [Enterprise Architecture Assessment Toolkit](enterprise-architecture-assessment-toolkit/README.md) | Capability-led assessment and target-state roadmapping | CI verified — 6 synthetic maturity/dependency tests passed; no client assessment |
+| 1 | [Enterprise Information Resilience](enterprise-information-resilience/README.md) | Digital trust, information integrity and reputation resilience | CI + Docker verified — 6 synthetic signal/review tests passed; no live monitoring |
+| 2 | [Enterprise Document Intelligence](enterprise-document-intelligence/README.md) | Document extraction, validation and human exception handling | CI + Docker verified — 6 tests passed; text-only prototype limitations remain |
+| 3 | [Breach-Resilient Enterprise](breach-resilient-enterprise/README.md) | Zero-trust architecture and attack-path containment | CI + Docker verified — 6 simulation tests passed; no live controls connected |
+| 4 | [Enterprise Data Protection](enterprise-data-protection/README.md) | Data classification, minimisation, masking and access governance | CI + Docker verified — 7 synthetic policy/masking tests passed; limitations remain |
+| 5 | [Enterprise Attention and Intelligence Hub](enterprise-attention-intelligence-hub/README.md) | Business-impact observability and decision prioritisation | CI + Docker verified — 6 synthetic scoring/correlation tests passed; limitations remain |
+| 6 | [Enterprise MDM and Data Governance](enterprise-mdm-data-governance/README.md) | Matching, survivorship, stewardship and golden records | CI + Docker verified — 6 tests passed; prototype limitations remain |
+| 7 | [Agent-Driven Enterprise Operations](agent-driven-enterprise-operations/README.md) | Bounded agents, policy checks and human approvals | CI + Docker verified — 7 policy/approval tests passed; no live agent tools connected |
+| 8 | [Enterprise Integration Platform](enterprise-integration-platform/README.md) | APIs, events, routing, orchestration and reliability | CI + Docker verified — 6 delivery/retry/DLQ tests passed; no live broker connected |
+| 9 | [Predictive Life Sciences Supply Chain](predictive-life-sciences-supply-chain/README.md) | Supply visibility, lot traceability and risk prediction | CI + Docker verified — 6 synthetic risk tests passed; no GxP or live source integration |
+| 10 | [Pharma R&D Data Spine](pharma-rnd-data-spine/README.md) | Research data harmonisation, traceability and lineage | CI + Docker verified — 6 synthetic metadata/lineage tests passed; no GxP validation |
+| 11 | [Cloud Data Engineering Platform](cloud-data-engineering-platform/README.md) | Ingestion, lakehouse transformations, quality and FinOps | CI + Docker verified — 6 local batch/quality tests passed; no cloud deployment |
+| 12 | [Autonomous AI Engineering Workbench](autonomous-ai-engineering-workbench/README.md) | Sandboxed coding-agent evaluation and evidence reporting | CI + Docker verified — 7 static evaluation tests passed; no sandbox/agent execution |
+| 13 | [Third-Party Risk Management](third-party-risk-management/README.md) | Vendor lifecycle, due diligence and fourth-party risk | CI + Docker verified — 6 synthetic vendor/evidence tests passed; no external evidence integration |
+| 14 | [SAP S/4HANA Data Modernisation](sap-s4-data-modernisation/README.md) | SAP-like master data migration and reconciliation | CI + Docker verified — 6 synthetic mapping/reconciliation tests passed; no SAP connection |
+| 15 | [Enterprise Architecture Assessment Toolkit](enterprise-architecture-assessment-toolkit/README.md) | Capability-led assessment and target-state roadmapping | CI + Docker verified — 6 synthetic maturity/dependency tests passed; no client assessment |
 
 ## Earlier engineering exercises
 
