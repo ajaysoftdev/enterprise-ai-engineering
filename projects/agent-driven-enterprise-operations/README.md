@@ -4,7 +4,7 @@
 
 **Domain:** Agentic AI, workflow orchestration and enterprise operations.  
 **Technology direction:** Provider-neutral LLM and tool adapters, policy enforcement, durable workflow state and auditable APIs; concrete choices will be captured in ADRs.  
-**Status:** Current prototype CI + Docker + security verified — 8 tests passed on Python 3.12 (GitHub Actions run 42461086864, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Status:** CI + Docker build verified — 9 tests passed on Python 3.12 (GitHub Actions run 42477963305, commit 1352495). Authentication is enforced for protected API routes; the test suite includes a missing-key rejection check. This verifies synthetic/local prototype behaviour only, not production readiness.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
@@ -36,7 +36,7 @@ Treat retrieved content and tool output as untrusted. Prevent prompt injection f
 
 The current prototype implements an allow-listed procurement workflow planner, a fixed tool registry, risk classification, policy decisions, SQLite workflow/audit persistence and human approval/rejection. Read-only supplier lookup can be prepared; purchase-order drafting/submission pauses for approval; destructive supplier deletion is blocked. Approval changes state to `APPROVED_DRY_RUN` only and never submits an order.
 
-**Limitations:** there is no LLM/agent runtime, live tool execution, enterprise identity, role-based approver authorization, tenant isolation, durable distributed orchestration, budget enforcement, external procurement connector or production kill switch. The policy is a deterministic prototype. Request text is stored as untrusted input and does not grant tools or permissions. GitHub Actions executed the API suite successfully: 7 passed, 0 failed. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning.
+**Limitations:** there is no LLM/agent runtime, live tool execution, enterprise identity, role-based approver authorization, tenant isolation, durable distributed orchestration, budget enforcement, external procurement connector or production kill switch. The policy is a deterministic prototype. Request text is stored as untrusted input and does not grant tools or permissions. GitHub Actions executed the API suite successfully: 9 passed, 0 failed, including the protected-route authentication test. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning.
 
 ## Run locally
 
