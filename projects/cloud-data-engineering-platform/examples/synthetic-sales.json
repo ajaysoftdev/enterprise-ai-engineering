@@ -1,0 +1,6 @@
+[
+  {"order_id":"ORD-1001","product_id":"SKU-01","quantity":2,"unit_price":12.5,"event_date":"2026-11-08"},
+  {"order_id":"ORD-1002","product_id":"SKU-01","quantity":3,"unit_price":10.0,"event_date":"2026-11-08"},
+  {"order_id":"ORD-1003","product_id":"SKU-02","quantity":1,"unit_price":25.0,"event_date":"2026-11-08"},
+  {"order_id":"ORD-INVALID","product_id":"SKU-02","quantity":-2,"unit_price":25.0,"event_date":"2026-11-08"}
+]
