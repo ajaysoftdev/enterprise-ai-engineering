@@ -1,50 +1,41 @@
 # Breach-Resilient Enterprise
 
-**Domain:** Zero-trust security architecture and attack-path containment  
-**Status:** Architecture specification; implementation and runtime verification pending.
+**Purpose:** Model how an enterprise contains an assumed compromise across identity, applications, data, APIs and software delivery.
 
-## Start here
-- [Project blueprint](docs/PROJECT_BLUEPRINT.md)
-- [Source-code structure and implementation boundaries](src/README.md)
-- [Test strategy and definition of done](tests/README.md)
+**Domain:** Zero-trust security architecture, attack-path containment and cyber resilience.  
+**Planned stack:** Python 3.12, FastAPI, OPA/Rego policy examples, Docker Compose and OpenTelemetry.  
+**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+
+## Business capabilities
+- Represent identities, workloads, resources, trust boundaries and access paths.
+- Evaluate least-privilege and contextual access policies.
+- Map attack paths and identify excessive privilege or exposed trust relationships.
+- Demonstrate segmentation, credential containment and secret rotation workflows.
+- Correlate security signals with affected services and business impact.
+- Track response, recovery and evidence for audit.
+
+## Reference workflow
+Asset and identity inventory → trust-boundary mapping → policy evaluation → attack-path analysis → detection → containment approval/action → recovery validation → evidence reporting.
+
+## Key modules
+- **Identity and access:** principals, roles, workload identities and privilege scope.
+- **Policy engine:** policy-as-code examples and explainable decisions.
+- **Exposure graph:** relationships among identities, workloads, APIs and data.
+- **Detection and response:** event normalisation, incident state and response playbooks.
+- **Recovery:** credential rotation, restore checks and recovery evidence.
+- **Telemetry:** security events, audit trail and service-level observability.
+
+## Expected demonstration
+Use a synthetic enterprise topology to simulate a compromised identity, trace reachable resources, identify excessive access and demonstrate a controlled containment workflow.
+
+## Guardrails
+This is a defensive engineering project. Use isolated synthetic environments only. Never include real credentials, exploit third-party systems or represent a simulated control as a deployed security capability.
+
+## Project documentation
+- [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
+- [Source-code boundaries](src/README.md)
+- [Test strategy](tests/README.md)
 - [Local deployment and operations](infra/README.md)
 
-## Planned repository layout
-```text
-breach-resilient-enterprise/
-├── docs/
-│   ├── PROJECT_BLUEPRINT.md
-│   └── adr/
-├── src/
-│   ├── app/
-│   ├── api/
-│   ├── domain/
-│   ├── application/
-│   ├── infrastructure/
-│   └── observability/
-├── tests/
-│   ├── unit/
-│   ├── integration/
-│   ├── contract/
-│   └── e2e/
-├── infra/
-│   ├── Dockerfile
-│   ├── compose.yaml
-│   └── deploy/
-├── scripts/
-├── .github/workflows/
-├── .env.example
-├── pyproject.toml
-└── README.md
-```
-
-The layout is a target structure. Directories and executable modules will be added with implementation increments; empty directories are not represented as committed Git objects.
-
-## Engineering status
-- Architecture and module boundaries: documented.
-- Executable application: pending.
-- Automated tests: planned; not yet run.
-- Container/CI verification: pending.
-- Production deployment: not claimed.
-
-See [project blueprint](docs/PROJECT_BLUEPRINT.md) for business flow, domain model, interfaces, security, NFRs, delivery increments and acceptance criteria.
+## Delivery status
+The documents define the intended design and acceptance criteria. No enterprise security certification, live SOC integration or production protection is claimed.
