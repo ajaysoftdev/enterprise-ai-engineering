@@ -1,0 +1,29 @@
+name: Life Sciences Supply Prototype CI
+
+on:
+  push:
+    paths:
+      - "projects/predictive-life-sciences-supply-chain/**"
+      - ".github/workflows/life-sciences-supply.yml"
+  pull_request:
+    paths:
+      - "projects/predictive-life-sciences-supply-chain/**"
+      - ".github/workflows/life-sciences-supply.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/predictive-life-sciences-supply-chain
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: projects/predictive-life-sciences-supply-chain/pyproject.toml
+      - run: python -m pip install --upgrade pip
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
