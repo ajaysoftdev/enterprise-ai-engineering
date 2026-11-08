@@ -6,7 +6,7 @@ A document intake and validation demonstrator that receives synthetic plain-text
 
 ## Current implementation status
 
-<badge>Prototype code added — execution not yet verified</badge>
+**Prototype code added — execution not yet verified**
 
 The first executable slice is now present:
 - FastAPI service with health, document create/list/read and review endpoints
