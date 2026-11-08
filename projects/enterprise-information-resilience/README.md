@@ -4,7 +4,7 @@
 
 **Domain:** Digital trust, information integrity, reputation resilience and AI governance.  
 **Planned stack:** Python 3.12, FastAPI, PostgreSQL, Redis and OpenTelemetry; optional provider-neutral LLM adapter.  
-**Status:** Synthetic signal/case-review prototype CI verified — 6 tests passed on Python 3.12 (GitHub Actions run 42455834978, commit 3b9153f). This verifies deterministic synthetic scoring and human-review tests only; no live monitoring or truth assessment is claimed.
+**Status:** Synthetic signal/case-review prototype CI verified — 6 tests passed on Python 3.12 (GitHub Actions run 42456122642, commit d48f381). This verifies deterministic synthetic scoring and human-review tests only; no live monitoring or truth assessment is claimed.
 
 ## Business capabilities
 - Ingest signals from approved public, internal and partner sources.
