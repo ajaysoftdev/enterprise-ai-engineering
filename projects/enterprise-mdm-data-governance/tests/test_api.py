@@ -18,9 +18,12 @@ def source(source_key, tax_id, name="Northwind Supplies"):
 
 
 def test_health():
-    response = client.get("/health")
+    response = client.get("/health", headers={"X-Request-ID": "test-request-01"})
     assert response.status_code == 200
     assert response.json()["status"] == "ok"
+    assert response.headers["x-request-id"] == "test-request-01"
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert response.headers["cache-control"] == "no-store"
 
 
 def test_first_source_creates_golden_record(tmp_path, monkeypatch):
@@ -91,3 +94,10 @@ def test_second_steward_decision_is_rejected_without_partial_change(tmp_path, mo
     golden = client.get("/v1/golden-records").json()
     assert len(golden) == 1
     assert len(golden[0]["source_record_ids"]) == 2
+
+
+def test_malformed_request_id_is_replaced():
+    response = client.get("/health", headers={"X-Request-ID": "invalid request id"})
+    assert response.status_code == 200
+    assert response.headers["x-request-id"] != "invalid request id"
+    assert len(response.headers["x-request-id"]) == 32
