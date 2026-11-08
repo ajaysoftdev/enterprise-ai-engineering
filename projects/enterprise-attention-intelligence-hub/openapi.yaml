@@ -1,0 +1,63 @@
+openapi: 3.1.0
+info:
+  title: Enterprise Attention and Intelligence Hub
+  version: 0.1.0
+  description: Synthetic signal correlation and business-impact prioritisation API.
+servers:
+  - url: http://127.0.0.1:8000
+paths:
+  /health:
+    get:
+      summary: Service health
+      responses:
+        "200": {description: Healthy}
+  /v1/signals:
+    post:
+      summary: Ingest and score an operational signal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/SignalCreate"}
+      responses:
+        "201": {description: Signal accepted and scored}
+    get:
+      summary: List signals by priority
+      responses:
+        "200": {description: Signal list}
+  /v1/correlations/{correlation_key}:
+    get:
+      summary: Retrieve related signals and explain the highest priority
+      parameters:
+        - in: path
+          name: correlation_key
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Correlated signal group}
+  /v1/signals/{signal_id}/acknowledge:
+    post:
+      summary: Record an operator acknowledgement
+      parameters:
+        - in: path
+          name: signal_id
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Acknowledgement recorded}
+        "409": {description: Already acknowledged}
+components:
+  schemas:
+    SignalCreate:
+      type: object
+      required: [service_name, correlation_key, source, description, severity, business_impact, urgency, confidence, owner]
+      properties:
+        service_name: {type: string}
+        correlation_key: {type: string}
+        source: {type: string}
+        description: {type: string}
+        severity: {type: integer, minimum: 1, maximum: 5}
+        business_impact: {type: integer, minimum: 1, maximum: 5}
+        urgency: {type: integer, minimum: 1, maximum: 5}
+        confidence: {type: number, minimum: 0, maximum: 1}
+        owner: {type: string}
