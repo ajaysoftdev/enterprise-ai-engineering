@@ -4,6 +4,10 @@ A practical engineering portfolio exploring enterprise software development, AI 
 
 The portfolio is organised around end-to-end projects. Each project starts with a problem statement and acceptance criteria, then progresses through implementation, testing, review and evidence-based reporting.
 
+## Integrated enterprise architecture
+
+The portfolio's target-state architecture connects business strategy and operating model with enterprise data, integration, cloud engineering, AI agents, security, information resilience, observability and software delivery. See the [integrated enterprise reference architecture](docs/architecture/enterprise-reference-architecture.md), [capability map](docs/architecture/capability-map.md) and [module dependency map](docs/architecture/module-dependency-map.md).
+
 ## Documentation
 
 See the [engineering documentation portal](docs/README.md) for architecture references, local setup, configuration, testing, operations, troubleshooting and project walkthroughs.
