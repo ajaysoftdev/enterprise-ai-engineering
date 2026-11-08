@@ -1,0 +1,104 @@
+"""FastAPI service for synthetic master-data ingestion and stewardship."""
+from datetime import datetime, timezone
+from uuid import uuid4
+import sqlite3
+from fastapi import FastAPI, HTTPException, Query
+from . import repository
+from .models import SourceRecordCreate, SourceRecord, MatchCandidate, StewardDecision, GoldenRecord
+
+app = FastAPI(
+    title="Enterprise MDM and Data Governance",
+    version="0.1.0",
+    description="Synthetic supplier source-record matching and human stewardship demonstrator.",
+)
+
+
+def now() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def normalise_tax_id(value: str) -> str:
+    return "".join(ch for ch in value.upper() if ch.isalnum())
+
+
+def create_golden(source: dict) -> dict:
+    golden = {
+        "id": str(uuid4()), "canonical_name": source["legal_name"],
+        "tax_id": normalise_tax_id(source["tax_id"]),
+        "source_record_ids": [source["id"]], "status": "ACTIVE",
+        "created_at": source["created_at"],
+    }
+    repository.save_golden(golden)
+    return golden
+
+
+@app.get("/health")
+def health() -> dict[str, str]:
+    return {"status": "ok", "service": "enterprise-mdm-data-governance"}
+
+
+@app.post("/v1/source-records", response_model=dict, status_code=201)
+def ingest_source_record(payload: SourceRecordCreate) -> dict:
+    stamp = now()
+    record = {
+        "id": str(uuid4()), **payload.model_dump(),
+        "tax_id": payload.tax_id.strip(), "created_at": stamp.isoformat(),
+    }
+    try:
+        repository.save_source(record)
+    except sqlite3.IntegrityError:
+        raise HTTPException(status_code=409, detail="Source system/key already exists")
+    existing = repository.rows("SELECT * FROM source_records WHERE id<>? ORDER BY created_at", (record["id"],))
+    match = next((item for item in existing
+                  if normalise_tax_id(item["tax_id"]) == normalise_tax_id(record["tax_id"])), None)
+    if match:
+        candidate = {
+            "id": str(uuid4()), "incoming_record_id": record["id"],
+            "existing_record_id": match["id"], "match_rule": "EXACT_NORMALISED_TAX_ID",
+            "status": "PENDING", "created_at": stamp.isoformat(),
+        }
+        repository.save_candidate(candidate)
+        return {"source_record": record, "match_candidate": candidate, "golden_record": None}
+    golden = create_golden(record)
+    return {"source_record": record, "match_candidate": None, "golden_record": golden}
+
+
+@app.get("/v1/match-candidates", response_model=list[MatchCandidate])
+def list_match_candidates(status: str | None = Query(default=None, pattern="^(PENDING|CONFIRMED|REJECTED)$")):
+    return repository.list_candidates(status)
+
+
+@app.post("/v1/match-candidates/{candidate_id}/decision", response_model=dict)
+def decide_match(candidate_id: str, payload: StewardDecision) -> dict:
+    candidate = repository.get_candidate(candidate_id)
+    if candidate is None:
+        raise HTTPException(status_code=404, detail="Match candidate not found")
+    if candidate["status"] != "PENDING":
+        raise HTTPException(status_code=409, detail="Match candidate has already been decided")
+    incoming = repository.get_source(candidate["incoming_record_id"])
+    if incoming is None:
+        raise HTTPException(status_code=409, detail="Incoming source record is unavailable")
+    status = "CONFIRMED" if payload.decision == "CONFIRM_MATCH" else "REJECTED"
+    repository.update_candidate(candidate_id, status)
+    decision = {
+        "id": str(uuid4()), "candidate_id": candidate_id,
+        "decision": payload.decision, "steward": payload.steward,
+        "note": payload.note, "created_at": now().isoformat(),
+    }
+    repository.save_decision(decision)
+    if status == "CONFIRMED":
+        golden = repository.golden_for_source(candidate["existing_record_id"])
+        if golden is None:
+            raise HTTPException(status_code=409, detail="Existing source has no golden record")
+        repository.add_source_to_golden(golden["id"], incoming["id"])
+        result = repository.row("SELECT * FROM golden_records WHERE id=?", (golden["id"],))
+    else:
+        result = create_golden(incoming)
+    return {"candidate": {**candidate, "status": status}, "steward_decision": decision, "golden_record": result}
+
+
+@app.get("/v1/golden-records", response_model=list[GoldenRecord])
+def list_golden_records():
+    import json
+    return [{**item, "source_record_ids": json.loads(item["source_record_ids"])}
+            for item in repository.list_golden()]
