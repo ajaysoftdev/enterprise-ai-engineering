@@ -5,6 +5,7 @@
 **Domain:** Data protection, privacy engineering and information governance.  
 **Planned stack:** Python 3.12, FastAPI, PostgreSQL, SQLAlchemy, policy adapter and synthetic data.  
 **Status:** Prototype CI + Docker verified — 7 tests passed on Python 3.12 (GitHub Actions run 42456383296, commit 0bc40c8). This verifies synthetic dataset/policy/masking tests only; it does not establish compliance or production readiness.
+**Latest revision note:** Request correlation IDs and baseline security response headers have been added; the new middleware tests are awaiting CI verification.
 
 ## Business capabilities
 - Discover and register datasets, fields, owners and processing purposes.
