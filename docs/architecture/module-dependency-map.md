@@ -109,7 +109,7 @@ The current 15 prototype workstreams map to these logical modules:
 |---|---|
 | Enterprise Architecture Assessment Toolkit | M0 — architecture and governance workbench |
 | Enterprise MDM and Data Governance; Pharma R&D Data Spine | M1 — enterprise data foundation |
-| Enterprise Integration Platform; SAP S/4HANA Data Modernisation | M2 — integration and workflow foundation |
+| Enterprise Integration Platform; SAP S/4HANA Data Modernisation; Enterprise Portfolio Integration | M2 — integration and workflow foundation |
 | Cloud Data Engineering Platform; Predictive Life Sciences Supply Chain | M3 — cloud data engineering and industry scenarios |
 | Enterprise Document Intelligence | M4 — inference and knowledge services |
 | Agent-Driven Enterprise Operations; Autonomous AI Engineering Workbench | M5 — agentic workflow and engineering workbench |
@@ -123,4 +123,4 @@ For project-to-project producer/consumer handoffs, shared event envelopes, API c
 
 ## 9. Status
 
-The 15 project folders now contain independent executable synthetic prototypes, API contracts, automated tests, Docker packaging and CI workflows. Initial CI and Docker evidence is recorded in the project catalogue. A later revision added request-correlation middleware and tests across all 15 services; the current-revision CI reruns are pending. The shared portfolio integration is still a separate future workstream; it is not yet implemented.
+The 15 core project folders contain independent executable synthetic prototypes, API contracts, automated tests, Docker packaging and CI workflows. A sixteenth Enterprise Portfolio Integration project now composes the first Document Intelligence → MDM supplier-onboarding vertical slice. Initial CI and Docker evidence is recorded in the project catalogue. A later revision added request-correlation middleware and tests across all 15 services; the current-revision CI reruns are pending. The broader portfolio integration remains a staged workstream: the first vertical slice is implemented and CI-verified with fake adapters, while live HTTP interoperability, event-broker integration and shared identity are still pending.
