@@ -78,7 +78,7 @@ def start_supplier_onboarding(
             "filename": payload.filename,
             "content_type": "text/plain",
             "text_content": payload.text_content,
-        })
+        }, request_id=request.state.request_id)
         document_id = document.get("id")
         if not document_id:
             workflow = repository.transition(
@@ -110,7 +110,7 @@ def start_supplier_onboarding(
             "source_key": payload.source_key,
             "legal_name": supplier,
             "tax_id": tax_id,
-        })
+        }, request_id=request.state.request_id)
         source_record = mdm_result.get("source_record") or {}
         source_record_id = source_record.get("id")
         candidate = mdm_result.get("match_candidate")
@@ -156,7 +156,7 @@ def get_workflow(workflow_id: str):
 
 
 @app.post("/v1/workflows/{workflow_id}/refresh")
-def refresh_stewardship(workflow_id: str):
+def refresh_stewardship(workflow_id: str, request: Request):
     workflow = repository.get_workflow(workflow_id)
     if workflow is None:
         raise HTTPException(status_code=404, detail="Workflow not found")
@@ -164,7 +164,8 @@ def refresh_stewardship(workflow_id: str):
         raise HTTPException(status_code=409, detail="Workflow is not waiting for MDM stewardship")
     try:
         result = app.state.mdm_adapter.refresh(
-            workflow["match_candidate_id"], workflow["source_record_id"]
+            workflow["match_candidate_id"], workflow["source_record_id"],
+            request_id=request.state.request_id,
         )
     except AdapterError as exc:
         updated = repository.transition(
