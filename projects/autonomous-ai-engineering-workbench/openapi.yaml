@@ -1,0 +1,50 @@
+openapi: 3.1.0
+info:
+  title: Autonomous AI Engineering Workbench
+  version: 0.1.0
+  description: Static patch evaluation and evidence reporting; submitted code is never executed.
+servers:
+  - url: http://127.0.0.1:8000
+paths:
+  /health:
+    get:
+      summary: Service health
+      responses:
+        "200": {description: Healthy}
+  /v1/tasks:
+    get:
+      summary: List benchmark tasks
+      responses:
+        "200": {description: Task catalogue}
+  /v1/evaluations:
+    post:
+      summary: Evaluate a submitted patch as text
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/EvaluationCreate"}
+      responses:
+        "201": {description: Static evaluation report}
+        "404": {description: Task not found}
+  /v1/evaluations/{report_id}:
+    get:
+      summary: Retrieve evaluation report
+      parameters:
+        - in: path
+          name: report_id
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Evaluation report}
+components:
+  schemas:
+    EvaluationCreate:
+      type: object
+      required: [task_id, agent_profile, patch_files]
+      properties:
+        task_id: {type: string}
+        agent_profile: {type: string}
+        patch_files:
+          type: object
+          additionalProperties: {type: string}
