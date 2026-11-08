@@ -23,7 +23,7 @@ The project folders are maintained inside this repository; they are not separate
 | 13 | [Third-Party Risk Management](third-party-risk-management/README.md) | Vendor lifecycle, due diligence and fourth-party risk | CI + Docker + security verified — 8 tests passed (GitHub Actions run 42477998084) |
 | 14 | [SAP S/4HANA Data Modernisation](sap-s4-data-modernisation/README.md) | SAP-like master data migration and reconciliation | CI + Docker + security verified — 8 tests passed (GitHub Actions run 42478002325) |
 | 15 | [Enterprise Architecture Assessment Toolkit](enterprise-architecture-assessment-toolkit/README.md) | Capability-led assessment and target-state roadmapping | CI + Docker + security verified — 8 tests passed (GitHub Actions run 42478101324) |
-| 16 | [Enterprise Portfolio Integration](enterprise-portfolio-integration/README.md) | Cross-project orchestration and contract-based workflows | CI + Docker + HTTP E2E + security verified — 11 tests passed (GitHub Actions run 42462914331) |
+| 16 | [Enterprise Portfolio Integration](enterprise-portfolio-integration/README.md) | Cross-project orchestration and contract-based workflows | CI + Docker + authenticated HTTP E2E + security verified — 12 tests passed (GitHub Actions run 42478610123) |
 
 ## Earlier engineering exercises
 
@@ -38,7 +38,7 @@ The project folders are maintained inside this repository; they are not separate
 
 - **Specified:** business scope, architecture and implementation guidance are documented; executable implementation and verification are not implied.
 - **In progress:** source code or configuration is being implemented; only completed and evidenced increments should be described as implemented.
-- **CI verified:** the project's GitHub Actions test workflow completed successfully; the README records the run, test count and remaining limitations. This is not production verification.
+- **CI + Docker + security verified:** the project's automated tests passed, its Docker image built, and Bandit plus pip-audit completed successfully in GitHub Actions. This is not production verification.
 
 ## Delivery rules
 
