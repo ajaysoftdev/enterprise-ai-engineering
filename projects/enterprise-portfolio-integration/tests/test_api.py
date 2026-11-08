@@ -4,7 +4,7 @@ from portfolio_integration.main import app
 from portfolio_integration import repository
 from portfolio_integration.adapters import AdapterError, DocumentIntelligenceAdapter
 
-client = TestClient(app)
+client = TestClient(app, headers={"X-API-Key": "ci-test-key"})
 
 
 class FakeDocumentAdapter:
@@ -174,3 +174,9 @@ def test_downstream_adapter_rejects_non_http_url():
     adapter = DocumentIntelligenceAdapter("file:///tmp/untrusted")
     with pytest.raises(AdapterError, match="HTTP or HTTPS"):
         adapter.submit({"filename": "x.txt"})
+
+
+def test_protected_api_rejects_missing_api_key():
+    unauthenticated = TestClient(app)
+    response = unauthenticated.get("/openapi.json")
+    assert response.status_code == 401
