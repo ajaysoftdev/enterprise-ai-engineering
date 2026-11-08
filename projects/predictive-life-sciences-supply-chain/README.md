@@ -39,3 +39,7 @@ Preserve lot-level traceability and data provenance. Predictions support plannin
 
 ## Delivery status
 Use synthetic data and clearly labelled simulated events. No validated GxP system, regulated production use or forecast accuracy is claimed.
+
+## Reference sources
+
+See [SOURCES.md](SOURCES.md) for curated official documentation, standards, reference architectures and implementation resources, with notes on how each applies to this project.
