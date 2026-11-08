@@ -75,16 +75,16 @@ Avoid creating a central framework prematurely. Extract shared libraries only af
 
 - The 15 core domain projects retain their project-specific scope, reference sources, implementation architecture, domain contracts and delivery guidance; the sixteenth portfolio integration project now has its own architecture and first vertical slice.
 - All 16 projects now have a first executable local prototype slice, API contracts, Docker configuration, automated tests and project-specific GitHub Actions workflows.
-- All 16 current-revision GitHub Actions test workflows completed successfully on Python 3.12: **135 tests passed across the portfolio**.
+- All 16 current-revision GitHub Actions test workflows completed successfully on Python 3.12: **136 tests passed across the portfolio**.
 - All 16 Docker images built successfully in their respective CI workflows.
 - This evidence verifies the current synthetic/local prototype slices only. It does not establish production readiness, live enterprise integration, security certification, GxP validation, cloud deployment, performance or regulatory compliance.
 - Every project README records its own CI run, test count and explicit limitations.
 - The Starlette TestClient deprecation warning was resolved by adding `httpx2` to the development dependencies; the latest CI reruns complete without that warning.
-- Portfolio Bandit and `pip-audit --skip-editable` scans passed for all 16 projects in GitHub Actions run 42462914239 (16/16 jobs) after upgrading pytest to the patched release range. See [Portfolio Security Baseline](PORTFOLIO_SECURITY_BASELINE.md).
-- Request correlation middleware, bounded caller-provided IDs, generated fallback IDs and baseline response headers have been added across all 15 core APIs; the new regression tests passed in the current CI runs.
+- Portfolio Bandit and `pip-audit --skip-editable` scans passed for all 16 projects in GitHub Actions run 42478610160 (16/16 jobs) after upgrading pytest to the patched release range. See [Portfolio Security Baseline](PORTFOLIO_SECURITY_BASELINE.md).
+- All 16 APIs now enforce a configured API key on non-health routes, reject missing keys, attach bounded request correlation IDs and return baseline security headers. The integration adapters forward separate downstream credentials to Document Intelligence and MDM; the authenticated three-service HTTP E2E smoke test passed.
 - MDM stewardship decisions now use a single SQLite transaction for candidate state, decision record and golden-record update; a regression test covers duplicate decisions without partial mutation and passed in CI.
 - The sixteenth project's first vertical slice connects Document Intelligence to MDM through an idempotent supplier-onboarding workflow. Its 11-test suite, Docker build and three-service HTTP smoke test passed; the workflow verified Document Intelligence → MDM → Integration, including a steward decision and refresh. Its Bandit and dependency audit job also passed.
-- Next engineering milestone: extend API-key authentication with role-based authorization, key rotation and tenant-isolation controls, test concurrent requests and recovery, and add operational telemetry and reproducible deployment verification. Expand the sixteenth integration project only as each domain interface and control becomes sufficiently stable.
+- Next engineering milestone: replace shared API keys with enterprise identity/workload credentials, add role-based authorization and tenant isolation, test concurrent requests and recovery, and add operational telemetry and reproducible deployment verification. Expand the sixteenth integration project only as each domain interface and control becomes sufficiently stable.
 
 ## Current official architecture references
 
