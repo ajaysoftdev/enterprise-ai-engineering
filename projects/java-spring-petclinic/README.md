@@ -2,7 +2,7 @@
 
 - Status: Proposed
 - Type: Existing open-source application exercise
-- Base code: [Portfolio fork](https://github.com/ajaysoftdev/spring-petclinic) of [Spring PetClinic upstream](https://github.com/spring-projects/spring-petclinic)
+- Base code: A personal fork of the [Spring PetClinic upstream repository](https://github.com/spring-projects/spring-petclinic)
 
 ## Problem context
 
