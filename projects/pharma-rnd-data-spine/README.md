@@ -35,7 +35,7 @@ Do not fabricate scientific observations or alter source evidence. Preserve prov
 
 The current prototype ingests synthetic experiment, sample, method and assay-result metadata; validates type-specific required fields; quarantines incomplete records; stores parent-child lineage; exposes upstream lineage queries; and records ingestion audit events. It includes API tests, OpenAPI, Docker and a GitHub Actions workflow.
 
-**Limitations:** source adapters, ELN/LIMS/MES connectors, scientific identity resolution, unit conversion, transformation pipelines, immutable raw evidence, access controls, lineage versioning, regulated audit trails and validated GxP operation are not implemented. The metadata checks are a small demonstrator, not a scientific data-quality standard. Tests have been added but have not yet been executed in CI. Synthetic research records only.
+**Limitations:** source adapters, ELN/LIMS/MES connectors, scientific identity resolution, unit conversion, transformation pipelines, immutable raw evidence, access controls, lineage versioning, regulated audit trails and validated GxP operation are not implemented. The metadata checks are a small demonstrator, not a scientific data-quality standard. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. One Starlette/httpx deprecation warning remains. Synthetic research records only.
 
 ## Run locally
 
