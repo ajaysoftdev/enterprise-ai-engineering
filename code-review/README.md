@@ -2,6 +2,14 @@
 
 Review guidance for assessing changes in correctness, maintainability, security and operational suitability.
 
+## Where the reviews will be applied
+
+- [Spring PetClinic service enhancement](../projects/java-spring-petclinic/README.md): API behaviour, validation, persistence, transaction boundaries and regression risk.
+- [Python batch data pipeline](../projects/python-batch-data-pipeline/README.md): malformed input, schema drift, idempotency, partial failures and safe logging.
+- [Data quality framework](../projects/data-quality-framework/README.md): rule correctness, null handling, threshold semantics and rejected-record traceability.
+- [AI agent evaluation workbench](../projects/ai-agent-evaluation-workbench/README.md): prompt/task reproducibility, provenance of changes and validity of evaluation evidence.
+- [Quality automation pipeline](../projects/quality-automation-pipeline/README.md): CI permissions, secret handling, dependency checks and trustworthy test reporting.
+
 ## Review checklist
 
 - Does the change meet the stated requirement and acceptance criteria?
@@ -25,4 +33,4 @@ Review AI-generated code to the same standard as human-written code. Never treat
 
 ## Status
 
-Review checklist established; project-specific reviews will be added as work is performed.
+Review checklist established. Project-specific reviews will be added only after implementation diffs and verification evidence exist.
