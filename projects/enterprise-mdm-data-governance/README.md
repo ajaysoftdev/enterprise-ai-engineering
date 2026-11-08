@@ -4,7 +4,7 @@
 
 **Domain:** Master data management, data quality, stewardship and governance.  
 **Technology direction:** API-based domain services, relational persistence, configurable matching and survivorship rules; concrete implementation choices will be recorded as architecture decisions.  
-**Status:** Current prototype CI + Docker + security verified — 8 tests passed on Python 3.12 (GitHub Actions run 42461085897, commit b81a7e2). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Status:** CI + Docker build verified — 9 tests passed on Python 3.12 (GitHub Actions run 42477959390, commit 415555f). Authentication is enforced for protected API routes; the test suite includes a missing-key rejection check. This verifies synthetic/local prototype behaviour only, not production readiness.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 The initial code slice provides:
@@ -14,7 +14,7 @@ The initial code slice provides:
 - Human confirmation/rejection before a candidate is merged or kept separate
 - Synthetic supplier fixtures, API tests and a GitHub Actions workflow
 
-**Important limitations:** matching is exact normalized tax-ID comparison only; there is no fuzzy matching, configurable survivorship, source-system connector, event publishing, authentication, tenant isolation, authorization, unmerge/version history, production-grade audit integrity or enterprise data-quality profiling. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. This is a local demonstrator, not a production MDM platform.
+**Important limitations:** matching is exact normalized tax-ID comparison only; there is no fuzzy matching, configurable survivorship, source-system connector, event publishing, authentication, tenant isolation, authorization, unmerge/version history, production-grade audit integrity or enterprise data-quality profiling. GitHub Actions executed the API suite successfully: 9 passed, 0 failed, including the protected-route authentication test. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. This is a local demonstrator, not a production MDM platform.
 
 ## Business capabilities
 - Ingest master records from ERP, CRM, procurement and operational systems.
