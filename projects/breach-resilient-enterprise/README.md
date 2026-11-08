@@ -39,3 +39,7 @@ This is a defensive engineering project. Use isolated synthetic environments onl
 
 ## Delivery status
 The documents define the intended design and acceptance criteria. No enterprise security certification, live SOC integration or production protection is claimed.
+
+## Reference sources
+
+See [SOURCES.md](SOURCES.md) for curated official documentation, standards, reference architectures and implementation resources, with notes on how each applies to this project.
