@@ -101,6 +101,26 @@ A module is not complete because its design document exists. Completion requires
 - Demonstration data that is synthetic or appropriately public.
 - Clear status labels and known limitations.
 
-## 8. Status
+## 8. Project implementation mapping
 
-This is a proposed portfolio plan. Module implementation and local execution are pending unless separately evidenced in the repository.
+The current 15 prototype workstreams map to these logical modules:
+
+| Portfolio project | Module alignment |
+|---|---|
+| Enterprise Architecture Assessment Toolkit | M0 — architecture and governance workbench |
+| Enterprise MDM and Data Governance; Pharma R&D Data Spine | M1 — enterprise data foundation |
+| Enterprise Integration Platform; SAP S/4HANA Data Modernisation | M2 — integration and workflow foundation |
+| Cloud Data Engineering Platform; Predictive Life Sciences Supply Chain | M3 — cloud data engineering and industry scenarios |
+| Enterprise Document Intelligence | M4 — inference and knowledge services |
+| Agent-Driven Enterprise Operations; Autonomous AI Engineering Workbench | M5 — agentic workflow and engineering workbench |
+| Breach-Resilient Enterprise; Enterprise Data Protection; Third-Party Risk Management | M6 — security and trust foundation |
+| Enterprise Attention and Intelligence Hub | M7 — observability and AIOps |
+| Enterprise Information Resilience | M8 — information resilience |
+| All 15 project CI workflows and shared engineering standards | M9 — engineering quality platform |
+| Life Sciences Supply Chain, Pharma R&D, SAP Modernisation and TPRM scenarios | M10 — industry reference scenarios |
+
+For project-to-project producer/consumer handoffs, shared event envelopes, API conventions and integration acceptance criteria, see the [Portfolio Integration Contract Register](../PORTFOLIO_INTEGRATION_CONTRACT_REGISTER.md).
+
+## 9. Status
+
+The 15 project folders now contain independent executable synthetic prototypes, API contracts, automated tests, Docker packaging and CI workflows. Initial CI and Docker evidence is recorded in the project catalogue. A later revision added request-correlation middleware and tests across all 15 services; the current-revision CI reruns are pending. The shared portfolio integration is still a separate future workstream; it is not yet implemented.
