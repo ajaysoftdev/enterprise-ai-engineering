@@ -1,0 +1,1 @@
+"""Enterprise data protection demonstrator."""
