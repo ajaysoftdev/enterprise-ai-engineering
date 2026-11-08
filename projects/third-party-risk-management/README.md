@@ -39,3 +39,7 @@ Protect confidential vendor evidence, restrict access by role and record evidenc
 
 ## Delivery status
 The documents define the intended design and acceptance criteria. No real vendor assessment, certification or external supplier connection is claimed.
+
+## Reference sources
+
+See [SOURCES.md](SOURCES.md) for curated official documentation, standards, reference architectures and implementation resources, with notes on how each applies to this project.
