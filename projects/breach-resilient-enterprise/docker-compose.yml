@@ -1,0 +1,5 @@
+services:
+  breach-resilience:
+    build: .
+    ports:
+      - "8000:8000"
