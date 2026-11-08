@@ -25,9 +25,12 @@ def register_dataset():
 
 
 def test_health():
-    response = client.get("/health")
+    response = client.get("/health", headers={"X-Request-ID": "test-request-01"})
     assert response.status_code == 200
     assert response.json()["status"] == "ok"
+    assert response.headers["x-request-id"] == "test-request-01"
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert response.headers["cache-control"] == "no-store"
 
 
 def test_dataset_registration_and_retrieval(tmp_path, monkeypatch):
@@ -104,3 +107,10 @@ def test_policy_evaluation_is_audited(tmp_path, monkeypatch):
     events = client.get(f"/v1/datasets/{dataset['id']}/audit").json()
     assert len(events) == 1
     assert events[0]["decision"] == "ALLOW"
+
+
+def test_malformed_request_id_is_replaced():
+    response = client.get("/health", headers={"X-Request-ID": "invalid request id"})
+    assert response.status_code == 200
+    assert response.headers["x-request-id"] != "invalid request id"
+    assert len(response.headers["x-request-id"]) == 32
