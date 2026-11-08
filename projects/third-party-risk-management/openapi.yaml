@@ -1,0 +1,69 @@
+openapi: 3.1.0
+info:
+  title: Third-Party Risk Management
+  version: 0.1.0
+  description: Synthetic vendor risk tiering, evidence tracking and approval gating.
+servers:
+  - url: http://127.0.0.1:8000
+paths:
+  /health:
+    get:
+      summary: Service health
+      responses:
+        "200": {description: Healthy}
+  /v1/vendors:
+    post:
+      summary: Register a vendor and calculate inherent risk
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/VendorCreate"}
+      responses:
+        "201": {description: Vendor registered}
+  /v1/vendors/{vendor_id}/evidence:
+    post:
+      summary: Attach due-diligence evidence metadata
+      parameters:
+        - in: path
+          name: vendor_id
+          required: true
+          schema: {type: string}
+      responses:
+        "201": {description: Evidence recorded}
+        "409": {description: Control not required for this risk tier}
+  /v1/vendors/{vendor_id}/assessment:
+    get:
+      summary: Retrieve risk and evidence completeness
+      parameters:
+        - in: path
+          name: vendor_id
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Assessment and missing controls}
+  /v1/vendors/{vendor_id}/decision:
+    post:
+      summary: Approve or reject a vendor
+      parameters:
+        - in: path
+          name: vendor_id
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Decision recorded}
+        "409": {description: Evidence incomplete or decision already recorded}
+components:
+  schemas:
+    VendorCreate:
+      type: object
+      required: [vendor_name, service_name, service_criticality, data_sensitivity, internet_facing, privileged_access, fourth_party_count, owner]
+      properties:
+        vendor_name: {type: string}
+        service_name: {type: string}
+        service_criticality: {type: integer, minimum: 1, maximum: 5}
+        data_sensitivity: {type: integer, minimum: 1, maximum: 5}
+        internet_facing: {type: boolean}
+        privileged_access: {type: boolean}
+        fourth_party_count: {type: integer, minimum: 0, maximum: 100}
+        owner: {type: string}
