@@ -1,0 +1,11 @@
+services:
+  information-resilience:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      INFO_RESILIENCE_DB: /app/data/info-resilience.db
+    volumes:
+      - info-resilience-data:/app/data
+volumes:
+  info-resilience-data:
