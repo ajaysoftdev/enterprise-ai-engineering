@@ -1,0 +1,76 @@
+"""FastAPI service for synthetic data classification, masking and access policy."""
+from datetime import datetime, timezone
+from uuid import uuid4
+import sqlite3
+from fastapi import FastAPI, HTTPException
+from . import repository
+from .models import DatasetCreate, DatasetRecord, AccessRequest, AccessDecision, MaskRequest, MaskResponse
+from .policy import evaluate, mask_record
+
+app = FastAPI(
+    title="Enterprise Data Protection",
+    version="0.1.0",
+    description="Synthetic dataset classification, purpose-aware access evaluation and masking.",
+)
+
+
+@app.get("/health")
+def health() -> dict[str, str]:
+    return {"status": "ok", "service": "enterprise-data-protection"}
+
+
+@app.post("/v1/datasets", response_model=DatasetRecord, status_code=201)
+def register_dataset(payload: DatasetCreate) -> dict:
+    item = {"id": str(uuid4()), **payload.model_dump(),
+            "fields": [field.model_dump() for field in payload.fields],
+            "created_at": datetime.now(timezone.utc).isoformat()}
+    try:
+        repository.save_dataset(item)
+    except sqlite3.IntegrityError:
+        raise HTTPException(status_code=409, detail="Dataset identifier conflict")
+    return item
+
+
+@app.get("/v1/datasets", response_model=list[DatasetRecord])
+def list_datasets():
+    return repository.list_datasets()
+
+
+@app.get("/v1/datasets/{dataset_id}", response_model=DatasetRecord)
+def get_dataset(dataset_id: str):
+    item = repository.get_dataset(dataset_id)
+    if item is None:
+        raise HTTPException(status_code=404, detail="Dataset not found")
+    return item
+
+
+@app.post("/v1/access/evaluate", response_model=AccessDecision)
+def evaluate_access(payload: AccessRequest):
+    dataset = repository.get_dataset(payload.dataset_id)
+    if dataset is None:
+        raise HTTPException(status_code=404, detail="Dataset not found")
+    result = evaluate(dataset, payload)
+    repository.audit({
+        "id": str(uuid4()), "dataset_id": payload.dataset_id, "actor": payload.actor,
+        "role": payload.role, "purpose": payload.purpose, "decision": result["decision"],
+        "requested_fields": payload.requested_fields,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+    })
+    return result
+
+
+@app.post("/v1/datasets/{dataset_id}/mask", response_model=MaskResponse)
+def mask_dataset_records(dataset_id: str, payload: MaskRequest):
+    dataset = repository.get_dataset(dataset_id)
+    if dataset is None:
+        raise HTTPException(status_code=404, detail="Dataset not found")
+    return {"dataset_id": dataset_id,
+            "records": [mask_record(record, dataset) for record in payload.records],
+            "masking_profile": "CLASSIFICATION_BASED_DETERMINISTIC"}
+    
+
+@app.get("/v1/datasets/{dataset_id}/audit")
+def dataset_audit(dataset_id: str):
+    if repository.get_dataset(dataset_id) is None:
+        raise HTTPException(status_code=404, detail="Dataset not found")
+    return repository.list_audit(dataset_id)
