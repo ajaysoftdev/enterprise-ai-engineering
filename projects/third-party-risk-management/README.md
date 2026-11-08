@@ -4,7 +4,7 @@
 
 **Domain:** Third-party cyber risk, supplier governance and operational resilience.  
 **Technology direction:** Workflow/API services, evidence metadata, risk rules and audit records; specific implementation choices will be captured in ADRs.  
-**Status:** Current prototype CI + Docker + security verified — 7 tests passed on Python 3.12 (GitHub Actions run 42461086751, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Status:** CI + Docker build verified — 8 tests passed on Python 3.12 (GitHub Actions run 42477998084, commit 1460e4d). Authentication is enforced for protected API routes; the test suite includes a missing-key rejection check. This verifies synthetic/local prototype behaviour only, not production readiness.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
@@ -36,7 +36,7 @@ Protect confidential vendor evidence, restrict access by role and record evidenc
 
 The current prototype registers synthetic vendors, calculates explainable inherent-risk scores and HIGH/MEDIUM/LOW tiers, defines tier-specific due-diligence controls, tracks evidence validity dates and blocks approval until required evidence is current. It includes API tests, OpenAPI, SQLite persistence, Docker and a GitHub Actions workflow.
 
-**Limitations:** risk weights and required controls are illustrative. There are no vendor questionnaire integrations, document storage/scanning, external risk feeds, fourth-party graph, access inventory, identity provider, contract lifecycle, continuous monitoring, role-based approval authority or regulatory/legal review. Evidence references are metadata only; evidence files are not verified. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. Synthetic vendors only.
+**Limitations:** risk weights and required controls are illustrative. There are no vendor questionnaire integrations, document storage/scanning, external risk feeds, fourth-party graph, access inventory, identity provider, contract lifecycle, continuous monitoring, role-based approval authority or regulatory/legal review. Evidence references are metadata only; evidence files are not verified. GitHub Actions executed the API suite successfully: 8 passed, 0 failed, including the protected-route authentication test. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. Synthetic vendors only.
 
 ## Run locally
 
