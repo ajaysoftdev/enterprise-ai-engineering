@@ -22,9 +22,12 @@ def vendor(**overrides):
 
 
 def test_health():
-    response = client.get("/health")
+    response = client.get("/health", headers={"X-Request-ID": "test-request-01"})
     assert response.status_code == 200
     assert response.json()["status"] == "ok"
+    assert response.headers["x-request-id"] == "test-request-01"
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert response.headers["cache-control"] == "no-store"
 
 
 def test_high_risk_vendor_gets_high_tier(tmp_path, monkeypatch):
@@ -80,3 +83,10 @@ def test_low_risk_vendor_requires_fewer_controls(tmp_path, monkeypatch):
 def test_unknown_vendor_returns_404(tmp_path, monkeypatch):
     use_database(tmp_path, monkeypatch)
     assert client.get("/v1/vendors/not-found").status_code == 404
+
+
+def test_malformed_request_id_is_replaced():
+    response = client.get("/health", headers={"X-Request-ID": "invalid request id"})
+    assert response.status_code == 200
+    assert response.headers["x-request-id"] != "invalid request id"
+    assert len(response.headers["x-request-id"]) == 32
