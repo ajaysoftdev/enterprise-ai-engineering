@@ -1,0 +1,13 @@
+{
+  "idempotency_key": "ORDER-1001-CREATED",
+  "producer": "order-service",
+  "event_type": "OrderCreated",
+  "schema_version": "1.0",
+  "correlation_id": "CORR-ORDER-1001",
+  "payload": {
+    "order_id": "ORD-1001",
+    "customer_reference": "SYNTHETIC-CUSTOMER-01",
+    "amount": 125.0,
+    "currency": "USD"
+  }
+}
