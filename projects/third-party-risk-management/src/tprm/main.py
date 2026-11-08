@@ -1,6 +1,7 @@
 """FastAPI service for synthetic vendor risk and due-diligence workflow."""
 from datetime import datetime, timezone
 from uuid import uuid4
+from fastapi import Request
 from fastapi import FastAPI, HTTPException
 from . import repository
 from .models import VendorCreate, VendorRecord, EvidenceCreate, VendorDecision
@@ -20,6 +21,22 @@ def assessment(vendor: dict) -> dict:
             "required_controls": vendor["required_controls"],
             "evidence": evidence, "missing_controls": missing,
             "evidence_complete": not missing}
+
+
+@app.middleware("http")
+async def request_context(request: Request, call_next):
+    """Attach a bounded correlation ID and baseline response headers."""
+    import re
+    import secrets
+    supplied = request.headers.get("X-Request-ID", "")
+    request_id = supplied if re.fullmatch(r"[A-Za-z0-9._-]{1,64}", supplied) else secrets.token_hex(16)
+    request.state.request_id = request_id
+    response = await call_next(request)
+    response.headers["X-Request-ID"] = request_id
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["Referrer-Policy"] = "no-referrer"
+    response.headers["Cache-Control"] = "no-store"
+    return response
 
 
 @app.get("/health")
