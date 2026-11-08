@@ -2,6 +2,14 @@
 
 This area records application structure, design reasoning and technical decisions for the portfolio exercises.
 
+## Integrated enterprise reference model
+
+The portfolio-level target-state architecture connects business capabilities and operating model with enterprise data, integration, AI, security, observability, resilience and engineering delivery.
+
+- [Integrated enterprise reference architecture](../docs/architecture/enterprise-reference-architecture.md)
+- [Enterprise capability map](../docs/architecture/capability-map.md)
+- [Portfolio module dependency map](../docs/architecture/module-dependency-map.md)
+
 ## Featured project
 
 [Enterprise integration architecture case study](../projects/enterprise-integration-architecture/README.md)
