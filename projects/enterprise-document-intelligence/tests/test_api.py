@@ -5,9 +5,12 @@ client = TestClient(app)
 
 
 def test_health():
-    response = client.get("/health")
+    response = client.get("/health", headers={"X-Request-ID": "test-request-01"})
     assert response.status_code == 200
     assert response.json()["status"] == "ok"
+    assert response.headers["x-request-id"] == "test-request-01"
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert response.headers["cache-control"] == "no-store"
 
 
 def test_create_and_retrieve_document(tmp_path, monkeypatch):
@@ -82,3 +85,10 @@ def test_audit_records_intake_and_review(tmp_path, monkeypatch):
     assert reviewed.status_code == 200
     events = client.get(f"/v1/documents/{created['id']}/audit").json()
     assert [event["action"] for event in events] == ["DOCUMENT_RECEIVED", "REVIEW_APPROVED"]
+
+
+def test_malformed_request_id_is_replaced():
+    response = client.get("/health", headers={"X-Request-ID": "invalid request id"})
+    assert response.status_code == 200
+    assert response.headers["x-request-id"] != "invalid request id"
+    assert len(response.headers["x-request-id"]) == 32
