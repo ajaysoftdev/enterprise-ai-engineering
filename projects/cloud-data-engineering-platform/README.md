@@ -44,3 +44,7 @@ The documents define the intended design and acceptance criteria. No cloud accou
 ## Reference sources
 
 See [SOURCES.md](SOURCES.md) for curated official documentation, standards, reference architectures and implementation resources, with notes on how each applies to this project.
+
+## Implementation architecture
+
+See [IMPLEMENTATION_ARCHITECTURE.md](IMPLEMENTATION_ARCHITECTURE.md) for the proposed logical architecture, workflow, API/event contracts, data model, security, operational requirements, acceptance tests and delivery sequence.
