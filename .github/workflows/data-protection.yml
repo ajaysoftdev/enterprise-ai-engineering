@@ -1,0 +1,29 @@
+name: Data Protection Prototype CI
+
+on:
+  push:
+    paths:
+      - "projects/enterprise-data-protection/**"
+      - ".github/workflows/data-protection.yml"
+  pull_request:
+    paths:
+      - "projects/enterprise-data-protection/**"
+      - ".github/workflows/data-protection.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/enterprise-data-protection
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: projects/enterprise-data-protection/pyproject.toml
+      - run: python -m pip install --upgrade pip
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
