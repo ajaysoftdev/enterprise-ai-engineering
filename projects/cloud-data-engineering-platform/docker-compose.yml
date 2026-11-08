@@ -4,6 +4,7 @@ services:
     ports:
       - "8000:8000"
     environment:
+      API_KEY: ${API_KEY:?Set API_KEY in the project .env file}
       CLOUD_PIPELINE_DB: /app/data/cloud-pipeline.db
     volumes:
       - cloud-pipeline-data:/app/data
