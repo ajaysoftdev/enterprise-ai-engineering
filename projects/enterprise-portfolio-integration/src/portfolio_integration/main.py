@@ -80,6 +80,13 @@ def start_supplier_onboarding(
             "text_content": payload.text_content,
         })
         document_id = document.get("id")
+        if not document_id:
+            workflow = repository.transition(
+                workflow["id"], "DOWNSTREAM_FAILED",
+                "Document Intelligence response did not contain a document ID",
+                str(uuid4()), now(), error="Missing downstream document ID",
+            )
+            return {"workflow": public_workflow(workflow), "duplicate": False}
         fields = document.get("extracted_fields") or {}
         supplier = (fields.get("supplier") or {}).get("value")
         tax_id = (fields.get("supplier_tax_id") or {}).get("value")
@@ -108,7 +115,7 @@ def start_supplier_onboarding(
         source_record_id = source_record.get("id")
         candidate = mdm_result.get("match_candidate")
         golden = mdm_result.get("golden_record")
-        if candidate and candidate.get("id"):
+        if candidate and candidate.get("id") and source_record_id:
             workflow = repository.transition(
                 workflow["id"], "WAITING_FOR_STEWARD",
                 "MDM returned a possible match; human stewardship is required",
