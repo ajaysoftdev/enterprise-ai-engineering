@@ -122,3 +122,77 @@ def golden_for_source(source_id: str) -> dict | None:
         if source_id in json.loads(item["source_record_ids"]):
             return item
     return None
+
+
+def apply_steward_decision(candidate_id: str, payload: dict, decision_id: str, stamp: str) -> dict:
+    """Apply candidate state, steward decision and golden-record change atomically."""
+    with closing(connect()) as db:
+        db.execute("BEGIN IMMEDIATE")
+        candidate_row = db.execute(
+            "SELECT * FROM match_candidates WHERE id=?", (candidate_id,)
+        ).fetchone()
+        if candidate_row is None:
+            raise LookupError("Match candidate not found")
+        candidate = dict(candidate_row)
+        if candidate["status"] != "PENDING":
+            raise ValueError("Match candidate has already been decided")
+        incoming_row = db.execute(
+            "SELECT * FROM source_records WHERE id=?", (candidate["incoming_record_id"],)
+        ).fetchone()
+        if incoming_row is None:
+            raise LookupError("Incoming source record is unavailable")
+        incoming = dict(incoming_row)
+        status = "CONFIRMED" if payload["decision"] == "CONFIRM_MATCH" else "REJECTED"
+        updated = db.execute(
+            "UPDATE match_candidates SET status=? WHERE id=? AND status='PENDING'",
+            (status, candidate_id),
+        )
+        if updated.rowcount != 1:
+            raise ValueError("Match candidate has already been decided")
+        decision = {
+            "id": decision_id, "candidate_id": candidate_id,
+            "decision": payload["decision"], "steward": payload["steward"],
+            "note": payload["note"], "created_at": stamp,
+        }
+        db.execute(
+            """INSERT INTO steward_decisions
+            (id,candidate_id,decision,steward,note,created_at) VALUES (?,?,?,?,?,?)""",
+            (decision["id"], decision["candidate_id"], decision["decision"],
+             decision["steward"], decision["note"], decision["created_at"]),
+        )
+        if status == "CONFIRMED":
+            golden_rows = db.execute("SELECT * FROM golden_records ORDER BY created_at").fetchall()
+            golden = next(
+                (dict(item) for item in golden_rows
+                 if candidate["existing_record_id"] in json.loads(item["source_record_ids"])),
+                None,
+            )
+            if golden is None:
+                raise LookupError("Existing source has no golden record")
+            ids = json.loads(golden["source_record_ids"])
+            if incoming["id"] not in ids:
+                ids.append(incoming["id"])
+                db.execute(
+                    "UPDATE golden_records SET source_record_ids=? WHERE id=?",
+                    (json.dumps(ids), golden["id"]),
+                )
+            golden["source_record_ids"] = json.dumps(ids)
+        else:
+            golden = {
+                "id": str(__import__("uuid").uuid4()),
+                "canonical_name": incoming["legal_name"],
+                "tax_id": "".join(ch for ch in incoming["tax_id"].upper() if ch.isalnum()),
+                "source_record_ids": json.dumps([incoming["id"]]),
+                "status": "ACTIVE", "created_at": stamp,
+            }
+            db.execute(
+                """INSERT INTO golden_records
+                (id,canonical_name,tax_id,source_record_ids,status,created_at)
+                VALUES (?,?,?,?,?,?)""",
+                (golden["id"], golden["canonical_name"], golden["tax_id"],
+                 golden["source_record_ids"], golden["status"], golden["created_at"]),
+            )
+        db.commit()
+        candidate["status"] = status
+        golden["source_record_ids"] = json.loads(golden["source_record_ids"])
+        return {"candidate": candidate, "steward_decision": decision, "golden_record": golden}
