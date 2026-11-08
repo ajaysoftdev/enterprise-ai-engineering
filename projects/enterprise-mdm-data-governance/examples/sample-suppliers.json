@@ -1,0 +1,5 @@
+[
+  {"source_system":"ERP","source_key":"SUP-1001","legal_name":"Northwind Supplies Pvt Ltd","tax_id":"GST-AB1234567","email":"accounts@northwind.example"},
+  {"source_system":"CRM","source_key":"ORG-2044","legal_name":"Northwind Supplies Private Limited","tax_id":"gst ab-1234567","email":"ap@northwind.example"},
+  {"source_system":"PROCUREMENT","source_key":"VEN-8821","legal_name":"Contoso Industrial Goods","tax_id":"GST-ZX7654321","email":"finance@contoso.example"}
+]
