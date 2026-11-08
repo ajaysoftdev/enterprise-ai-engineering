@@ -4,7 +4,7 @@
 
 **Domain:** Pharmaceutical R&D data architecture, scientific traceability and governed analytics.  
 **Technology direction:** Metadata-driven ingestion, domain contracts, lineage and governed data products; implementation choices will be documented as ADRs.  
-**Status:** Synthetic provenance prototype CI verified — 6 tests passed on Python 3.12 (GitHub Actions run 42455087698, commit 7f234d4). This verifies metadata and lineage tests only; it does not establish scientific validation or GxP qualification.
+**Status:** Synthetic provenance prototype CI verified — 6 tests passed on Python 3.12 (GitHub Actions run 42456156922, commit c944b2c). This verifies metadata and lineage tests only; it does not establish scientific validation or GxP qualification.
 
 ## Business capabilities
 - Register studies, experiments, samples, materials, methods and batches.
