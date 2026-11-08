@@ -4,6 +4,11 @@ Intended implementation boundary:
 
 ```text
 src/
+  dataprotection/
+    main.py              # dataset registration, policy evaluation, masking and audit endpoints
+    models.py            # typed dataset, field, access and masking contracts
+    policy.py            # deterministic purpose/classification rules and masking functions
+    repository.py        # SQLite dataset metadata and policy audit adapter
   app/
     main.py              # application composition/startup
     config.py            # typed environment configuration
