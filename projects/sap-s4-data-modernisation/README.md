@@ -5,6 +5,7 @@
 **Domain:** SAP S/4HANA data architecture, migration, data quality and integration.  
 **Technology direction:** Synthetic SAP-like extracts, mapping/validation services, API or CDC-style adapters and reconciliation controls. No live SAP connection is assumed.  
 **Status:** Synthetic migration prototype CI + Docker verified — 6 tests passed on Python 3.12 (GitHub Actions run 42456178632, commit 3897b38). This verifies local mapping/quarantine/reconciliation tests only; no SAP connectivity or production migration is claimed.
+**Latest revision note:** Request correlation IDs and baseline security response headers have been added; the new middleware tests are awaiting CI verification.
 
 ## Business capabilities
 - Model representative business partners, products/materials and organisational data.
