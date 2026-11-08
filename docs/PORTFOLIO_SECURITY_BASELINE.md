@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This baseline defines minimum engineering controls for the 15 synthetic portfolio prototypes. It is a development standard, not a claim of security certification or production readiness.
+This baseline defines minimum engineering controls for the 16 synthetic portfolio projects. It is a development standard, not a claim of security certification or production readiness.
 
 ## Current automated checks
 
@@ -64,7 +64,7 @@ All 15 FastAPI services now attach a bounded `X-Request-ID` correlation value (a
 - Bandit static analysis completed successfully for all 15 projects in the initial portfolio scan.
 - The first dependency audit identified a known vulnerability in the previously pinned `pytest 8.4.2` release (fixed upstream in `9.0.3`). All 15 projects have been updated to `pytest>=9.0.3,<10.0`.
 - The audit command now uses `pip-audit --skip-editable` so the locally installed portfolio package is not incorrectly looked up as a published PyPI dependency.
-- The clean portfolio-wide rerun completed successfully: **15/15 project jobs passed** Bandit and pip-audit in GitHub Actions run 42461092337 (Dependabot dependency-update branch, based on main commit 5fd42f7). The corresponding main-branch security run is still pending; the source and dependency state scanned is the same apart from a non-functional MDM UUID-import cleanup.
-- Request correlation middleware and its tests have been added across all 15 APIs. Their current-revision CI verification is pending.
+- The clean security matrix completed successfully for the **15 core projects**: 15/15 jobs passed Bandit and pip-audit in GitHub Actions run 42461092337 (Dependabot workflow-update branch, based on main commit 5fd42f7). The sixteenth Enterprise Portfolio Integration project was added afterward; its security scan is pending.
+- Request correlation middleware and its tests have been added across all 15 core APIs and passed in CI. The integration project has the same request-context controls; its security scan is pending.
 
 Existing test and Docker evidence remains limited to the exact synthetic prototype revisions described in each project README.
