@@ -4,7 +4,7 @@
 
 **Domain:** Master data management, data quality, stewardship and governance.  
 **Technology direction:** API-based domain services, relational persistence, configurable matching and survivorship rules; concrete implementation choices will be recorded as architecture decisions.  
-**Status:** CI + Docker build verified — 9 tests passed on Python 3.12 (GitHub Actions run 42477959390, commit 415555f). Authentication is enforced for protected API routes; the test suite includes a missing-key rejection check. This verifies synthetic/local prototype behaviour only, not production readiness.
+**Status:** CI + Docker build verified — 10 tests passed on Python 3.12 (GitHub Actions run 42478842872). Authentication rejects missing/incorrect keys and fails closed when the server key is not configured. This verifies synthetic/local prototype behaviour only, not production readiness.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 The initial code slice provides:
