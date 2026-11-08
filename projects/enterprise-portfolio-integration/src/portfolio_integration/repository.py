@@ -111,9 +111,27 @@ def transition(workflow_id: str, state: str, details: str, audit_id: str, stamp:
             db.rollback()
             return None
         old_state = current["state"]
-        assignments = ["state=?", "updated_at=?"] + [f"{key}=?" for key in updates]
-        values = [state, stamp, *updates.values(), workflow_id]
-        db.execute(f"UPDATE workflows SET {', '.join(assignments)} WHERE id=?", values)
+        db.execute(
+            """UPDATE workflows SET
+              state=?, updated_at=?,
+              document_id=CASE WHEN ? THEN ? ELSE document_id END,
+              source_record_id=CASE WHEN ? THEN ? ELSE source_record_id END,
+              match_candidate_id=CASE WHEN ? THEN ? ELSE match_candidate_id END,
+              golden_record_id=CASE WHEN ? THEN ? ELSE golden_record_id END,
+              outcome=CASE WHEN ? THEN ? ELSE outcome END,
+              error=CASE WHEN ? THEN ? ELSE error END
+              WHERE id=?""",
+            (
+                state, stamp,
+                int("document_id" in updates), updates.get("document_id"),
+                int("source_record_id" in updates), updates.get("source_record_id"),
+                int("match_candidate_id" in updates), updates.get("match_candidate_id"),
+                int("golden_record_id" in updates), updates.get("golden_record_id"),
+                int("outcome" in updates), updates.get("outcome"),
+                int("error" in updates), updates.get("error"),
+                workflow_id,
+            ),
+        )
         db.execute(
             """INSERT INTO audit_events
             (id,workflow_id,action,from_state,to_state,details,created_at)
