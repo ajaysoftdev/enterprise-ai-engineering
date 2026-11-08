@@ -2,6 +2,7 @@
 import json
 import os
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlparse
 from urllib.request import Request, urlopen
 
 
@@ -12,13 +13,16 @@ class AdapterError(RuntimeError):
 
 
 def _request_json(url: str, method: str = "GET", payload: dict | None = None, timeout: float = 5.0, request_id: str | None = None):
+    parsed_url = urlparse(url)
+    if parsed_url.scheme not in {"http", "https"} or not parsed_url.netloc:
+        raise AdapterError("Downstream URL must use HTTP or HTTPS")
     data = json.dumps(payload).encode("utf-8") if payload is not None else None
     headers = {"Content-Type": "application/json", "Accept": "application/json"}
     if request_id:
         headers["X-Request-ID"] = request_id
     request = Request(url, data=data, method=method, headers=headers)
     try:
-        with urlopen(request, timeout=timeout) as response:
+        with urlopen(request, timeout=timeout) as response:  # nosec B310 - URL scheme is restricted above
             body = response.read()
             return json.loads(body) if body else {}
     except HTTPError as exc:
