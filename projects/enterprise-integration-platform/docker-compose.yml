@@ -1,0 +1,11 @@
+services:
+  integration-platform:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      INTEGRATION_DB: /app/data/integration.db
+    volumes:
+      - integration-data:/app/data
+volumes:
+  integration-data:
