@@ -3,7 +3,11 @@ name: Portfolio Security Baseline
 on:
   push:
     paths:
-      - "projects/**"
+      - "projects/**/src/**"
+      - "projects/**/tests/**"
+      - "projects/**/pyproject.toml"
+      - "projects/**/Dockerfile"
+      - "projects/**/docker-compose.yml"
       - ".github/workflows/portfolio-security.yml"
   pull_request:
     paths:
@@ -41,8 +45,8 @@ jobs:
       run:
         working-directory: projects/${{ matrix.project }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           cache: pip
