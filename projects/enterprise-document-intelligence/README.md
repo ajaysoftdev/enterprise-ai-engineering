@@ -1,49 +1,72 @@
 # Enterprise Document Intelligence
 
-**Purpose:** Convert business documents into validated, traceable information and route uncertain cases to the right human reviewer.
+## Purpose
 
-**Domain:** Document AI, workflow automation and controlled business inference.  
-**Planned stack:** Python 3.12, FastAPI, Pydantic, PostgreSQL, OCR and LLM adapters.  
-**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+A document intake and validation demonstrator that receives synthetic plain-text business documents, extracts labelled fields with evidence, applies deterministic validation and supports a recorded human review decision.
 
-## Business capabilities
-- Receive invoices, claims, contracts, forms and operational documents.
-- Classify document type and extract typed fields with page-level evidence.
-- Validate extracted values against schemas, business rules and reference data.
-- Detect missing fields, conflicts, duplicates and low-confidence results.
-- Route exceptions to role-based human review with correction history.
-- Publish approved structured records through APIs or downstream adapters.
+## Current implementation status
 
-## Reference workflow
-Document intake → file validation → classification/OCR → field extraction → evidence linking → business validation → confidence and exception routing → human approval → downstream publication.
+<badge>Prototype code added — execution not yet verified</badge>
 
-## Key modules
-- **Intake:** upload/API adapters, file checks and document registry.
-- **Extraction:** OCR abstraction, layout parsing and model/provider adapters.
-- **Validation:** Pydantic schemas, deterministic rules and reference lookups.
-- **Review:** field-level evidence, correction, approval and rejection.
-- **Publication:** versioned output contract and idempotent delivery.
-- **Audit:** document lineage, model/version trace and reviewer actions.
+The first executable slice is now present:
+- FastAPI service with health, document create/list/read and review endpoints
+- SQLite persistence for document metadata and extracted fields
+- Deterministic labelled-field extraction for sample invoice-like text
+- Required-field validation and NEEDS_REVIEW routing
+- API tests, Dockerfile, Docker Compose profile and synthetic sample input
 
-## Expected demonstration
-Process synthetic invoices and contracts, show extracted fields with source-page evidence, deliberately introduce missing or inconsistent values, and demonstrate human correction before publication.
+**Important limitations:** this version accepts only text/plain input. It does not yet parse PDF/image files, call an OCR or LLM provider, authenticate users, implement tenant isolation, publish events, or provide production-grade file storage. The tests have been added but have not yet been executed in CI or against a local runtime. Do not treat this prototype as production-ready or as a validated document-processing control.
 
-## Guardrails
-Treat extracted content as untrusted input. Do not execute embedded instructions. Keep model output separate from verified facts, protect document contents, and require approval for material financial or contractual actions.
+## Run locally
+
+Requires Python 3.11 or later.
+
+```bash
+python -m venv .venv
+# Windows:
+.venv\Scripts\activate
+# macOS/Linux:
+source .venv/bin/activate
+pip install -e ".[dev]"
+uvicorn docintel.main:app --reload --app-dir src
+```
+
+Open the interactive API docs at `http://127.0.0.1:8000/docs`.
+
+Run tests:
+
+```bash
+pytest
+```
+
+Run with Docker:
+
+```bash
+docker compose up --build
+```
+
+## Sample request
+
+```json
+{
+  "filename": "sample-invoice.txt",
+  "content_type": "text/plain",
+  "text_content": "Supplier: Northwind Supplies\nInvoice Number: INV-2026-0042\nDate: 2026-11-08\nTotal: USD 1250.00"
+}
+```
+
+## Next implementation milestones
+
+1. Execute tests and fix any failures.
+2. Add authentication, authorization, audit events and idempotency.
+3. Add file quarantine, file-size limits, MIME/signature checks and malware scanning.
+4. Add OCR adapter interfaces and a PDF/image processing path.
+5. Add explicit field-level evidence locations, extraction versioning and review history.
+6. Add PostgreSQL/object-storage adapters, retention controls and observability.
+7. Add CI, dependency scanning and security tests.
 
 ## Project documentation
-- [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
-- [Source-code boundaries](src/README.md)
-- [Test strategy](tests/README.md)
-- [Local deployment and operations](infra/README.md)
 
-## Delivery status
-The documents define the intended design and acceptance criteria. No production OCR accuracy, customer integration or runtime test result is claimed.
-
-## Reference sources
-
-See [SOURCES.md](SOURCES.md) for curated official documentation, standards, reference architectures and implementation resources, with notes on how each applies to this project.
-
-## Implementation architecture
-
-See [IMPLEMENTATION_ARCHITECTURE.md](IMPLEMENTATION_ARCHITECTURE.md) for the proposed logical architecture, workflow, API/event contracts, data model, security, operational requirements, acceptance tests and delivery sequence.
+- [Implementation architecture](IMPLEMENTATION_ARCHITECTURE.md)
+- [Reference sources](SOURCES.md)
+- [Project blueprint](docs/PROJECT_BLUEPRINT.md)
