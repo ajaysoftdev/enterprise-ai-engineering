@@ -1,7 +1,8 @@
+import pytest
 from fastapi.testclient import TestClient
 from portfolio_integration.main import app
 from portfolio_integration import repository
-from portfolio_integration.adapters import AdapterError
+from portfolio_integration.adapters import AdapterError, DocumentIntelligenceAdapter
 
 client = TestClient(app)
 
@@ -167,3 +168,9 @@ def test_malformed_request_id_is_replaced():
     assert response.status_code == 200
     assert response.headers["x-request-id"] != "invalid request id"
     assert len(response.headers["x-request-id"]) == 32
+
+
+def test_downstream_adapter_rejects_non_http_url():
+    adapter = DocumentIntelligenceAdapter("file:///tmp/untrusted")
+    with pytest.raises(AdapterError, match="HTTP or HTTPS"):
+        adapter.submit({"filename": "x.txt"})
