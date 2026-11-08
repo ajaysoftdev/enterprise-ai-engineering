@@ -1,0 +1,45 @@
+openapi: 3.1.0
+info:
+  title: Cloud Data Engineering Platform
+  version: 0.1.0
+  description: Synthetic sales batch ingestion, validation and curated data API.
+servers:
+  - url: http://127.0.0.1:8000
+paths:
+  /health:
+    get:
+      summary: Service health
+      responses:
+        "200": {description: Healthy}
+  /v1/pipelines/sales/run:
+    post:
+      summary: Run the synthetic sales batch pipeline
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/PipelineRunCreate"}
+      responses:
+        "201": {description: Pipeline run completed; invalid rows may be quarantined}
+  /v1/pipelines/{run_id}:
+    get:
+      summary: Retrieve pipeline run and outputs
+      parameters:
+        - in: path
+          name: run_id
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Pipeline run}
+        "404": {description: Not found}
+components:
+  schemas:
+    PipelineRunCreate:
+      type: object
+      required: [idempotency_key, source_name, rows]
+      properties:
+        idempotency_key: {type: string}
+        source_name: {type: string}
+        rows:
+          type: array
+          items: {type: object}
