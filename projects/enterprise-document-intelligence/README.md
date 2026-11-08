@@ -7,7 +7,7 @@ A document intake and validation demonstrator that receives synthetic plain-text
 
 ## Current implementation status
 
-**Current prototype CI + Docker + security verified — 7 tests passed on Python 3.12 (GitHub Actions run 42462168881, commit 6dfd2b3).** This verifies the current synthetic text-only API test slice; production readiness is not claimed.
+**Status:** CI + Docker build verified — 8 tests passed on Python 3.12 (GitHub Actions run 42477930922, commit 2f94905). Authentication is enforced for protected API routes; the test suite includes a missing-key rejection check. This verifies synthetic/local prototype behaviour only, not production readiness.
 
 The first executable slice is now present:
 - FastAPI service with health, document create/list/read, review and audit-read endpoints
@@ -16,7 +16,7 @@ The first executable slice is now present:
 - Required-field validation and NEEDS_REVIEW routing
 - API tests, Dockerfile, Docker Compose profile and synthetic sample input
 
-**Important limitations:** this version accepts only text/plain input. It does not yet parse PDF/image files, call an OCR or LLM provider, authenticate users, implement tenant isolation or idempotency keys, publish events, or provide production-grade file storage. The audit table is append-only through this prototype API but is not tamper-proof against direct database modification. GitHub Actions executed the current API suite successfully: 7 passed, 0 failed. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. Do not treat this prototype as production-ready or as a validated document-processing control.
+**Important limitations:** this version accepts only text/plain input. It does not yet parse PDF/image files, call an OCR or LLM provider, authenticate users, implement tenant isolation or idempotency keys, publish events, or provide production-grade file storage. The audit table is append-only through this prototype API but is not tamper-proof against direct database modification. GitHub Actions executed the API suite successfully: 8 passed, 0 failed, including the protected-route authentication test. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. Do not treat this prototype as production-ready or as a validated document-processing control.
 
 ## Run locally
 
