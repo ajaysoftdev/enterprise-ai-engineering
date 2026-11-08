@@ -52,4 +52,4 @@ The project folders are maintained inside this repository; they are not separate
 
 ## Portfolio integration sequence
 
-The fifteen core domain projects have initial CI-verified prototype slices. The sixteenth Enterprise Portfolio Integration project has started the first supplier-onboarding vertical slice; its tests and Docker build passed, while live HTTP interoperability and shared identity remain future milestones.
+The fifteen core domain projects have initial CI-verified prototype slices. The sixteenth Enterprise Portfolio Integration project now has an authenticated supplier-onboarding HTTP vertical slice across Document Intelligence and MDM. Its 13-test suite, Docker build and real three-service HTTP smoke test passed; enterprise identity, role-based authorization and tenant isolation remain future milestones.
