@@ -4,8 +4,8 @@
 
 **Domain:** Enterprise architecture, business capability assessment and technology transformation.  
 **Technology direction:** Metadata-driven assessment workflows, structured architecture records, evidence links and report generation; specific implementation choices will be recorded as ADRs.  
-**Status:** Synthetic EA assessment prototype CI + Docker verified — 6 tests passed on Python 3.12 (GitHub Actions run 42456182632, commit 883fb9d). This verifies maturity-gap/dependency tests only; it does not constitute a client assessment or validated target-state architecture.
-**Latest revision note:** Request correlation IDs and baseline security response headers have been added; the new middleware tests are awaiting CI verification.
+**Status:** Current prototype CI + Docker verified — 7 tests passed on Python 3.12 (GitHub Actions run 42461086760, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
 - Capture assessment scope, objectives, stakeholders and constraints.
