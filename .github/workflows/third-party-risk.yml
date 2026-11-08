@@ -1,0 +1,29 @@
+name: Third-Party Risk Prototype CI
+
+on:
+  push:
+    paths:
+      - "projects/third-party-risk-management/**"
+      - ".github/workflows/third-party-risk.yml"
+  pull_request:
+    paths:
+      - "projects/third-party-risk-management/**"
+      - ".github/workflows/third-party-risk.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/third-party-risk-management
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: projects/third-party-risk-management/pyproject.toml
+      - run: python -m pip install --upgrade pip
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
