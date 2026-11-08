@@ -21,9 +21,12 @@ def sample_signal(**overrides):
 
 
 def test_health():
-    response = client.get("/health")
+    response = client.get("/health", headers={"X-Request-ID": "test-request-01"})
     assert response.status_code == 200
     assert response.json()["status"] == "ok"
+    assert response.headers["x-request-id"] == "test-request-01"
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert response.headers["cache-control"] == "no-store"
 
 
 def test_high_business_impact_signal_gets_high_priority(tmp_path, monkeypatch):
@@ -70,3 +73,10 @@ def test_duplicate_acknowledgement_returns_conflict(tmp_path, monkeypatch):
     client.post(f"/v1/signals/{created['id']}/acknowledge", json={"actor": "on-call@example.test"})
     response = client.post(f"/v1/signals/{created['id']}/acknowledge", json={"actor": "another@example.test"})
     assert response.status_code == 409
+
+
+def test_malformed_request_id_is_replaced():
+    response = client.get("/health", headers={"X-Request-ID": "invalid request id"})
+    assert response.status_code == 200
+    assert response.headers["x-request-id"] != "invalid request id"
+    assert len(response.headers["x-request-id"]) == 32
