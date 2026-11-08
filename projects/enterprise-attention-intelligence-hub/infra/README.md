@@ -14,5 +14,8 @@ Keep environment-specific values outside source control. Separate development, t
 ## Operations
 Expose liveness/readiness, structured logs, metrics and trace context. Document backup/restore, migration rollback, dependency outage, queue/DLQ inspection and incident escalation as capabilities are implemented.
 
+## Current local assets
+A non-root Dockerfile, Docker Compose service and GitHub Actions test workflow are present. SQLite stores synthetic signal records.
+
 ## Status
-No production deployment is implied. Local containerisation, CI execution and operational verification remain pending implementation.
+No production deployment is implied. CI execution and operational verification remain pending. No monitoring, observability or ticketing platform is connected.
