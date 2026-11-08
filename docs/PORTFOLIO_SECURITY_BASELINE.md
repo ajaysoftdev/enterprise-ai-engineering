@@ -61,4 +61,10 @@ All 15 FastAPI services now attach a bounded `X-Request-ID` correlation value (a
 
 ## Current status
 
-The portfolio security workflow has been added. Its first execution is pending. No security scan result is claimed until the workflow completes. Existing CI and Docker build evidence remains limited to the synthetic prototype scope described in each project README.
+- Bandit static analysis completed successfully for all 15 projects in the initial portfolio scan.
+- The first dependency audit identified a known vulnerability in the previously pinned `pytest 8.4.2` release (fixed upstream in `9.0.3`). All 15 projects have been updated to `pytest>=9.0.3,<10.0`.
+- The audit command now uses `pip-audit --skip-editable` so the locally installed portfolio package is not incorrectly looked up as a published PyPI dependency.
+- A clean portfolio-wide rerun is pending; no clean dependency-audit result is claimed yet.
+- Request correlation middleware and its tests have been added across all 15 APIs. Their current-revision CI verification is pending.
+
+Existing test and Docker evidence remains limited to the exact synthetic prototype revisions described in each project README.
