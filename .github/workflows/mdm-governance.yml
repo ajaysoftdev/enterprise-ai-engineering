@@ -1,0 +1,29 @@
+name: MDM Governance Prototype CI
+
+on:
+  push:
+    paths:
+      - "projects/enterprise-mdm-data-governance/**"
+      - ".github/workflows/mdm-governance.yml"
+  pull_request:
+    paths:
+      - "projects/enterprise-mdm-data-governance/**"
+      - ".github/workflows/mdm-governance.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/enterprise-mdm-data-governance
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: projects/enterprise-mdm-data-governance/pyproject.toml
+      - run: python -m pip install --upgrade pip
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
