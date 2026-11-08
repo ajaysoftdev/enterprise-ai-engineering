@@ -22,7 +22,7 @@ class FakeDocumentAdapter:
         self.error = error
         self.calls = 0
 
-    def submit(self, payload):
+    def submit(self, payload, request_id=None):
         self.calls += 1
         if self.error:
             raise self.error
@@ -42,12 +42,12 @@ class FakeMdmAdapter:
         }
         self.calls = 0
 
-    def create_supplier(self, payload):
+    def create_supplier(self, payload, request_id=None):
         self.calls += 1
         self.payload = payload
         return self.response
 
-    def refresh(self, candidate_id, source_record_id):
+    def refresh(self, candidate_id, source_record_id, request_id=None):
         self.refresh_args = (candidate_id, source_record_id)
         return self.refresh_response
 
