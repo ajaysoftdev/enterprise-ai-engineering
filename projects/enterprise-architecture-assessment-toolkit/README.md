@@ -4,7 +4,7 @@
 
 **Domain:** Enterprise architecture, business capability assessment and technology transformation.  
 **Technology direction:** Metadata-driven assessment workflows, structured architecture records, evidence links and report generation; specific implementation choices will be recorded as ADRs.  
-**Status:** CI + Docker build verified — 8 tests passed on Python 3.12 (GitHub Actions run 42478101324, commit d74ee2f). Authentication is enforced for protected API routes; the test suite includes a missing-key rejection check. This verifies synthetic/local prototype behaviour only, not production readiness.
+**Status:** CI + Docker build verified — 9 tests passed on Python 3.12 (GitHub Actions run 42478891292). Authentication rejects missing/incorrect keys and fails closed when the server key is not configured. This verifies synthetic/local prototype behaviour only, not production readiness.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
