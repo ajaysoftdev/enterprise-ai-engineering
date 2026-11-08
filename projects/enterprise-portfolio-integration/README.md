@@ -22,7 +22,35 @@
 - Idempotency prevents duplicate workflow creation for the same request key and payload.
 - A changed payload with an existing key returns a conflict.
 - A pending MDM match is never auto-approved.
-- The first slice uses synthetic plain-text invoices and configurable local service endpoints only. Automated tests use fake downstream adapters; they do not yet prove live HTTP interoperability between the three processes.
+- The first slice uses synthetic plain-text invoices and configurable local service endpoints only. Unit tests use fake downstream adapters; a separate GitHub Actions smoke test starts all three services and exercises the real HTTP handoff, idempotency, MDM stewardship and refresh flow. Its first successful run is pending.
+
+
+## Three-service end-to-end run
+
+Install the three packages from the repository root:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e "projects/enterprise-document-intelligence[dev]" -e "projects/enterprise-mdm-data-governance[dev]" -e "projects/enterprise-portfolio-integration[dev]"
+```
+
+Start these services in separate terminals from the repository root:
+
+```bash
+uvicorn docintel.main:app --reload --app-dir projects/enterprise-document-intelligence/src --port 8001
+uvicorn mdm.main:app --reload --app-dir projects/enterprise-mdm-data-governance/src --port 8002
+uvicorn portfolio_integration.main:app --reload --app-dir projects/enterprise-portfolio-integration/src --port 8003
+```
+
+Then run from this project directory:
+
+```bash
+pytest -q
+python scripts/e2e_smoke.py
+```
+
+Docker: `docker compose up --build` (the two domain services must already be reachable on the configured host URLs). API contract: [openapi.yaml](openapi.yaml).
 
 ## Current limitations
 
