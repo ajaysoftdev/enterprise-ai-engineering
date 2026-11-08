@@ -60,3 +60,20 @@ See [IMPLEMENTATION_ARCHITECTURE.md](IMPLEMENTATION_ARCHITECTURE.md) for the pro
 ## Domain contracts and data model
 
 See [DOMAIN_CONTRACTS.md](DOMAIN_CONTRACTS.md) for proposed domain entities, REST endpoints, event names, workflow, invariants and contract-test scenarios.
+
+
+## Local runtime
+
+```bash
+pip install -e ".[dev]"
+uvicorn mdm.main:app --reload --app-dir src
+pytest
+```
+
+Docker:
+
+```bash
+docker compose up --build
+```
+
+API contract: [openapi.yaml](openapi.yaml). Synthetic supplier examples: [examples/sample-suppliers.json](examples/sample-suppliers.json).
