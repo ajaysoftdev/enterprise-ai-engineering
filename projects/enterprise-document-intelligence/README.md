@@ -9,13 +9,13 @@ A document intake and validation demonstrator that receives synthetic plain-text
 **Prototype code added — execution not yet verified**
 
 The first executable slice is now present:
-- FastAPI service with health, document create/list/read and review endpoints
-- SQLite persistence for document metadata and extracted fields
+- FastAPI service with health, document create/list/read, review and audit-read endpoints
+- SQLite persistence for document metadata, extracted fields and append-only application audit events
 - Deterministic labelled-field extraction for sample invoice-like text
 - Required-field validation and NEEDS_REVIEW routing
 - API tests, Dockerfile, Docker Compose profile and synthetic sample input
 
-**Important limitations:** this version accepts only text/plain input. It does not yet parse PDF/image files, call an OCR or LLM provider, authenticate users, implement tenant isolation, publish events, or provide production-grade file storage. The tests have been added but have not yet been executed in CI or against a local runtime. Do not treat this prototype as production-ready or as a validated document-processing control.
+**Important limitations:** this version accepts only text/plain input. It does not yet parse PDF/image files, call an OCR or LLM provider, authenticate users, implement tenant isolation or idempotency keys, publish events, or provide production-grade file storage. The audit table is append-only through this prototype API but is not tamper-proof against direct database modification. The tests have been added but have not yet been executed in CI or against a local runtime. Do not treat this prototype as production-ready or as a validated document-processing control.
 
 ## Run locally
 
