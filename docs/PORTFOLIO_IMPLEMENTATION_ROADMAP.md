@@ -75,6 +75,7 @@ Avoid creating a central framework prematurely. Extract shared libraries only af
 - All 15 project folders retain their project-specific scope, reference sources, implementation architecture, domain contracts and delivery guidance.
 - All 15 projects now have a first executable local prototype slice, API contracts, Docker configuration, automated tests and project-specific GitHub Actions workflows.
 - All 15 GitHub Actions test workflows completed successfully on Python 3.12: **93 tests passed across the portfolio**.
+- All 15 Docker images built successfully in their respective CI workflows.
 - This evidence verifies the current synthetic/local prototype slices only. It does not establish production readiness, live enterprise integration, security certification, GxP validation, cloud deployment, performance or regulatory compliance.
 - Every project README records its own CI run, test count and explicit limitations.
 - The Starlette TestClient deprecation warning was resolved by adding `httpx2` to the development dependencies; the latest CI reruns complete without that warning.
