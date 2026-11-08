@@ -13,7 +13,7 @@ The initial code slice provides:
 - Human confirmation/rejection before a candidate is merged or kept separate
 - Synthetic supplier fixtures, API tests and a GitHub Actions workflow
 
-**Important limitations:** matching is exact normalized tax-ID comparison only; there is no fuzzy matching, configurable survivorship, source-system connector, event publishing, authentication, tenant isolation, authorization, unmerge/version history, production-grade audit integrity or enterprise data-quality profiling. Tests have been added but have not yet been executed in CI or a local runtime. This is a local demonstrator, not a production MDM platform.
+**Important limitations:** matching is exact normalized tax-ID comparison only; there is no fuzzy matching, configurable survivorship, source-system connector, event publishing, authentication, tenant isolation, authorization, unmerge/version history, production-grade audit integrity or enterprise data-quality profiling. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. The run emitted one Starlette/httpx deprecation warning; dependency compatibility should be reviewed. This is a local demonstrator, not a production MDM platform.
 
 ## Business capabilities
 - Ingest master records from ERP, CRM, procurement and operational systems.
