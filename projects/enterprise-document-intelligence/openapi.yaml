@@ -1,0 +1,155 @@
+openapi: 3.1.0
+info:
+  title: Enterprise Document Intelligence API
+  version: 0.1.0
+  description: Synthetic plain-text document intake, extraction, validation and review prototype.
+servers:
+  - url: http://localhost:8000
+paths:
+  /health:
+    get:
+      summary: Service health
+      responses:
+        "200":
+          description: Service is healthy
+  /v1/documents:
+    post:
+      summary: Submit a plain-text document
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentCreate"
+      responses:
+        "201":
+          description: Document accepted and fields extracted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentRecord"
+        "422":
+          description: Request validation failed
+    get:
+      summary: List recent documents
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 50
+      responses:
+        "200":
+          description: Recent documents
+  /v1/documents/{document_id}:
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a document and its extracted fields
+      responses:
+        "200":
+          description: Document record
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentRecord"
+        "404":
+          description: Document not found
+  /v1/documents/{document_id}/review:
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+    post:
+      summary: Record a human review decision
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewRequest"
+      responses:
+        "200":
+          description: Updated document record
+        "404":
+          description: Document not found
+        "409":
+          description: Document has already been reviewed
+components:
+  schemas:
+    DocumentCreate:
+      type: object
+      required: [filename, content_type, text_content]
+      properties:
+        filename:
+          type: string
+          maxLength: 255
+        content_type:
+          type: string
+          const: text/plain
+        text_content:
+          type: string
+          maxLength: 200000
+    ExtractedField:
+      type: object
+      required: [value, confidence]
+      properties:
+        value:
+          type: [string, "null"]
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 1
+        evidence:
+          type: [string, "null"]
+    ReviewRequest:
+      type: object
+      required: [decision, reviewer]
+      properties:
+        decision:
+          type: string
+          enum: [APPROVED, REJECTED]
+        reviewer:
+          type: string
+          minLength: 2
+          maxLength: 120
+        note:
+          type: string
+          maxLength: 1000
+    DocumentRecord:
+      type: object
+      required: [id, filename, content_type, status, extracted_fields, validation_errors, created_at]
+      properties:
+        id:
+          type: string
+          format: uuid
+        filename:
+          type: string
+        content_type:
+          type: string
+        status:
+          type: string
+          enum: [RECEIVED, NEEDS_REVIEW, APPROVED, REJECTED]
+        extracted_fields:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/ExtractedField"
+        validation_errors:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          format: date-time
+        reviewed_by:
+          type: [string, "null"]
+        review_note:
+          type: [string, "null"]
