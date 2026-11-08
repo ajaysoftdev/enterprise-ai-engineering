@@ -1,0 +1,64 @@
+openapi: 3.1.0
+info:
+  title: Breach-Resilient Enterprise
+  version: 0.1.0
+  description: Synthetic identity-compromise and dry-run containment API.
+servers:
+  - url: http://127.0.0.1:8000
+paths:
+  /health:
+    get:
+      summary: Service health
+      responses:
+        "200": {description: Healthy}
+  /v1/principals:
+    get:
+      summary: List synthetic principals
+      responses:
+        "200": {description: Principal identifiers}
+  /v1/attack-paths/{principal}:
+    get:
+      summary: Enumerate reachable sensitive targets in the synthetic graph
+      parameters:
+        - in: path
+          name: principal
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Attack paths}
+  /v1/policies/evaluate:
+    post:
+      summary: Evaluate a synthetic least-privilege policy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/PolicyRequest"}
+      responses:
+        "200": {description: Policy decision}
+  /v1/containment/plan:
+    post:
+      summary: Produce a human-gated containment dry-run plan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/ContainmentRequest"}
+      responses:
+        "200": {description: Dry-run plan; no controls are executed}
+components:
+  schemas:
+    PolicyRequest:
+      type: object
+      required: [principal, resource, action]
+      properties:
+        principal: {type: string, minLength: 2, maxLength: 100}
+        resource: {type: string, minLength: 2, maxLength: 100}
+        action: {type: string, enum: [read, write, admin]}
+    ContainmentRequest:
+      type: object
+      required: [principal, incident_id]
+      properties:
+        principal: {type: string, minLength: 2, maxLength: 100}
+        incident_id: {type: string, minLength: 3, maxLength: 100}
+        approved_by: {type: [string, "null"], minLength: 2, maxLength: 120}
