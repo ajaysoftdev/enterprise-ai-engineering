@@ -35,7 +35,7 @@ Do not automate public statements or consequential reputational decisions. Prese
 
 The current prototype ingests evidence-linked synthetic signals, calculates an explainable weighted risk score, groups signals by a shared case key, adds a capped corroboration increment, supports a single human review decision and records audit events. It includes API tests, OpenAPI, SQLite persistence, Docker and GitHub Actions.
 
-**Limitations:** signals are manually submitted and correlation uses a supplied case key; there is no web monitoring, claim extraction, entity resolution, semantic clustering, source reputation service, LLM, misinformation classifier, fact verification, legal review workflow or external response connector. Risk scores are prioritisation aids, not truth assessments. Public statements and consequential actions are not automated. Tests have been added but have not yet been executed in CI. Synthetic evidence only.
+**Limitations:** signals are manually submitted and correlation uses a supplied case key; there is no web monitoring, claim extraction, entity resolution, semantic clustering, source reputation service, LLM, misinformation classifier, fact verification, legal review workflow or external response connector. Risk scores are prioritisation aids, not truth assessments. Public statements and consequential actions are not automated. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. One Starlette/httpx deprecation warning remains. Synthetic evidence only.
 
 ## Run locally
 
