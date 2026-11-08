@@ -10,7 +10,7 @@ The portfolio's target-state architecture connects business strategy and operati
 
 ## Documentation
 
-See the [engineering documentation portal](docs/README.md) for architecture references, local setup, configuration, testing, operations, troubleshooting and project walkthroughs. Also see the [portfolio implementation roadmap](docs/PORTFOLIO_IMPLEMENTATION_ROADMAP.md) and [portfolio security baseline](docs/PORTFOLIO_SECURITY_BASELINE.md). Repository governance is documented in [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md); pull requests use a structured [review template](.github/pull_request_template.md).
+See the [engineering documentation portal](docs/README.md) for architecture references, local setup, configuration, testing, operations, troubleshooting and project walkthroughs. Also see the [portfolio implementation roadmap](docs/PORTFOLIO_IMPLEMENTATION_ROADMAP.md), [portfolio security baseline](docs/PORTFOLIO_SECURITY_BASELINE.md) and [portfolio integration contract register](docs/PORTFOLIO_INTEGRATION_CONTRACT_REGISTER.md). Repository governance is documented in [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md); pull requests use a structured [review template](.github/pull_request_template.md).
 
 ## Portfolio areas
 
