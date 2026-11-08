@@ -1,49 +1,42 @@
 # Enterprise Architecture Assessment Toolkit
 
-**Domain:** Capability-led current-state assessment and target-state roadmapping  
-**Status:** Architecture specification; implementation and runtime verification pending.
+**Purpose:** Turn strategy and stakeholder evidence into a structured view of business capabilities, current-state architecture, gaps, target options and a prioritised transformation roadmap.
 
-## Start here
-- [Project blueprint](docs/PROJECT_BLUEPRINT.md)
-- [Source-code structure and implementation boundaries](src/README.md)
-- [Test strategy and definition of done](tests/README.md)
+**Domain:** Enterprise architecture, business capability assessment and technology transformation.  
+**Technology direction:** Metadata-driven assessment workflows, structured architecture records, evidence links and report generation; specific implementation choices will be recorded as ADRs.  
+**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+
+## Business capabilities
+- Capture assessment scope, objectives, stakeholders and constraints.
+- Model business capabilities, value streams and operating responsibilities.
+- Inventory processes, information domains, applications, integrations and technology.
+- Link stakeholder evidence, risks, pain points and dependencies to architecture elements.
+- Identify capability gaps, duplication, obsolescence and control weaknesses.
+- Compare target-state options and record trade-offs and architecture decisions.
+- Generate sequenced initiatives, dependencies, owners and roadmap views.
+
+## Reference workflow
+Assessment intake → capability map → stakeholder evidence → current-state inventory → dependency and gap analysis → target options → roadmap and decisions.
+
+## Key modules
+- **Assessment workspace:** scope, stakeholders, objectives and evidence register.
+- **Capability model:** capability hierarchy, maturity and business outcomes.
+- **Architecture inventory:** process, data, application, integration and technology records.
+- **Dependency graph:** relationships, critical paths and impact analysis.
+- **Gap and option analysis:** current/target comparison, risks and trade-offs.
+- **Roadmap/reporting:** initiatives, sequencing, decision log and exportable outputs.
+
+## Expected demonstration
+Assess a synthetic enterprise scenario, map a business capability to its supporting processes, data and applications, identify a duplicated integration and create a phased modernisation roadmap with explicit assumptions.
+
+## Guardrails
+Keep evidence, assumptions and recommendations distinct. Record confidence and source for assessments. Do not present generated maturity scores as objective facts without an agreed assessment method.
+
+## Project documentation
+- [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
+- [Source-code boundaries](src/README.md)
+- [Test strategy](tests/README.md)
 - [Local deployment and operations](infra/README.md)
 
-## Planned repository layout
-```text
-enterprise-architecture-assessment-toolkit/
-├── docs/PROJECT_BLUEPRINT.md
-├── docs/adr/
-├── src/
-│   ├── app/
-│   ├── api/
-│   ├── domain/
-│   ├── application/
-│   ├── infrastructure/
-│   └── observability/
-├── tests/
-│   ├── unit/
-│   ├── integration/
-│   ├── contract/
-│   └── e2e/
-├── infra/
-│   ├── Dockerfile
-│   ├── compose.yaml
-│   └── deploy/
-├── scripts/
-├── .github/workflows/
-├── .env.example
-├── pyproject.toml
-└── README.md
-```
-
-The layout is a target structure. Implementation increments will add tracked source and deployment files; empty folders cannot be committed by Git alone.
-
-## Engineering status
-- Architecture and module boundaries: documented.
-- Executable application: pending.
-- Automated tests: planned; not yet run.
-- Container/CI verification: pending.
-- Production deployment: not claimed.
-
-See the [project blueprint](docs/PROJECT_BLUEPRINT.md) for business flow, domain model, interfaces, security, NFRs, delivery increments and acceptance criteria.
+## Delivery status
+The documents define the intended design and acceptance criteria. No client assessment, enterprise architecture certification or real-world transformation outcome is claimed.
