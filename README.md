@@ -32,24 +32,24 @@ The fifteen core projects are maintained as independent workstreams, with a sixt
 
 | # | Independent project | Main capability | Status |
 |---:|---|---|---|
-| 1 | [Enterprise Information Resilience](projects/enterprise-information-resilience/README.md) | Digital trust, information integrity, reputation resilience | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086794) |
-| 2 | [Enterprise Document Intelligence](projects/enterprise-document-intelligence/README.md) | Document extraction, validation, human exception handling | CI + Docker verified — 7 tests passed (GitHub Actions run 42462168881) |
-| 3 | [Breach-Resilient Enterprise](projects/breach-resilient-enterprise/README.md) | Zero trust, attack-path containment, response | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086819) |
-| 4 | [Enterprise Data Protection](projects/enterprise-data-protection/README.md) | Classification, minimisation, masking, access governance | CI + Docker verified — 8 tests passed (GitHub Actions run 42461086755) |
-| 5 | [Enterprise Attention and Intelligence Hub](projects/enterprise-attention-intelligence-hub/README.md) | Business-impact observability and prioritisation | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086772) |
-| 6 | [Enterprise MDM and Data Governance](projects/enterprise-mdm-data-governance/README.md) | Matching, survivorship, stewardship, golden records | CI + Docker verified — 8 tests passed (GitHub Actions run 42461085897) |
-| 7 | [Agent-Driven Enterprise Operations](projects/agent-driven-enterprise-operations/README.md) | Bounded agents, tool policy, human approvals | CI + Docker verified — 8 tests passed (GitHub Actions run 42461086864) |
-| 8 | [Enterprise Integration Platform](projects/enterprise-integration-platform/README.md) | APIs, events, routing, orchestration, reliability | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086815) |
-| 9 | [Predictive Life Sciences Supply Chain](projects/predictive-life-sciences-supply-chain/README.md) | Supply visibility, traceability, risk prediction | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086790) |
-| 10 | [Pharma R&D Data Spine](projects/pharma-rnd-data-spine/README.md) | Research data harmonisation and lineage | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086795) |
-| 11 | [Cloud Data Engineering Platform](projects/cloud-data-engineering-platform/README.md) | Ingestion, lakehouse patterns, quality, FinOps | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086770) |
-| 12 | [Autonomous AI Engineering Workbench](projects/autonomous-ai-engineering-workbench/README.md) | Sandboxed coding-agent evaluation | CI + Docker verified — 8 tests passed (GitHub Actions run 42461086821) |
-| 13 | [Third-Party Risk Management](projects/third-party-risk-management/README.md) | Vendor lifecycle, evidence, access and fourth-party risk | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086751) |
-| 14 | [SAP S/4HANA Data Modernisation](projects/sap-s4-data-modernisation/README.md) | SAP master data, migration, CDC and reconciliation | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086801) |
-| 15 | [Enterprise Architecture Assessment Toolkit](projects/enterprise-architecture-assessment-toolkit/README.md) | Capability-led assessment and target-state roadmap | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086760) |
+| 1 | [Enterprise Information Resilience](projects/enterprise-information-resilience/README.md) | Digital trust, information integrity, reputation resilience | CI + Docker + security verified — 7 tests passed (GitHub Actions run 42461086794) |
+| 2 | [Enterprise Document Intelligence](projects/enterprise-document-intelligence/README.md) | Document extraction, validation, human exception handling | CI + Docker + security verified — 7 tests passed (GitHub Actions run 42462168881) |
+| 3 | [Breach-Resilient Enterprise](projects/breach-resilient-enterprise/README.md) | Zero trust, attack-path containment, response | CI + Docker + security verified — 7 tests passed (GitHub Actions run 42461086819) |
+| 4 | [Enterprise Data Protection](projects/enterprise-data-protection/README.md) | Classification, minimisation, masking, access governance | CI + Docker + security verified — 8 tests passed (GitHub Actions run 42461086755) |
+| 5 | [Enterprise Attention and Intelligence Hub](projects/enterprise-attention-intelligence-hub/README.md) | Business-impact observability and prioritisation | CI + Docker + security verified — 7 tests passed (GitHub Actions run 42461086772) |
+| 6 | [Enterprise MDM and Data Governance](projects/enterprise-mdm-data-governance/README.md) | Matching, survivorship, stewardship, golden records | CI + Docker + security verified — 8 tests passed (GitHub Actions run 42461085897) |
+| 7 | [Agent-Driven Enterprise Operations](projects/agent-driven-enterprise-operations/README.md) | Bounded agents, tool policy, human approvals | CI + Docker + security verified — 8 tests passed (GitHub Actions run 42461086864) |
+| 8 | [Enterprise Integration Platform](projects/enterprise-integration-platform/README.md) | APIs, events, routing, orchestration, reliability | CI + Docker + security verified — 7 tests passed (GitHub Actions run 42461086815) |
+| 9 | [Predictive Life Sciences Supply Chain](projects/predictive-life-sciences-supply-chain/README.md) | Supply visibility, traceability, risk prediction | CI + Docker + security verified — 7 tests passed (GitHub Actions run 42461086790) |
+| 10 | [Pharma R&D Data Spine](projects/pharma-rnd-data-spine/README.md) | Research data harmonisation and lineage | CI + Docker + security verified — 7 tests passed (GitHub Actions run 42461086795) |
+| 11 | [Cloud Data Engineering Platform](projects/cloud-data-engineering-platform/README.md) | Ingestion, lakehouse patterns, quality, FinOps | CI + Docker + security verified — 7 tests passed (GitHub Actions run 42461086770) |
+| 12 | [Autonomous AI Engineering Workbench](projects/autonomous-ai-engineering-workbench/README.md) | Sandboxed coding-agent evaluation | CI + Docker + security verified — 8 tests passed (GitHub Actions run 42461086821) |
+| 13 | [Third-Party Risk Management](projects/third-party-risk-management/README.md) | Vendor lifecycle, evidence, access and fourth-party risk | CI + Docker + security verified — 7 tests passed (GitHub Actions run 42461086751) |
+| 14 | [SAP S/4HANA Data Modernisation](projects/sap-s4-data-modernisation/README.md) | SAP master data, migration, CDC and reconciliation | CI + Docker + security verified — 7 tests passed (GitHub Actions run 42461086801) |
+| 15 | [Enterprise Architecture Assessment Toolkit](projects/enterprise-architecture-assessment-toolkit/README.md) | Capability-led assessment and target-state roadmap | CI + Docker + security verified — 7 tests passed (GitHub Actions run 42461086760) |
 | 16 | [Enterprise Portfolio Integration](projects/enterprise-portfolio-integration/README.md) | Cross-project orchestration, idempotency and workflow traceability | CI + Docker + HTTP E2E + security verified — 11 tests passed (GitHub Actions run 42462914331) |
 
-**Status meaning:** CI + Docker verified means the project's current synthetic prototype test suite passed and its container image built in GitHub Actions. It does not mean production readiness, live enterprise integration, penetration-test clearance, regulatory validation or deployment to a customer environment.
+**Status meaning:** CI + Docker + security verified means the project's current synthetic prototype test suite passed and its container image built in GitHub Actions. It does not mean production readiness, live enterprise integration, penetration-test clearance, regulatory validation or deployment to a customer environment.
 
 The earlier six project briefs remain in the repository as additional engineering exercises. They are not substitutes for the sixteen portfolio projects above.
 
