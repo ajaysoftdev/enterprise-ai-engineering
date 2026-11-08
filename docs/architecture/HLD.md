@@ -18,7 +18,7 @@ A fictional distributor receives digital orders, validates customer and product 
 | Shipment visibility | Publish delivery status | Carrier adapter |
 | Finance | Invoice and reconcile | ERP / finance |
 
-Ownership is a proposed starting point and must be validated with business stakeholders.
+Ownership is a proposed starting point and must be validated with stakeholders.
 
 ## 3. Context view
 
@@ -31,16 +31,14 @@ Ownership is a proposed starting point and must be validated with business stake
                      v                                 |
                  Event broker -------------------------+
                      |
-                Notification
-                     |
-                  Customer
+                Notification -> Customer
 
 ## 4. Component responsibilities
 
 | Component | Responsibility | Boundary |
 |---|---|---|
 | API gateway | Identity, quotas, routing, request policy | No business orchestration |
-| Order service | Validate and coordinate order state | Owns order lifecycle only if agreed |
+| Order service | Validate and coordinate order state | Owns lifecycle only if agreed |
 | ERP adapter | Translate ERP-specific contracts | Isolates vendor details |
 | WMS adapter | Translate fulfilment commands/events | Idempotent processing |
 | Broker | Buffer and distribute events | Assume at-least-once delivery |
@@ -48,35 +46,16 @@ Ownership is a proposed starting point and must be validated with business stake
 | Observability | Correlate and monitor flows | Redact sensitive payloads |
 
 ## 5. Integration patterns
-- Synchronous APIs for immediate validation and acknowledgement.
-- Asynchronous events for fulfilment and notifications.
-- Transactional outbox where state change and event publication must remain consistent.
-- Idempotency keys for retried commands.
-- Bounded retries, dead-letter handling and controlled replay.
-- Reconciliation for ambiguous or long-running outcomes.
+Synchronous APIs for immediate validation; asynchronous events for fulfilment; transactional outbox where state and event publication must remain consistent; idempotency keys; bounded retries; dead-letter handling; controlled replay; reconciliation.
 
 ## 6. Quality attributes
-
-| Attribute | Questions / evidence |
-|---|---|
-| Availability | Business availability target and dependency map |
-| Performance | Peak rates, latency budgets and workload tests |
-| Reliability | Duplicate, retry and partial-failure tests |
-| Security | Identity, data classification and threat model |
-| Scalability | Independent scaling and capacity model |
-| Operability | Dashboards, alerts and stuck-order runbooks |
-| Recoverability | Agreed RTO/RPO and restore exercises |
+Availability targets, peak rates, latency budgets, duplicate/retry tests, identity/data classification, scaling model, dashboards/alerts and agreed RTO/RPO must be defined.
 
 ## 7. Deployment
-No cloud topology is selected. Compare managed integration services, containers and existing enterprise middleware against skills, cost, latency, security and operational constraints.
+No cloud topology is selected. Compare managed integration services, containers and enterprise middleware against skills, cost, latency, security and operational constraints.
 
 ## 8. Open questions
-- Which platform owns authoritative order status?
-- Can ERP accept idempotency references?
-- What ordering guarantees exist for WMS events?
-- How are stuck orders reconciled?
-- Which fields are personal or commercially sensitive?
-- What are the volumes, SLAs, RTO and RPO?
+Which platform owns order status? Can ERP accept idempotency references? What ordering guarantees exist for WMS events? How are stuck orders reconciled? Which fields are sensitive? What are volumes, SLAs, RTO and RPO?
 
 ## 9. Acceptance
-System boundaries, data ownership, API/event distinctions, failure recovery, security and operations must be documented. Proposed elements must not be represented as deployed facts.
+System boundaries, data ownership, API/event distinctions, failure recovery, security and operations must be documented. Proposed elements are not deployed facts.
