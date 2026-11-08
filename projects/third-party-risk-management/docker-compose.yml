@@ -1,0 +1,11 @@
+services:
+  third-party-risk:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      TPRM_DB: /app/data/tprm.db
+    volumes:
+      - tprm-data:/app/data
+volumes:
+  tprm-data:
