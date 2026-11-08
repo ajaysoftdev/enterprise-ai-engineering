@@ -22,9 +22,12 @@ def signal(source_id, **overrides):
 
 
 def test_health():
-    response = client.get("/health")
+    response = client.get("/health", headers={"X-Request-ID": "test-request-01"})
     assert response.status_code == 200
     assert response.json()["status"] == "ok"
+    assert response.headers["x-request-id"] == "test-request-01"
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert response.headers["cache-control"] == "no-store"
 
 
 def test_signal_is_scored_with_explainable_factors(tmp_path, monkeypatch):
@@ -74,3 +77,10 @@ def test_case_audit_records_ingestion_and_review(tmp_path, monkeypatch):
     })
     events = client.get("/v1/cases/CASE-SYN-01/audit").json()
     assert [item["event_type"] for item in events] == ["SIGNAL_INGESTED", "HUMAN_REVIEW_RECORDED"]
+
+
+def test_malformed_request_id_is_replaced():
+    response = client.get("/health", headers={"X-Request-ID": "invalid request id"})
+    assert response.status_code == 200
+    assert response.headers["x-request-id"] != "invalid request id"
+    assert len(response.headers["x-request-id"]) == 32
