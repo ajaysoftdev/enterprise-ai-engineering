@@ -61,7 +61,9 @@ def test_review_decision_is_persisted(tmp_path, monkeypatch):
     assert client.get(f"/v1/documents/{created['id']}").json()["reviewed_by"] == "reviewer@example.test"
 
 
-def test_unknown_document_returns_404():
+def test_unknown_document_returns_404(tmp_path, monkeypatch):
+    from docintel import repository
+    monkeypatch.setattr(repository, "database_path", lambda: str(tmp_path / "missing.db"))
     response = client.get("/v1/documents/not-a-real-id")
     assert response.status_code == 404
 
