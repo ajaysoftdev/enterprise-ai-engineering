@@ -1,0 +1,14 @@
+{
+  "notice": "Entirely synthetic defensive test fixture; no real infrastructure is represented.",
+  "principals": ["contractor-temp", "svc-reporting"],
+  "relationships": [
+    ["contractor-temp", "build-runner", "ASSIGNED_TO"],
+    ["build-runner", "artifact-registry", "PUBLISHES_TO"],
+    ["artifact-registry", "billing-api", "DEPLOYS_TO"],
+    ["billing-api", "customer-db", "CONNECTS_TO"],
+    ["billing-api", "secrets-vault", "READS_SECRET"],
+    ["svc-reporting", "reporting-api", "CALLS"],
+    ["reporting-api", "analytics-db", "READS"]
+  ],
+  "sensitive_targets": ["customer-db", "secrets-vault", "prod-admin"]
+}
