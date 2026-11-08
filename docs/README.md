@@ -2,7 +2,16 @@
 
 This portal describes portfolio projects, engineering standards and architecture exercises. Source code and executed evidence remain authoritative.
 
-## Architecture references
+## Enterprise reference architecture
+
+The integrated target-state design connects business operating model, enterprise data, integration, AI, security, observability, resilience and engineering delivery.
+
+- [Integrated enterprise reference architecture](architecture/enterprise-reference-architecture.md)
+- [Enterprise capability map](architecture/capability-map.md)
+- [Portfolio module dependency map and implementation sequence](architecture/module-dependency-map.md)
+
+## Existing architecture references
+
 - [Enterprise integration HLD](architecture/HLD.md)
 - [Enterprise integration LLD](architecture/LLD.md)
 - [Data model and quality](architecture/data-model.md)
@@ -10,6 +19,7 @@ This portal describes portfolio projects, engineering standards and architecture
 - [Threat-model method](architecture/threat-model.md)
 
 ## Engineering guides
+
 - [Local quickstart](guides/quickstart-local.md)
 - [Configuration](guides/configuration.md)
 - [Testing](guides/testing.md)
@@ -18,6 +28,7 @@ This portal describes portfolio projects, engineering standards and architecture
 - [Project walkthrough](guides/walkthrough.md)
 
 ## Project-specific documentation
+
 - [Spring PetClinic documentation](https://github.com/ajaysoftdev/spring-petclinic/tree/main/docs)
 - [Python batch pipeline](../projects/python-batch-data-pipeline/README.md)
 - [Data quality framework](../projects/data-quality-framework/README.md)
@@ -26,6 +37,7 @@ This portal describes portfolio projects, engineering standards and architecture
 - [Enterprise integration case study](../projects/enterprise-integration-architecture/README.md)
 
 ## Status vocabulary
+
 - Implemented: verified in source or configuration.
 - Observed: confirmed by repository inspection, not necessarily executed.
 - Proposed: design or exercise not yet implemented.
