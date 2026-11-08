@@ -1,8 +1,8 @@
 # Enterprise AI Engineering
 
-A practical engineering portfolio exploring enterprise software development, AI coding agents, software quality, testing, Python data engineering and architecture.
+A practical engineering portfolio exploring enterprise software development, AI coding agents, software quality, testing, Python data engineering and enterprise architecture.
 
-The portfolio is organised around end-to-end projects. Each project starts with a problem statement and acceptance criteria, then progresses through implementation, testing, review and evidence-based reporting.
+This repository contains fifteen separately scoped project folders under `projects/` (not fifteen separate GitHub repositories). Each folder has a project overview, detailed blueprint, source-code boundaries, test strategy and local deployment plan. These documents establish the implementation scope; executable code and verification are tracked separately as they are completed.
 
 ## Integrated enterprise architecture
 
@@ -28,7 +28,7 @@ See the [engineering documentation portal](docs/README.md) for architecture refe
 
 ## Independent project catalogue
 
-The portfolio is being built as fifteen independently scoped projects. Each project has its own blueprint, code-module boundaries, test strategy, and local deployment/operations plan. The projects will be developed and verified individually before a separate final project is designed to connect them.
+The fifteen projects are maintained as independent workstreams inside this single repository. Each project README now describes its business purpose, capabilities, reference workflow, key modules, demonstration scenario, guardrails, documentation and delivery status. Their blueprints define detailed architecture and acceptance criteria. Projects will be implemented and verified individually before a separate final project is designed to connect them.
 
 | # | Independent project | Main capability | Status |
 |---:|---|---|---|
@@ -106,4 +106,4 @@ See [third-party notices](docs/THIRD_PARTY_NOTICES.md) for attribution informati
 
 ## Current status
 
-Portfolio structure, project specifications and working templates are being established. The six project briefs are proposed work. Local setup, implementation, test execution and agent comparisons remain pending until actually performed and documented.
+All fifteen project folders and their core specification files are present. The individual project overviews and the portfolio catalogue are documented. Executable application code, automated test runs, container builds, CI verification and deployment evidence remain pending unless explicitly recorded in a project.
