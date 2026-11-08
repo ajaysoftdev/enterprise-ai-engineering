@@ -4,7 +4,7 @@
 
 **Domain:** Pharmaceutical R&D data architecture, scientific traceability and governed analytics.  
 **Technology direction:** Metadata-driven ingestion, domain contracts, lineage and governed data products; implementation choices will be documented as ADRs.  
-**Status:** Current prototype CI + Docker + security verified — 7 tests passed on Python 3.12 (GitHub Actions run 42461086795, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Status:** CI + Docker build verified — 8 tests passed on Python 3.12 (GitHub Actions run 42477974651, commit 3d39106). Authentication is enforced for protected API routes; the test suite includes a missing-key rejection check. This verifies synthetic/local prototype behaviour only, not production readiness.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
@@ -36,7 +36,7 @@ Do not fabricate scientific observations or alter source evidence. Preserve prov
 
 The current prototype ingests synthetic experiment, sample, method and assay-result metadata; validates type-specific required fields; quarantines incomplete records; stores parent-child lineage; exposes upstream lineage queries; and records ingestion audit events. It includes API tests, OpenAPI, Docker and a GitHub Actions workflow.
 
-**Limitations:** source adapters, ELN/LIMS/MES connectors, scientific identity resolution, unit conversion, transformation pipelines, immutable raw evidence, access controls, lineage versioning, regulated audit trails and validated GxP operation are not implemented. The metadata checks are a small demonstrator, not a scientific data-quality standard. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. Synthetic research records only.
+**Limitations:** source adapters, ELN/LIMS/MES connectors, scientific identity resolution, unit conversion, transformation pipelines, immutable raw evidence, access controls, lineage versioning, regulated audit trails and validated GxP operation are not implemented. The metadata checks are a small demonstrator, not a scientific data-quality standard. GitHub Actions executed the API suite successfully: 8 passed, 0 failed, including the protected-route authentication test. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. Synthetic research records only.
 
 ## Run locally
 
