@@ -1,0 +1,11 @@
+services:
+  sap-modernisation:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      SAP_MODERN_DB: /app/data/sap-modern.db
+    volumes:
+      - sap-modern-data:/app/data
+volumes:
+  sap-modern-data:
