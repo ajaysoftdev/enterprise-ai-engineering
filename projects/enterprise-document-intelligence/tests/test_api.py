@@ -74,7 +74,7 @@ def test_audit_records_intake_and_review(tmp_path, monkeypatch):
     created = client.post("/v1/documents", json={
         "filename": "audit-sample.txt",
         "content_type": "text/plain",
-        "text_content": "Invoice Number: AUD-7\\nTotal: 17.00",
+        "text_content": "Invoice Number: AUD-7\nTotal: 17.00",
     }).json()
     reviewed = client.post(f"/v1/documents/{created['id']}/review", json={
         "decision": "APPROVED", "reviewer": "reviewer@example.test", "note": "Checked sample"
