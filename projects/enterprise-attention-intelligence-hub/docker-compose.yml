@@ -4,6 +4,7 @@ services:
     ports:
       - "8000:8000"
     environment:
+      API_KEY: ${API_KEY:?Set API_KEY in the project .env file}
       ATTENTION_DB: /app/data/attention.db
     volumes:
       - attention-data:/app/data
