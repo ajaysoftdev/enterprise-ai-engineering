@@ -2,7 +2,7 @@
 
 **Purpose:** Connect the fifteen independently implemented enterprise prototypes through versioned contracts, provider-neutral adapters, durable workflow state and end-to-end traceability.
 
-**Status:** First vertical slice in progress — supplier invoice intake → document extraction → MDM source-record onboarding. This project is separate from the Enterprise Integration Platform: the platform demonstrates messaging/retry/DLQ mechanics; this project composes domain capabilities across the portfolio.
+**Status:** First vertical slice CI + Docker verified — 10 tests passed on Python 3.12 (GitHub Actions run 42462133940, commit 3f3db89). This verifies orchestration state, idempotency and fake-adapter tests; the actual downstream HTTP integration still requires a three-service local end-to-end run.
 
 ## Initial vertical slice
 
@@ -22,7 +22,7 @@
 - Idempotency prevents duplicate workflow creation for the same request key and payload.
 - A changed payload with an existing key returns a conflict.
 - A pending MDM match is never auto-approved.
-- The first slice uses synthetic plain-text invoices and local service endpoints only.
+- The first slice uses synthetic plain-text invoices and configurable local service endpoints only. Automated tests use fake downstream adapters; they do not yet prove live HTTP interoperability between the three processes.
 
 ## Current limitations
 
