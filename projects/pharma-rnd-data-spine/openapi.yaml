@@ -1,0 +1,55 @@
+openapi: 3.1.0
+info:
+  title: Pharma R&D Data Spine
+  version: 0.1.0
+  description: Synthetic scientific record intake, quality validation and lineage API.
+servers:
+  - url: http://127.0.0.1:8000
+paths:
+  /health:
+    get:
+      summary: Service health
+      responses:
+        "200": {description: Healthy}
+  /v1/records:
+    post:
+      summary: Ingest a synthetic research record
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/ResearchRecordCreate"}
+      responses:
+        "201": {description: Record accepted or quarantined}
+        "409": {description: Parent missing or source identifier duplicated}
+    get:
+      summary: List research records
+      responses:
+        "200": {description: Research records}
+  /v1/records/{record_id}/lineage:
+    get:
+      summary: Retrieve upstream record lineage
+      parameters:
+        - in: path
+          name: record_id
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Record and upstream records}
+        "404": {description: Not found}
+components:
+  schemas:
+    ResearchRecordCreate:
+      type: object
+      required: [source_system, source_record_id, study_id, record_type, record_name, schema_version, payload]
+      properties:
+        source_system: {type: string}
+        source_record_id: {type: string}
+        study_id: {type: string}
+        record_type: {type: string, enum: [EXPERIMENT, SAMPLE, METHOD, ASSAY_RESULT]}
+        record_name: {type: string}
+        schema_version: {type: string, enum: ["1.0"]}
+        parent_record_ids:
+          type: array
+          items: {type: string}
+        payload: {type: object}
