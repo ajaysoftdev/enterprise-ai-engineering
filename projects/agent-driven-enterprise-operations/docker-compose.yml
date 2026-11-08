@@ -1,0 +1,11 @@
+services:
+  agent-operations:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      AGENTOPS_DB: /app/data/agentops.db
+    volumes:
+      - agentops-data:/app/data
+volumes:
+  agentops-data:
