@@ -1,6 +1,6 @@
 # Project Catalogue
 
-This directory contains fifteen independently scoped core enterprise workstreams, one portfolio integration project, plus six earlier engineering exercises. The fifteen portfolio projects each have a project overview, detailed blueprint, curated reference sources, implementation architecture, domain contracts/data model and delivery/test guidance.
+This directory contains fifteen independently scoped core enterprise workstreams, one portfolio integration project, plus six earlier engineering exercises. All sixteen portfolio projects each have a project overview, detailed blueprint, curated reference sources, implementation architecture, domain contracts/data model and delivery/test guidance.
 
 The project folders are maintained inside this repository; they are not separate GitHub repositories.
 
@@ -52,4 +52,4 @@ The project folders are maintained inside this repository; they are not separate
 
 ## Portfolio integration sequence
 
-The fifteen projects will be implemented and verified independently. A separate sixteenth integration project is intentionally deferred until the individual projects have stable interfaces, data contracts, identity and access patterns, and operational evidence.
+The fifteen core domain projects have initial CI-verified prototype slices. The sixteenth Enterprise Portfolio Integration project has started the first supplier-onboarding vertical slice; its tests and Docker build passed, while live HTTP interoperability and shared identity remain future milestones.
