@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 from breach.main import app
 
-client = TestClient(app)
+client = TestClient(app, headers={"X-API-Key": "ci-test-key"})
 
 
 def test_health():
