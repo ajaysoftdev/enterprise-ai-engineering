@@ -11,6 +11,9 @@ BASE = os.getenv("INTEGRATION_URL", "http://127.0.0.1:8003")
 def call(path: str, method: str = "GET", payload: dict | None = None, headers: dict | None = None, base: str = BASE):
     body = json.dumps(payload).encode("utf-8") if payload is not None else None
     request_headers = {"Accept": "application/json"}
+    service_key = os.getenv("API_KEY")
+    if service_key:
+        request_headers["X-API-Key"] = service_key
     if body is not None:
         request_headers["Content-Type"] = "application/json"
     request_headers.update(headers or {})
@@ -85,6 +88,7 @@ def main():
             "steward": "e2e-steward@example.test",
             "note": "Confirmed during synthetic integration smoke test",
         },
+        headers={"X-API-Key": os.getenv("MDM_API_KEY", os.getenv("API_KEY", ""))},
         base=os.getenv("MDM_URL", "http://127.0.0.1:8002"),
     )
     assert decision_status == 200, decision
