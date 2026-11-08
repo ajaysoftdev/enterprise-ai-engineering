@@ -35,7 +35,7 @@ Never expose host secrets or unrestricted shell access. Treat repository content
 
 The current prototype contains a versioned benchmark-task registry, a static patch evaluator, acceptance-marker checks, secret-pattern and unsafe-execution-pattern detection, weighted evidence scoring, SQLite report persistence, API tests, OpenAPI, Docker and GitHub Actions.
 
-**Important limitations:** submitted source is inspected as text and is never executed. No LLM provider, coding agent, Git worktree, container sandbox, shell runner, test runner, cost/token budget enforcement or human code-review workflow is connected. The report explicitly marks test execution as `NOT_RUN`; a high static score is not proof that code works or is safe to merge. The security patterns are illustrative and are not a substitute for a security scanner. GitHub Actions executed the API suite successfully: 7 passed, 0 failed. One Starlette/httpx deprecation warning remains.
+**Important limitations:** submitted source is inspected as text and is never executed. No LLM provider, coding agent, Git worktree, container sandbox, shell runner, test runner, cost/token budget enforcement or human code-review workflow is connected. The report explicitly marks test execution as `NOT_RUN`; a high static score is not proof that code works or is safe to merge. The security patterns are illustrative and are not a substitute for a security scanner. GitHub Actions executed the API suite successfully: 7 passed, 0 failed. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning.
 
 ## Run locally
 
