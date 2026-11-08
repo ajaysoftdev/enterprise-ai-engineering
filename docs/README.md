@@ -9,6 +9,9 @@ The integrated target-state design connects business operating model, enterprise
 - [Integrated enterprise reference architecture](architecture/enterprise-reference-architecture.md)
 - [Enterprise capability map](architecture/capability-map.md)
 - [Portfolio module dependency map and implementation sequence](architecture/module-dependency-map.md)
+- [Portfolio implementation roadmap](PORTFOLIO_IMPLEMENTATION_ROADMAP.md)
+- [Portfolio security baseline](PORTFOLIO_SECURITY_BASELINE.md)
+- [Portfolio integration contract register](PORTFOLIO_INTEGRATION_CONTRACT_REGISTER.md)
 
 ## Existing architecture references
 
