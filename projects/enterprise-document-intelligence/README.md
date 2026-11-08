@@ -1,4 +1,5 @@
 # Enterprise Document Intelligence
+**Latest revision note:** Request correlation IDs and baseline security response headers have been added; the new middleware tests are awaiting CI verification.
 
 ## Purpose
 
