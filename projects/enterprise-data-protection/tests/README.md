@@ -20,5 +20,8 @@ Generate synthetic examples for Dataset, DataElement, Classification, DataOwner,
 - CI retains test reports; failures are not silently ignored.
 - Performance thresholds are declared before performance claims.
 
+## Current executable test slice
+The current API suite covers health, dataset registration/retrieval, masked analyst access, finance-role restrictions on personal fields, wrong-purpose denial, classification-based masking and policy-decision audit. It does not cover real identity claims, data-gateway enforcement, token vaults, encryption, tenant isolation, concurrency or re-identification analysis.
+
 ## Evidence record
 For each run record commit, runtime/tool versions, command, result, test count and exclusions. Until executed, a test is **planned**, not passed.
