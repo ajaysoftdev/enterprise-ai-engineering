@@ -2,7 +2,7 @@ from fastapi.testclient import TestClient
 from inforesilience.main import app
 from inforesilience import repository
 
-client = TestClient(app)
+client = TestClient(app, headers={"X-API-Key": "ci-test-key"})
 
 
 def use_database(tmp_path, monkeypatch):
