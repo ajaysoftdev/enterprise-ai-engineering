@@ -4,6 +4,7 @@ import os
 import sqlite3
 from contextlib import closing
 from pathlib import Path
+from uuid import uuid4
 
 
 def database_path() -> str:
@@ -179,7 +180,7 @@ def apply_steward_decision(candidate_id: str, payload: dict, decision_id: str, s
             golden["source_record_ids"] = json.dumps(ids)
         else:
             golden = {
-                "id": str(__import__("uuid").uuid4()),
+                "id": str(uuid4()),
                 "canonical_name": incoming["legal_name"],
                 "tax_id": "".join(ch for ch in incoming["tax_id"].upper() if ch.isalnum()),
                 "source_record_ids": json.dumps([incoming["id"]]),
