@@ -39,3 +39,7 @@ Avoid opaque priority scores. Preserve original signals, explain correlations an
 
 ## Delivery status
 The documents define the intended design and acceptance criteria. No live monitoring platform, measured incident reduction or production integration is claimed.
+
+## Reference sources
+
+See [SOURCES.md](SOURCES.md) for curated official documentation, standards, reference architectures and implementation resources, with notes on how each applies to this project.
