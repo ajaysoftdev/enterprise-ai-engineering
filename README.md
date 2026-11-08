@@ -2,7 +2,7 @@
 
 A practical engineering portfolio exploring enterprise software development, AI coding agents, software quality, testing, Python data engineering and enterprise architecture.
 
-This repository contains fifteen separately scoped enterprise project folders under `projects/` (within this single GitHub repository). Each project now includes its own executable synthetic prototype, API contract, automated tests, Docker configuration and CI workflow, alongside its architecture and domain documentation. Current verification is limited to the documented prototype scope; production integrations and security assurance remain separate delivery gates.
+This repository contains fifteen core domain projects plus a sixteenth portfolio integration project under `projects/` (all within this single GitHub repository). Each project now includes its own executable synthetic prototype, API contract, automated tests, Docker configuration and CI workflow, alongside its architecture and domain documentation. Current verification is limited to the documented prototype scope; production integrations and security assurance remain separate delivery gates.
 
 ## Integrated enterprise architecture
 
@@ -28,7 +28,7 @@ See the [engineering documentation portal](docs/README.md) for architecture refe
 
 ## Independent project catalogue
 
-The fifteen projects are maintained as independent workstreams inside this single repository. Each project README describes its business purpose, capabilities, reference workflow, key modules, demonstration scenario, guardrails, documentation and delivery status. Each also has a runnable prototype slice and project-level CI evidence. The separate portfolio integration project remains deferred until these individual services have stronger security, operational and contract verification.
+The fifteen core projects are maintained as independent workstreams, with a sixteenth project composing them through explicit contracts. Each project README describes its business purpose, capabilities, reference workflow, key modules, demonstration scenario, guardrails, documentation and delivery status. Each also has a runnable prototype slice and project-level CI evidence. The portfolio integration project has now started its first vertical slice: supplier invoice intake → Document Intelligence → MDM, with idempotency and a human-stewardship pause.
 
 | # | Independent project | Main capability | Status |
 |---:|---|---|---|
@@ -47,17 +47,18 @@ The fifteen projects are maintained as independent workstreams inside this singl
 | 13 | [Third-Party Risk Management](projects/third-party-risk-management/README.md) | Vendor lifecycle, evidence, access and fourth-party risk | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086751) |
 | 14 | [SAP S/4HANA Data Modernisation](projects/sap-s4-data-modernisation/README.md) | SAP master data, migration, CDC and reconciliation | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086801) |
 | 15 | [Enterprise Architecture Assessment Toolkit](projects/enterprise-architecture-assessment-toolkit/README.md) | Capability-led assessment and target-state roadmap | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086760) |
+| 16 | [Enterprise Portfolio Integration](projects/enterprise-portfolio-integration/README.md) | Cross-project orchestration, idempotency and workflow traceability | CI + Docker verified — 10 tests passed (GitHub Actions run 42462133940); fake-adapter tests, live HTTP interoperability pending |
 
 **Status meaning:** CI + Docker verified means the project's current synthetic prototype test suite passed and its container image built in GitHub Actions. It does not mean production readiness, live enterprise integration, penetration-test clearance, regulatory validation or deployment to a customer environment.
 
-The earlier six project briefs remain in the repository as additional engineering exercises. They are not substitutes for the fifteen independent projects above.
+The earlier six project briefs remain in the repository as additional engineering exercises. They are not substitutes for the sixteen portfolio projects above.
 
 ## Project build sequence
 
 1. Establish the individual project structure, domain contracts and acceptance criteria.
 2. Implement each project independently, including source code, tests, security and local deployment.
 3. Run and record project-level verification and demo evidence.
-4. Only after the individual projects are stable, create the final portfolio integration project with explicit contracts and adapters between them.
+4. The portfolio integration project is now started; expand its vertical slices only after the relevant domain contracts, adapter behaviour and end-to-end verification are stable.
 
 ## Repository structure
 
@@ -78,7 +79,8 @@ enterprise-ai-engineering/
 │   ├── autonomous-ai-engineering-workbench/
 │   ├── third-party-risk-management/
 │   ├── sap-s4-data-modernisation/
-│   └── enterprise-architecture-assessment-toolkit/
+│   ├── enterprise-architecture-assessment-toolkit/
+│   └── enterprise-portfolio-integration/
 ├── architecture/
 ├── java-engineering/
 ├── python-data-engineering/
@@ -106,7 +108,7 @@ See [third-party notices](docs/THIRD_PARTY_NOTICES.md) for attribution informati
 
 ## Current status
 
-All fifteen current-revision prototype CI suites passed: 109 tests across the portfolio, and all fifteen Docker images built successfully in GitHub Actions. Each API now includes request correlation and baseline security response headers. Bandit static analysis passed across all 15 projects. The dependency audit initially identified an older pytest vulnerability; all projects were upgraded to 9.0.3, and the portfolio-wide Bandit plus pip-audit matrix passed 15/15 jobs (GitHub Actions run 42461092337; main-branch rerun pending). The prototypes use synthetic data and local SQLite-backed demonstrations where applicable. No production deployment, external system connection, independent security assessment or compliance validation is claimed.
+All sixteen current-revision prototype CI suites passed: 119 tests across the portfolio, and all sixteen Docker images built successfully in GitHub Actions. Each API now includes request correlation and baseline security response headers. Bandit static analysis passed across all 15 projects. The dependency audit initially identified an older pytest vulnerability; all projects were upgraded to 9.0.3, and the portfolio-wide Bandit plus pip-audit matrix passed for the 15 core projects (GitHub Actions run 42461092337; the sixteenth project's security scan is pending). The prototypes use synthetic data and local SQLite-backed demonstrations where applicable. No production deployment, external system connection, independent security assessment or compliance validation is claimed.
 
 ## Portfolio implementation roadmap
 
