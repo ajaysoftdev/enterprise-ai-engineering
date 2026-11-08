@@ -19,9 +19,12 @@ def record(source_id, kind, payload, parents=None):
 
 
 def test_health():
-    response = client.get("/health")
+    response = client.get("/health", headers={"X-Request-ID": "test-request-01"})
     assert response.status_code == 200
     assert response.json()["status"] == "ok"
+    assert response.headers["x-request-id"] == "test-request-01"
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert response.headers["cache-control"] == "no-store"
 
 
 def test_research_record_ingestion_and_lineage(tmp_path, monkeypatch):
@@ -64,3 +67,10 @@ def test_ingestion_audit_is_available(tmp_path, monkeypatch):
     created = client.post("/v1/records", json=record("EXP-3", "EXPERIMENT", {"protocol_id": "PROTO-3"})).json()
     events = client.get(f"/v1/records/{created['id']}/audit").json()
     assert events[0]["action"] == "RECORD_ACCEPTED"
+
+
+def test_malformed_request_id_is_replaced():
+    response = client.get("/health", headers={"X-Request-ID": "invalid request id"})
+    assert response.status_code == 200
+    assert response.headers["x-request-id"] != "invalid request id"
+    assert len(response.headers["x-request-id"]) == 32
