@@ -36,7 +36,7 @@ Do not imply access to SAP systems or SAP certification. Use synthetic SAP-like 
 
 The current prototype accepts synthetic Business Partner and Material Master records, applies versioned canonical mappings, validates required fields, quarantines invalid/duplicate source keys, simulates target-shaped records and produces source/loaded/quarantined count reconciliation. It includes API tests, OpenAPI, SQLite report persistence, Docker and GitHub Actions.
 
-**Limitations:** there is no SAP tenant connection, RFC/OData/IDoc adapter, CDC, real MDG workflow, cross-object dependency validation, data cleansing, stewardship UI, delta migration, checkpoint/restart, production target load or enterprise audit. The mapping rules cover only a small synthetic subset. Tests have been added but have not yet been executed in CI. No SAP certification or production migration is claimed.
+**Limitations:** there is no SAP tenant connection, RFC/OData/IDoc adapter, CDC, real MDG workflow, cross-object dependency validation, data cleansing, stewardship UI, delta migration, checkpoint/restart, production target load or enterprise audit. The mapping rules cover only a small synthetic subset. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. One Starlette/httpx deprecation warning remains. No SAP certification or production migration is claimed.
 
 ## Run locally
 
