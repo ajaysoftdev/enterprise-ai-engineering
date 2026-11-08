@@ -20,5 +20,8 @@ Generate synthetic examples for Signal, Source, Claim, Entity, RiskAssessment, C
 - CI retains test reports; failures are not silently ignored.
 - Performance thresholds are declared before performance claims.
 
+## Current executable test slice
+The current API suite covers health, explainable signal scoring, shared-case grouping, human review, prevention of repeat review and audit events. It does not test real source monitoring, semantic claim matching, factual verification, identity resolution, source authenticity or response publishing.
+
 ## Evidence record
 For each run record commit, runtime/tool versions, command, result, test count and exclusions. Until executed, a test is **planned**, not passed.
