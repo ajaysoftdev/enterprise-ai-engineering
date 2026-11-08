@@ -11,12 +11,12 @@ class AdapterError(RuntimeError):
         self.status_code = status_code
 
 
-def _request_json(url: str, method: str = "GET", payload: dict | None = None, timeout: float = 5.0):
+def _request_json(url: str, method: str = "GET", payload: dict | None = None, timeout: float = 5.0, request_id: str | None = None):
     data = json.dumps(payload).encode("utf-8") if payload is not None else None
-    request = Request(
-        url, data=data, method=method,
-        headers={"Content-Type": "application/json", "Accept": "application/json"},
-    )
+    headers = {"Content-Type": "application/json", "Accept": "application/json"}
+    if request_id:
+        headers["X-Request-ID"] = request_id
+    request = Request(url, data=data, method=method, headers=headers)
     try:
         with urlopen(request, timeout=timeout) as response:
             body = response.read()
@@ -32,25 +32,25 @@ class DocumentIntelligenceAdapter:
     def __init__(self, base_url: str | None = None):
         self.base_url = (base_url or os.getenv("DOCINT_URL", "http://localhost:8001")).rstrip("/")
 
-    def submit(self, payload: dict) -> dict:
-        return _request_json(f"{self.base_url}/v1/documents", "POST", payload)
+    def submit(self, payload: dict, request_id: str | None = None) -> dict:
+        return _request_json(f"{self.base_url}/v1/documents", "POST", payload, request_id=request_id)
 
 
 class MdmAdapter:
     def __init__(self, base_url: str | None = None):
         self.base_url = (base_url or os.getenv("MDM_URL", "http://localhost:8002")).rstrip("/")
 
-    def create_supplier(self, payload: dict) -> dict:
-        return _request_json(f"{self.base_url}/v1/source-records", "POST", payload)
+    def create_supplier(self, payload: dict, request_id: str | None = None) -> dict:
+        return _request_json(f"{self.base_url}/v1/source-records", "POST", payload, request_id=request_id)
 
-    def refresh(self, candidate_id: str, source_record_id: str) -> dict:
-        candidates = _request_json(f"{self.base_url}/v1/match-candidates")
+    def refresh(self, candidate_id: str, source_record_id: str, request_id: str | None = None) -> dict:
+        candidates = _request_json(f"{self.base_url}/v1/match-candidates", request_id=request_id)
         candidate = next((item for item in candidates if item["id"] == candidate_id), None)
         if candidate is None:
             raise AdapterError("MDM match candidate was not found")
         if candidate["status"] == "PENDING":
             return {"candidate_status": "PENDING", "golden_record_id": None}
-        golden_records = _request_json(f"{self.base_url}/v1/golden-records")
+        golden_records = _request_json(f"{self.base_url}/v1/golden-records", request_id=request_id)
         golden = next(
             (item for item in golden_records if source_record_id in item["source_record_ids"]),
             None,
