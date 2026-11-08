@@ -3,7 +3,7 @@ from fastapi.testclient import TestClient
 from tprm.main import app
 from tprm import repository
 
-client = TestClient(app)
+client = TestClient(app, headers={"X-API-Key": "ci-test-key"})
 
 
 def use_database(tmp_path, monkeypatch):
