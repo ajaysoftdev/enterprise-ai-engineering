@@ -4,7 +4,7 @@
 
 **Domain:** Data protection, privacy engineering and information governance.  
 **Planned stack:** Python 3.12, FastAPI, PostgreSQL, SQLAlchemy, policy adapter and synthetic data.  
-**Status:** Current prototype CI + Docker + security verified — 8 tests passed on Python 3.12 (GitHub Actions run 42461086755, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Status:** CI + Docker build verified — 9 tests passed on Python 3.12 (GitHub Actions run 42477937900, commit fee9bb2). Authentication is enforced for protected API routes; the test suite includes a missing-key rejection check. This verifies synthetic/local prototype behaviour only, not production readiness.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
@@ -36,7 +36,7 @@ Use synthetic data. Keep keys and secrets outside source control. Separate polic
 
 The current prototype includes dataset registration with field-level classifications, a SQLite metadata store, purpose/role/classification-aware access evaluation, deterministic masking, policy-decision audit records, API tests, OpenAPI, Docker and a GitHub Actions workflow.
 
-**Limitations:** policy rules are illustrative and hard-coded; no identity provider, attribute-based access engine, external catalogue, token vault, encryption/key management, lineage integration, retention scheduler or tenant isolation is connected. The masking examples are deterministic transformations, not anonymisation guarantees. Authentication, authorization enforcement at a data gateway, concurrency testing and security assessment remain pending. GitHub Actions executed the API suite successfully: 7 passed, 0 failed. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. Do not use real personal or financial data.
+**Limitations:** policy rules are illustrative and hard-coded; no identity provider, attribute-based access engine, external catalogue, token vault, encryption/key management, lineage integration, retention scheduler or tenant isolation is connected. The masking examples are deterministic transformations, not anonymisation guarantees. Authentication, authorization enforcement at a data gateway, concurrency testing and security assessment remain pending. GitHub Actions executed the API suite successfully: 9 passed, 0 failed, including the protected-route authentication test. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. Do not use real personal or financial data.
 
 ## Run locally
 
