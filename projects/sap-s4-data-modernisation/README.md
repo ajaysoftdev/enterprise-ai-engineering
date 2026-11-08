@@ -40,3 +40,7 @@ Do not imply access to SAP systems or SAP certification. Use synthetic SAP-like 
 
 ## Delivery status
 The documents define the intended design and acceptance criteria. No SAP tenant integration, production migration or customer data processing is claimed.
+
+## Reference sources
+
+See [SOURCES.md](SOURCES.md) for curated official documentation, standards, reference architectures and implementation resources, with notes on how each applies to this project.
