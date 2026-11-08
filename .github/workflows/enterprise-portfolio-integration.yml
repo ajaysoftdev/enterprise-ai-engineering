@@ -30,6 +30,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      API_KEY: ci-test-key
     defaults:
       run:
         working-directory: projects/enterprise-portfolio-integration
@@ -61,9 +63,9 @@ jobs:
         shell: bash
         run: |
           mkdir -p "$RUNNER_TEMP/portfolio-e2e"
-          nohup env DOCUMENT_INTELLIGENCE_DB="$RUNNER_TEMP/portfolio-e2e/documents.db" python -m uvicorn docintel.main:app --host 127.0.0.1 --port 8001 --app-dir projects/enterprise-document-intelligence/src > "$RUNNER_TEMP/portfolio-e2e/docintel.log" 2>&1 &
-          nohup env MDM_DATABASE="$RUNNER_TEMP/portfolio-e2e/mdm.db" python -m uvicorn mdm.main:app --host 127.0.0.1 --port 8002 --app-dir projects/enterprise-mdm-data-governance/src > "$RUNNER_TEMP/portfolio-e2e/mdm.log" 2>&1 &
-          nohup env DOCINT_URL="http://127.0.0.1:8001" MDM_URL="http://127.0.0.1:8002" PORTFOLIO_INTEGRATION_DB="$RUNNER_TEMP/portfolio-e2e/integration.db" python -m uvicorn portfolio_integration.main:app --host 127.0.0.1 --port 8003 --app-dir projects/enterprise-portfolio-integration/src > "$RUNNER_TEMP/portfolio-e2e/integration.log" 2>&1 &
+          nohup env API_KEY=ci-test-key DOCUMENT_INTELLIGENCE_DB="$RUNNER_TEMP/portfolio-e2e/documents.db" python -m uvicorn docintel.main:app --host 127.0.0.1 --port 8001 --app-dir projects/enterprise-document-intelligence/src > "$RUNNER_TEMP/portfolio-e2e/docintel.log" 2>&1 &
+          nohup env API_KEY=ci-test-key MDM_DATABASE="$RUNNER_TEMP/portfolio-e2e/mdm.db" python -m uvicorn mdm.main:app --host 127.0.0.1 --port 8002 --app-dir projects/enterprise-mdm-data-governance/src > "$RUNNER_TEMP/portfolio-e2e/mdm.log" 2>&1 &
+          nohup env API_KEY=ci-test-key DOCINT_API_KEY=ci-test-key MDM_API_KEY=ci-test-key DOCINT_URL="http://127.0.0.1:8001" MDM_URL="http://127.0.0.1:8002" PORTFOLIO_INTEGRATION_DB="$RUNNER_TEMP/portfolio-e2e/integration.db" python -m uvicorn portfolio_integration.main:app --host 127.0.0.1 --port 8003 --app-dir projects/enterprise-portfolio-integration/src > "$RUNNER_TEMP/portfolio-e2e/integration.log" 2>&1 &
           python - <<'PY'
           import time
           import urllib.request
@@ -81,4 +83,7 @@ jobs:
           print("All three HTTP services are healthy")
           PY
       - name: Run real HTTP vertical-slice smoke test
+        env:
+          API_KEY: ci-test-key
+          MDM_API_KEY: ci-test-key
         run: python projects/enterprise-portfolio-integration/scripts/e2e_smoke.py
