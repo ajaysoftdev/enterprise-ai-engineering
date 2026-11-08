@@ -64,3 +64,19 @@ def test_review_decision_is_persisted(tmp_path, monkeypatch):
 def test_unknown_document_returns_404():
     response = client.get("/v1/documents/not-a-real-id")
     assert response.status_code == 404
+
+
+def test_audit_records_intake_and_review(tmp_path, monkeypatch):
+    from docintel import repository
+    monkeypatch.setattr(repository, "database_path", lambda: str(tmp_path / "audit.db"))
+    created = client.post("/v1/documents", json={
+        "filename": "audit-sample.txt",
+        "content_type": "text/plain",
+        "text_content": "Invoice Number: AUD-7\\nTotal: 17.00",
+    }).json()
+    reviewed = client.post(f"/v1/documents/{created['id']}/review", json={
+        "decision": "APPROVED", "reviewer": "reviewer@example.test", "note": "Checked sample"
+    })
+    assert reviewed.status_code == 200
+    events = client.get(f"/v1/documents/{created['id']}/audit").json()
+    assert [event["action"] for event in events] == ["DOCUMENT_RECEIVED", "REVIEW_APPROVED"]
