@@ -17,7 +17,7 @@ A green run means only that these two automated checks completed for the scanned
 
 ## Implemented baseline in the current prototype revision
 
-All 16 FastAPI services now require a configured API key on every non-health route. Missing server configuration fails closed with HTTP 503; a missing or incorrect caller key receives HTTP 401. The 15 core service test clients and the portfolio integration test client use disposable CI-only keys, and each suite tests rejection of an unauthenticated request. The integration adapters forward separate `DOCINT_API_KEY` and `MDM_API_KEY` credentials to the two downstream services. All 16 services also attach a bounded `X-Request-ID` correlation value (accepting only 1–64 safe characters or generating a random replacement) and return `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer` and `Cache-Control: no-store`. This is a prototype shared-key gate, not an enterprise identity provider, fine-grained authorization, tenant isolation, key rotation, rate limiting or mTLS.
+All 16 FastAPI services now require a configured API key on every non-health route. Missing server configuration fails closed with HTTP 503; a missing or incorrect caller key receives HTTP 401. The 15 core service test clients and the portfolio integration test client use disposable CI-only keys; every suite tests missing and incorrect keys and verifies fail-closed behaviour when server configuration is absent. The integration adapters forward separate `DOCINT_API_KEY` and `MDM_API_KEY` credentials to the two downstream services. All 16 services also attach a bounded `X-Request-ID` correlation value (accepting only 1–64 safe characters or generating a random replacement) and return `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer` and `Cache-Control: no-store`. This is a prototype shared-key gate, not an enterprise identity provider, fine-grained authorization, tenant isolation, key rotation, rate limiting or mTLS.
 
 ## Minimum API and service controls before external exposure
 
@@ -64,7 +64,7 @@ All 16 FastAPI services now require a configured API key on every non-health rou
 - Bandit static analysis completed successfully for all 15 projects in the initial portfolio scan.
 - The first dependency audit identified a known vulnerability in the previously pinned `pytest 8.4.2` release (fixed upstream in `9.0.3`). All 15 projects have been updated to `pytest>=9.0.3,<10.0`.
 - The audit command now uses `pip-audit --skip-editable` so the locally installed portfolio package is not incorrectly looked up as a published PyPI dependency.
-- The latest clean security matrix completed successfully for **all 16 projects**: 16/16 jobs passed Bandit and pip-audit in GitHub Actions run 42478610160 on commit 7fa4c4a02ffcaeb3e75527069ad962ec07f05d37.
+- The latest clean security matrix completed successfully for **all 16 projects**: 16/16 jobs passed Bandit and pip-audit in GitHub Actions run 42478896241 on commit 1ce2294a4fd3cc72c55a175f64c3170e091bc407.
 - API-key rejection, request correlation and security-header tests passed across all 16 APIs. The portfolio integration adapters forward downstream service keys, restrict downstream URLs to HTTP(S), use parameterised SQL updates and passed Bandit and pip-audit.
 
 Existing test and Docker evidence remains limited to the exact synthetic prototype revisions described in each project README.
