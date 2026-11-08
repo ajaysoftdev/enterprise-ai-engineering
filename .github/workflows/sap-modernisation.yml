@@ -1,0 +1,29 @@
+name: SAP Modernisation Prototype CI
+
+on:
+  push:
+    paths:
+      - "projects/sap-s4-data-modernisation/**"
+      - ".github/workflows/sap-modernisation.yml"
+  pull_request:
+    paths:
+      - "projects/sap-s4-data-modernisation/**"
+      - ".github/workflows/sap-modernisation.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/sap-s4-data-modernisation
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: projects/sap-s4-data-modernisation/pyproject.toml
+      - run: python -m pip install --upgrade pip
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
