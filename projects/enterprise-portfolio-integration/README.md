@@ -2,7 +2,7 @@
 
 **Purpose:** Connect the fifteen independently implemented enterprise prototypes through versioned contracts, provider-neutral adapters, durable workflow state and end-to-end traceability.
 
-**Status:** First vertical slice CI + Docker + real HTTP E2E verified — 10 tests passed on Python 3.12 (GitHub Actions run 42462904962, commit 6ffc32e). The workflow starts Document Intelligence, MDM and Integration as separate HTTP services, exercises the steward decision and refresh path, and builds the integration Docker image.
+**Status:** First vertical slice CI + Docker + real HTTP E2E + security verified — 11 tests passed on Python 3.12 (GitHub Actions run 42462914331, commit 9676021). The workflow starts Document Intelligence, MDM and Integration as separate HTTP services, exercises the steward decision and refresh path, and builds the integration Docker image.
 
 ## Initial vertical slice
 
@@ -22,7 +22,7 @@
 - Idempotency prevents duplicate workflow creation for the same request key and payload.
 - A changed payload with an existing key returns a conflict.
 - A pending MDM match is never auto-approved.
-- The first slice uses synthetic plain-text invoices and configurable local service endpoints only. Unit tests use fake downstream adapters; a separate GitHub Actions smoke test starts all three services and exercises the real HTTP handoff, idempotency, MDM stewardship and refresh flow. The three-service smoke test has passed in GitHub Actions. A final URL-scheme rejection regression test has been added after this run and is awaiting the next CI execution.
+- The first slice uses synthetic plain-text invoices and configurable local service endpoints only. Unit tests use fake downstream adapters; a separate GitHub Actions smoke test starts all three services and exercises the real HTTP handoff, idempotency, MDM stewardship and refresh flow. The three-service smoke test has passed in GitHub Actions. URL-scheme restrictions, parameterised workflow updates, Bandit and pip-audit also passed in security matrix run 42462914239 (16/16 project jobs).
 
 
 ## Three-service end-to-end run
