@@ -104,4 +104,4 @@ Every asynchronous event should carry:
 
 ## Current readiness
 
-The 15 prototypes have independent local APIs and domain contracts, but they are not yet connected through a common identity provider, event broker, API gateway, schema registry or shared audit service. The first vertical slice should therefore be built only after the latest per-project CI reruns complete and the shared identity, event and audit contracts are agreed.
+The 15 core prototypes have independent local APIs and domain contracts, but they are not yet connected through a common identity provider, event broker, API gateway, schema registry or shared audit service. The sixteenth Enterprise Portfolio Integration project now implements the first supplier-onboarding vertical slice across Document Intelligence and MDM. Its 10 CI tests and Docker build passed; tests use fake adapters, so live HTTP interoperability between the three processes remains to be demonstrated. The broader event-driven and cross-domain integration roadmap remains proposed.
