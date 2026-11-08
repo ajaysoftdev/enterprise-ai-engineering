@@ -2,6 +2,12 @@
 
 A structured approach to evaluating coding agents on bounded software-engineering tasks.
 
+## Featured project
+
+[AI agent evaluation workbench](../projects/ai-agent-evaluation-workbench/README.md)
+
+The workbench will define a repeatable process for selecting tasks, capturing prompts and environment details, collecting diffs, running independent checks and recording human review effort. Initial evaluations will use the portfolio's Java and Python project tickets.
+
 ## Evaluation workflow
 
 1. Define a reproducible engineering task and acceptance criteria.
@@ -24,8 +30,8 @@ A structured approach to evaluating coding agents on bounded software-engineerin
 
 ## Fairness and integrity
 
-Record the agent, model/version when available, date, prompt/task, tools and configuration. Do not compare results from materially different conditions as if they were controlled trials. Distinguish agent-generated changes from human modifications.
+Record the agent, model/version when available, date, prompt/task, tools and configuration. Do not compare results from materially different conditions as if they were controlled trials. Distinguish agent-generated changes from human modifications. Do not publish private prompts, credentials, customer data or proprietary source code.
 
 ## Status
 
-Evaluation framework documented; no comparative agent results are published yet.
+Evaluation framework and project specification documented; no comparative agent results are published yet.
