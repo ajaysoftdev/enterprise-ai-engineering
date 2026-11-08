@@ -1,0 +1,11 @@
+services:
+  ai-engineering-workbench:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      AI_WORKBENCH_DB: /app/data/ai-workbench.db
+    volumes:
+      - workbench-data:/app/data
+volumes:
+  workbench-data:
