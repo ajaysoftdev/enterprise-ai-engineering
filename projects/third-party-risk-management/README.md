@@ -4,7 +4,7 @@
 
 **Domain:** Third-party cyber risk, supplier governance and operational resilience.  
 **Technology direction:** Workflow/API services, evidence metadata, risk rules and audit records; specific implementation choices will be captured in ADRs.  
-**Status:** Synthetic vendor-risk prototype CI verified — 6 tests passed on Python 3.12 (GitHub Actions run 42455446633, commit f17972a). This verifies illustrative risk/evidence workflow tests only; no real supplier assessment or compliance is claimed.
+**Status:** Synthetic vendor-risk prototype CI verified — 6 tests passed on Python 3.12 (GitHub Actions run 42456174771, commit a16145d). This verifies illustrative risk/evidence workflow tests only; no real supplier assessment or compliance is claimed.
 
 ## Business capabilities
 - Maintain vendor, service, contract and fourth-party dependency records.
