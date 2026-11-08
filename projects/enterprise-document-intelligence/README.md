@@ -15,7 +15,7 @@ The first executable slice is now present:
 - Required-field validation and NEEDS_REVIEW routing
 - API tests, Dockerfile, Docker Compose profile and synthetic sample input
 
-**Important limitations:** this version accepts only text/plain input. It does not yet parse PDF/image files, call an OCR or LLM provider, authenticate users, implement tenant isolation or idempotency keys, publish events, or provide production-grade file storage. The audit table is append-only through this prototype API but is not tamper-proof against direct database modification. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. One Starlette/httpx deprecation warning remains. Do not treat this prototype as production-ready or as a validated document-processing control.
+**Important limitations:** this version accepts only text/plain input. It does not yet parse PDF/image files, call an OCR or LLM provider, authenticate users, implement tenant isolation or idempotency keys, publish events, or provide production-grade file storage. The audit table is append-only through this prototype API but is not tamper-proof against direct database modification. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. Do not treat this prototype as production-ready or as a validated document-processing control.
 
 ## Run locally
 
