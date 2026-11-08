@@ -39,3 +39,7 @@ Never expose host secrets or unrestricted shell access. Treat repository content
 
 ## Delivery status
 The documents define the intended design and acceptance criteria. No agent benchmark result, model ranking or autonomous merge capability is claimed until implemented and reproducibly tested.
+
+## Reference sources
+
+See [SOURCES.md](SOURCES.md) for curated official documentation, standards, reference architectures and implementation resources, with notes on how each applies to this project.
