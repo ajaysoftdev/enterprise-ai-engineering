@@ -30,20 +30,10 @@
 | batch_id | string | Yes | Identifies ingestion run |
 
 ## 3. Data flow
-
-    Source files -> immutable raw input -> schema mapping
-       -> profiling and validation -> accepted canonical records
-                                 -> rejected rows with issue reasons
+Source files -> immutable raw input -> schema mapping -> profiling/validation -> accepted canonical records; rejected rows are retained with issue reasons.
 
 ## 4. Quality dimensions
-- Completeness: mandatory values and null thresholds.
-- Validity: types, formats, ranges and allowed values.
-- Uniqueness: business-key duplicates in a defined scope.
-- Consistency: cross-field and cross-record rules.
-- Referential integrity: customer/product references resolve.
-- Timeliness: timestamps meet freshness requirements.
-
-Every rule needs an ID, severity, scope, expression, threshold and owner.
+Completeness, validity, uniqueness, consistency, referential integrity and timeliness. Each rule needs an ID, severity, scope, expression, threshold and owner.
 
 ## 5. Lineage and reconciliation
 Record source file, row number, batch, transformation version and output identifier. Reconcile input rows to accepted, rejected, duplicate and explicitly skipped counts.
