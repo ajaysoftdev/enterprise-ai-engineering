@@ -4,7 +4,7 @@
 
 **Domain:** Third-party cyber risk, supplier governance and operational resilience.  
 **Technology direction:** Workflow/API services, evidence metadata, risk rules and audit records; specific implementation choices will be captured in ADRs.  
-**Status:** CI + Docker build verified — 8 tests passed on Python 3.12 (GitHub Actions run 42477998084, commit 1460e4d). Authentication is enforced for protected API routes; the test suite includes a missing-key rejection check. This verifies synthetic/local prototype behaviour only, not production readiness.
+**Status:** CI + Docker build verified — 9 tests passed on Python 3.12 (GitHub Actions run 42478881646). Authentication rejects missing/incorrect keys and fails closed when the server key is not configured. This verifies synthetic/local prototype behaviour only, not production readiness.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
