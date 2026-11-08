@@ -9,10 +9,15 @@ This baseline defines minimum engineering controls for the 15 synthetic portfoli
 The `.github/workflows/portfolio-security.yml` workflow runs, for each project:
 
 - Bandit static analysis over `src/`.
-- `pip-audit` against the installed Python dependency environment.
+- `pip-audit --skip-editable` against resolved third-party dependencies (editable local project packages are excluded from the PyPI vulnerability lookup).
 - A Python 3.12 environment and the project's declared development dependencies.
+- Weekly dependency update PRs are configured through `.github/dependabot.yml` for all 15 Python projects and GitHub Actions.
 
 A green run means only that these two automated checks completed for the scanned commit. It does not prove the absence of vulnerabilities or replace threat modelling, code review, penetration testing, container scanning or runtime controls.
+
+## Implemented baseline in the current prototype revision
+
+All 15 FastAPI services now attach a bounded `X-Request-ID` correlation value (accepting only 1–64 safe characters or generating a random replacement) and return `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer` and `Cache-Control: no-store`. New tests cover valid and malformed request IDs. These controls improve traceability and response hygiene; they do not provide authentication, authorization, tenant isolation or rate limiting. CI verification of this revision is pending.
 
 ## Minimum API and service controls before external exposure
 
