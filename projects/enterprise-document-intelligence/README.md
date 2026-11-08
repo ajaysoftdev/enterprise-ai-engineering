@@ -7,7 +7,7 @@ A document intake and validation demonstrator that receives synthetic plain-text
 
 ## Current implementation status
 
-**Current prototype CI + Docker verified — 7 tests passed on Python 3.12 (GitHub Actions run 42462168881, commit 6dfd2b3).** This verifies the current synthetic text-only API test slice; production readiness is not claimed.
+**Current prototype CI + Docker + security verified — 7 tests passed on Python 3.12 (GitHub Actions run 42462168881, commit 6dfd2b3).** This verifies the current synthetic text-only API test slice; production readiness is not claimed.
 
 The first executable slice is now present:
 - FastAPI service with health, document create/list/read, review and audit-read endpoints
