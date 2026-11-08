@@ -20,5 +20,8 @@ Generate synthetic examples for Signal, Metric, BusinessCapability, Service, Dep
 - CI retains test reports; failures are not silently ignored.
 - Performance thresholds are declared before performance claims.
 
+## Current executable test slice
+The current API suite covers health, high- and low-priority scoring, correlation of related signals across services, operator acknowledgement and duplicate acknowledgement conflict. It does not test real monitoring integrations, time-window correlation, SLOs, escalation delivery, access control or load behaviour.
+
 ## Evidence record
 For each run record commit, runtime/tool versions, command, result, test count and exclusions. Until executed, a test is **planned**, not passed.
