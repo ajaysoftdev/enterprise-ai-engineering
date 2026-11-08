@@ -32,21 +32,21 @@ The fifteen projects are maintained as independent workstreams inside this singl
 
 | # | Independent project | Main capability | Status |
 |---:|---|---|---|
-| 1 | [Enterprise Information Resilience](projects/enterprise-information-resilience/README.md) | Digital trust, information integrity, reputation resilience | Specified |
-| 2 | [Enterprise Document Intelligence](projects/enterprise-document-intelligence/README.md) | Document extraction, validation, human exception handling | Specified |
-| 3 | [Breach-Resilient Enterprise](projects/breach-resilient-enterprise/README.md) | Zero trust, attack-path containment, response | Specified |
-| 4 | [Enterprise Data Protection](projects/enterprise-data-protection/README.md) | Classification, minimisation, masking, access governance | Specified |
-| 5 | [Enterprise Attention and Intelligence Hub](projects/enterprise-attention-intelligence-hub/README.md) | Business-impact observability and prioritisation | Specified |
-| 6 | [Enterprise MDM and Data Governance](projects/enterprise-mdm-data-governance/README.md) | Matching, survivorship, stewardship, golden records | Specified |
-| 7 | [Agent-Driven Enterprise Operations](projects/agent-driven-enterprise-operations/README.md) | Bounded agents, tool policy, human approvals | Specified |
-| 8 | [Enterprise Integration Platform](projects/enterprise-integration-platform/README.md) | APIs, events, routing, orchestration, reliability | Specified |
-| 9 | [Predictive Life Sciences Supply Chain](projects/predictive-life-sciences-supply-chain/README.md) | Supply visibility, traceability, risk prediction | Specified |
-| 10 | [Pharma R&D Data Spine](projects/pharma-rnd-data-spine/README.md) | Research data harmonisation and lineage | Specified |
-| 11 | [Cloud Data Engineering Platform](projects/cloud-data-engineering-platform/README.md) | Ingestion, lakehouse patterns, quality, FinOps | Specified |
-| 12 | [Autonomous AI Engineering Workbench](projects/autonomous-ai-engineering-workbench/README.md) | Sandboxed coding-agent evaluation | Specified |
-| 13 | [Third-Party Risk Management](projects/third-party-risk-management/README.md) | Vendor lifecycle, evidence, access and fourth-party risk | Specified |
-| 14 | [SAP S/4HANA Data Modernisation](projects/sap-s4-data-modernisation/README.md) | SAP master data, migration, CDC and reconciliation | Specified |
-| 15 | [Enterprise Architecture Assessment Toolkit](projects/enterprise-architecture-assessment-toolkit/README.md) | Capability-led assessment and target-state roadmap | Specified |
+| 1 | [Enterprise Information Resilience](projects/enterprise-information-resilience/README.md) | Digital trust, information integrity, reputation resilience | CI verified — 6 tests passed |
+| 2 | [Enterprise Document Intelligence](projects/enterprise-document-intelligence/README.md) | Document extraction, validation, human exception handling | CI verified — 6 tests passed |
+| 3 | [Breach-Resilient Enterprise](projects/breach-resilient-enterprise/README.md) | Zero trust, attack-path containment, response | CI verified — 6 tests passed |
+| 4 | [Enterprise Data Protection](projects/enterprise-data-protection/README.md) | Classification, minimisation, masking, access governance | CI verified — 7 tests passed |
+| 5 | [Enterprise Attention and Intelligence Hub](projects/enterprise-attention-intelligence-hub/README.md) | Business-impact observability and prioritisation | CI verified — 6 tests passed |
+| 6 | [Enterprise MDM and Data Governance](projects/enterprise-mdm-data-governance/README.md) | Matching, survivorship, stewardship, golden records | CI verified — 6 tests passed |
+| 7 | [Agent-Driven Enterprise Operations](projects/agent-driven-enterprise-operations/README.md) | Bounded agents, tool policy, human approvals | CI verified — 7 tests passed |
+| 8 | [Enterprise Integration Platform](projects/enterprise-integration-platform/README.md) | APIs, events, routing, orchestration, reliability | CI verified — 6 tests passed |
+| 9 | [Predictive Life Sciences Supply Chain](projects/predictive-life-sciences-supply-chain/README.md) | Supply visibility, traceability, risk prediction | CI verified — 6 tests passed |
+| 10 | [Pharma R&D Data Spine](projects/pharma-rnd-data-spine/README.md) | Research data harmonisation and lineage | CI verified — 6 tests passed |
+| 11 | [Cloud Data Engineering Platform](projects/cloud-data-engineering-platform/README.md) | Ingestion, lakehouse patterns, quality, FinOps | CI verified — 6 tests passed |
+| 12 | [Autonomous AI Engineering Workbench](projects/autonomous-ai-engineering-workbench/README.md) | Sandboxed coding-agent evaluation | CI verified — 7 static tests passed; no agent execution |
+| 13 | [Third-Party Risk Management](projects/third-party-risk-management/README.md) | Vendor lifecycle, evidence, access and fourth-party risk | CI verified — 6 tests passed |
+| 14 | [SAP S/4HANA Data Modernisation](projects/sap-s4-data-modernisation/README.md) | SAP master data, migration, CDC and reconciliation | CI verified — 6 tests passed; no SAP connection |
+| 15 | [Enterprise Architecture Assessment Toolkit](projects/enterprise-architecture-assessment-toolkit/README.md) | Capability-led assessment and target-state roadmap | CI verified — 6 tests passed |
 
 **Status meaning:** Specified means architecture and implementation guidance are documented. It does not mean executable implementation, tests, deployment or client integration are complete.
 
