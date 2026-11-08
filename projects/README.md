@@ -8,7 +8,7 @@ The project folders are maintained inside this repository; they are not separate
 
 | # | Project | Primary business capability | Status |
 |---:|---|---|---|
-| 1 | [Enterprise Information Resilience](enterprise-information-resilience/README.md) | Digital trust, information integrity and reputation resilience | Specified |
+| 1 | [Enterprise Information Resilience](enterprise-information-resilience/README.md) | Digital trust, information integrity and reputation resilience | CI verified — 6 synthetic signal/review tests passed; no live monitoring |
 | 2 | [Enterprise Document Intelligence](enterprise-document-intelligence/README.md) | Document extraction, validation and human exception handling | CI verified — 6 tests passed; text-only prototype limitations remain |
 | 3 | [Breach-Resilient Enterprise](breach-resilient-enterprise/README.md) | Zero-trust architecture and attack-path containment | CI verified — 6 simulation tests passed; no live controls connected |
 | 4 | [Enterprise Data Protection](enterprise-data-protection/README.md) | Data classification, minimisation, masking and access governance | CI verified — 7 synthetic policy/masking tests passed; limitations remain |
@@ -37,7 +37,7 @@ The project folders are maintained inside this repository; they are not separate
 
 - **Specified:** business scope, architecture and implementation guidance are documented; executable implementation and verification are not implied.
 - **In progress:** source code or configuration is being implemented; only completed and evidenced increments should be described as implemented.
-- **Verified:** the relevant commands and automated checks have actually run, and their results are recorded.
+- **CI verified:** the project's GitHub Actions test workflow completed successfully; the README records the run, test count and remaining limitations. This is not production verification.
 
 ## Delivery rules
 
