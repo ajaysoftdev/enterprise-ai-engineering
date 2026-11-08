@@ -1,0 +1,11 @@
+services:
+  cloud-data-pipeline:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      CLOUD_PIPELINE_DB: /app/data/cloud-pipeline.db
+    volumes:
+      - cloud-pipeline-data:/app/data
+volumes:
+  cloud-pipeline-data:
