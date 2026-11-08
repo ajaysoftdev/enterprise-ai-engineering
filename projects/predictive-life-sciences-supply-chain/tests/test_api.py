@@ -22,9 +22,12 @@ def scenario(**overrides):
 
 
 def test_health():
-    response = client.get("/health")
+    response = client.get("/health", headers={"X-Request-ID": "test-request-01"})
     assert response.status_code == 200
     assert response.json()["status"] == "ok"
+    assert response.headers["x-request-id"] == "test-request-01"
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert response.headers["cache-control"] == "no-store"
 
 
 def test_quality_hold_is_highest_priority(tmp_path, monkeypatch):
@@ -64,3 +67,10 @@ def test_risk_assessment_is_audited(tmp_path, monkeypatch):
     events = client.get(f"/v1/scenarios/{created['id']}/audit").json()
     assert len(events) == 1
     assert events[0]["action"] == "RISK_ASSESSED"
+
+
+def test_malformed_request_id_is_replaced():
+    response = client.get("/health", headers={"X-Request-ID": "invalid request id"})
+    assert response.status_code == 200
+    assert response.headers["x-request-id"] != "invalid request id"
+    assert len(response.headers["x-request-id"]) == 32
