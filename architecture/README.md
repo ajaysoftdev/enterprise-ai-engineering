@@ -2,15 +2,23 @@
 
 This area records application structure, design reasoning and technical decisions for the portfolio exercises.
 
+## Featured project
+
+[Enterprise integration architecture case study](../projects/enterprise-integration-architecture/README.md)
+
+A proposed architecture case study for a fictional order-processing environment. It explores system context, API and event boundaries, data ownership, failure handling, security, observability, deployment and architecture decision records. It is a design exercise, not a claim about a deployed customer system.
+
 ## Documentation scope
 
 - System context and major components
 - Key application and request flows
 - Data model and persistence boundaries
 - API and integration boundaries
+- Synchronous APIs versus asynchronous events
+- Retry, idempotency, dead-letter and reconciliation patterns
 - Configuration and deployment assumptions
 - Quality attributes such as security, reliability and performance
-- Known constraints and technical trade-offs
+- Architecture decisions and trade-offs
 
 ## Architecture decision records
 
@@ -20,4 +28,4 @@ Architecture descriptions must reflect code and evidence actually inspected. Mar
 
 ## Status
 
-Documentation structure prepared. Project-specific architecture notes will be added after codebase exploration.
+Architecture documentation structure and case-study specification prepared. No production deployment or customer implementation is claimed.
