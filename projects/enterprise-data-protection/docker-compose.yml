@@ -1,0 +1,11 @@
+services:
+  data-protection:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DATA_PROTECTION_DB: /app/data/data-protection.db
+    volumes:
+      - protection-data:/app/data
+volumes:
+  protection-data:
