@@ -4,7 +4,7 @@
 
 **Domain:** SAP S/4HANA data architecture, migration, data quality and integration.  
 **Technology direction:** Synthetic SAP-like extracts, mapping/validation services, API or CDC-style adapters and reconciliation controls. No live SAP connection is assumed.  
-**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+**Status:** First executable synthetic migration prototype added — CI execution pending.
 
 ## Business capabilities
 - Model representative business partners, products/materials and organisational data.
@@ -31,6 +31,24 @@ Migrate synthetic business-partner and material records, inject invalid and dupl
 
 ## Guardrails
 Do not imply access to SAP systems or SAP certification. Use synthetic SAP-like data, document assumptions and keep migration execution separate from reconciliation approval.
+
+## First executable slice
+
+The current prototype accepts synthetic Business Partner and Material Master records, applies versioned canonical mappings, validates required fields, quarantines invalid/duplicate source keys, simulates target-shaped records and produces source/loaded/quarantined count reconciliation. It includes API tests, OpenAPI, SQLite report persistence, Docker and GitHub Actions.
+
+**Limitations:** there is no SAP tenant connection, RFC/OData/IDoc adapter, CDC, real MDG workflow, cross-object dependency validation, data cleansing, stewardship UI, delta migration, checkpoint/restart, production target load or enterprise audit. The mapping rules cover only a small synthetic subset. Tests have been added but have not yet been executed in CI. No SAP certification or production migration is claimed.
+
+## Run locally
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+uvicorn sapmodern.main:app --reload --app-dir src
+pytest
+```
+
+Docker: `docker compose up --build`. API contract: [openapi.yaml](openapi.yaml).
 
 ## Project documentation
 - [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
