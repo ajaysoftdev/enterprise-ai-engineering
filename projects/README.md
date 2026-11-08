@@ -9,7 +9,7 @@ The project folders are maintained inside this repository; they are not separate
 | # | Project | Primary business capability | Status |
 |---:|---|---|---|
 | 1 | [Enterprise Information Resilience](enterprise-information-resilience/README.md) | Digital trust, information integrity and reputation resilience | Specified |
-| 2 | [Enterprise Document Intelligence](enterprise-document-intelligence/README.md) | Document extraction, validation and human exception handling | In progress — prototype code added; execution verification pending |
+| 2 | [Enterprise Document Intelligence](enterprise-document-intelligence/README.md) | Document extraction, validation and human exception handling | CI verified — 6 tests passed; text-only prototype limitations remain |
 | 3 | [Breach-Resilient Enterprise](breach-resilient-enterprise/README.md) | Zero-trust architecture and attack-path containment | Specified |
 | 4 | [Enterprise Data Protection](enterprise-data-protection/README.md) | Data classification, minimisation, masking and access governance | Specified |
 | 5 | [Enterprise Attention and Intelligence Hub](enterprise-attention-intelligence-hub/README.md) | Business-impact observability and decision prioritisation | Specified |
