@@ -2,7 +2,7 @@
 
 **Purpose:** Connect the fifteen independently implemented enterprise prototypes through versioned contracts, provider-neutral adapters, durable workflow state and end-to-end traceability.
 
-**Status:** First vertical slice CI + Docker verified — 10 tests passed on Python 3.12 (GitHub Actions run 42462133940, commit 3f3db89). This verifies orchestration state, idempotency and fake-adapter tests; the actual downstream HTTP integration still requires a three-service local end-to-end run.
+**Status:** First vertical slice CI + Docker + real HTTP E2E verified — 10 tests passed on Python 3.12 (GitHub Actions run 42462678787, commit 2c8b8bf). The workflow starts Document Intelligence, MDM and Integration as separate HTTP services, exercises the steward decision and refresh path, and builds the integration Docker image.
 
 ## Initial vertical slice
 
@@ -22,7 +22,7 @@
 - Idempotency prevents duplicate workflow creation for the same request key and payload.
 - A changed payload with an existing key returns a conflict.
 - A pending MDM match is never auto-approved.
-- The first slice uses synthetic plain-text invoices and configurable local service endpoints only. Unit tests use fake downstream adapters; a separate GitHub Actions smoke test starts all three services and exercises the real HTTP handoff, idempotency, MDM stewardship and refresh flow. Its first successful run is pending.
+- The first slice uses synthetic plain-text invoices and configurable local service endpoints only. Unit tests use fake downstream adapters; a separate GitHub Actions smoke test starts all three services and exercises the real HTTP handoff, idempotency, MDM stewardship and refresh flow. The three-service smoke test has passed in GitHub Actions.
 
 
 ## Three-service end-to-end run
