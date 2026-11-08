@@ -1,0 +1,11 @@
+services:
+  pharma-rnd-spine:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      RND_SPINE_DB: /app/data/rnd-spine.db
+    volumes:
+      - rnd-spine-data:/app/data
+volumes:
+  rnd-spine-data:
