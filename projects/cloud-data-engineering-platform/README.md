@@ -4,7 +4,7 @@
 
 **Domain:** Cloud data engineering, lakehouse architecture and data operations.  
 **Technology direction:** Python-based pipeline components, object-storage/lakehouse patterns, SQL transformations and orchestration adapters; concrete services will be selected through ADRs.  
-**Status:** Local batch-pipeline prototype CI verified — 6 tests passed on Python 3.12 (GitHub Actions run 42456166922, commit 17a01a6). This verifies synthetic local transformation and quality tests only; no cloud deployment or scale claim is made.
+**Status:** Local batch-pipeline prototype CI + Docker verified — 6 tests passed on Python 3.12 (GitHub Actions run 42456166922, commit 17a01a6). This verifies synthetic local transformation and quality tests only; no cloud deployment or scale claim is made.
 
 ## Business capabilities
 - Ingest batch and incremental data from files, APIs and databases.
