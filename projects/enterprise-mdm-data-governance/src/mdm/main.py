@@ -70,35 +70,12 @@ def list_match_candidates(status: str | None = Query(default=None, pattern="^(PE
 
 @app.post("/v1/match-candidates/{candidate_id}/decision", response_model=dict)
 def decide_match(candidate_id: str, payload: StewardDecision) -> dict:
-    candidate = repository.get_candidate(candidate_id)
-    if candidate is None:
-        raise HTTPException(status_code=404, detail="Match candidate not found")
-    if candidate["status"] != "PENDING":
-        raise HTTPException(status_code=409, detail="Match candidate has already been decided")
-    incoming = repository.get_source(candidate["incoming_record_id"])
-    if incoming is None:
-        raise HTTPException(status_code=409, detail="Incoming source record is unavailable")
-    status = "CONFIRMED" if payload.decision == "CONFIRM_MATCH" else "REJECTED"
-    repository.update_candidate(candidate_id, status)
-    decision = {
-        "id": str(uuid4()), "candidate_id": candidate_id,
-        "decision": payload.decision, "steward": payload.steward,
-        "note": payload.note, "created_at": now().isoformat(),
-    }
-    repository.save_decision(decision)
-    if status == "CONFIRMED":
-        golden = repository.golden_for_source(candidate["existing_record_id"])
-        if golden is None:
-            raise HTTPException(status_code=409, detail="Existing source has no golden record")
-        repository.add_source_to_golden(golden["id"], incoming["id"])
-        result = repository.row("SELECT * FROM golden_records WHERE id=?", (golden["id"],))
-    else:
-        result = create_golden(incoming)
-    return {"candidate": {**candidate, "status": status}, "steward_decision": decision, "golden_record": result}
-
-
-@app.get("/v1/golden-records", response_model=list[GoldenRecord])
-def list_golden_records():
-    import json
-    return [{**item, "source_record_ids": json.loads(item["source_record_ids"])}
-            for item in repository.list_golden()]
+    try:
+        return repository.apply_steward_decision(
+            candidate_id, payload.model_dump(), str(uuid4()), now().isoformat()
+        )
+    except LookupError as exc:
+        raise HTTPException(status_code=404 if str(exc) == "Match candidate not found" else 409,
+                            detail=str(exc))
+    except ValueError as exc:
+        raise HTTPException(status_code=409, detail=str(exc))
