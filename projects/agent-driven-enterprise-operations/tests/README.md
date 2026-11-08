@@ -15,5 +15,8 @@ Generate synthetic examples for Workflow, AgentRun, Plan, Tool, ToolPermission, 
 ## Definition of done
 Every business rule has positive and negative tests; contracts validate; critical writes test rollback and idempotency; end-to-end flow runs from a clean environment; CI retains test reports. Performance claims require declared thresholds and repeatable measurements.
 
+## Current executable test slice
+The current API suite covers health, safe read-only tool selection, approval gating for purchase-order submission, rejection finality, blocking of destructive actions, resistance to request-text permission escalation and audit events. No live LLM, external tool, identity provider or distributed workflow engine is exercised.
+
 ## Evidence
 Record commit, runtime/tool versions, command, result, test count and exclusions. Until executed, tests are planned, not passed.
