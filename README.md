@@ -106,7 +106,7 @@ See [third-party notices](docs/THIRD_PARTY_NOTICES.md) for attribution informati
 
 ## Current status
 
-All fifteen prototype CI suites passed (93 tests across the portfolio), and all fifteen Docker images built successfully in GitHub Actions. A portfolio-wide Bandit and pip-audit security workflow has now been added; its first results are pending. The prototypes use synthetic data and local SQLite-backed demonstrations where applicable. No production deployment, external system connection, independent security assessment or compliance validation is claimed.
+All fifteen initial prototype CI suites passed (93 tests across the portfolio), and all fifteen Docker images built successfully in GitHub Actions. Subsequent request-correlation middleware and regression tests have been added across the 15 APIs; their current-revision CI rerun is pending. Initial Bandit scans passed across all projects. Dependency audit identified an older pytest vulnerability, now upgraded to 9.0.3; the clean pip-audit rerun is pending. The prototypes use synthetic data and local SQLite-backed demonstrations where applicable. No production deployment, external system connection, independent security assessment or compliance validation is claimed.
 
 ## Portfolio implementation roadmap
 
