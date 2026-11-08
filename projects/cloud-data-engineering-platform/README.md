@@ -36,7 +36,7 @@ Keep raw data immutable, make processing idempotent, protect sensitive fields an
 
 The current prototype accepts synthetic sales rows, persists idempotent pipeline runs, validates required fields and value ranges, quarantines malformed/duplicate rows, calculates curated silver-level line totals and produces a product-level gold summary. It includes API tests, OpenAPI, synthetic input, Docker and a GitHub Actions workflow.
 
-**Limitations:** this is a local SQLite/Python demonstration, not a cloud deployment or distributed lakehouse. There are no S3/ADLS connectors, Spark/Databricks, ADF/Airflow orchestration, CDC, schema registry, incremental checkpoints, immutable bronze object storage, access governance, lineage service, observability or FinOps measurement. Tests have been added but have not yet been executed in CI. No scale or performance claim is made.
+**Limitations:** this is a local SQLite/Python demonstration, not a cloud deployment or distributed lakehouse. There are no S3/ADLS connectors, Spark/Databricks, ADF/Airflow orchestration, CDC, schema registry, incremental checkpoints, immutable bronze object storage, access governance, lineage service, observability or FinOps measurement. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. One Starlette/httpx deprecation warning remains. No scale or performance claim is made.
 
 ## Run locally
 
