@@ -7,7 +7,7 @@ A document intake and validation demonstrator that receives synthetic plain-text
 
 ## Current implementation status
 
-**Status:** CI + Docker build verified — 8 tests passed on Python 3.12 (GitHub Actions run 42477930922, commit 2f94905). Authentication is enforced for protected API routes; the test suite includes a missing-key rejection check. This verifies synthetic/local prototype behaviour only, not production readiness.
+**Status:** CI + Docker build verified — 9 tests passed on Python 3.12 (GitHub Actions run 42478818147). Authentication rejects missing/incorrect keys and fails closed when the server key is not configured. This verifies synthetic/local prototype behaviour only, not production readiness.
 
 The first executable slice is now present:
 - FastAPI service with health, document create/list/read, review and audit-read endpoints
