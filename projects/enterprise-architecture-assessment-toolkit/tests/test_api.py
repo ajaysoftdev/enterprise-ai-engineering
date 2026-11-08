@@ -29,9 +29,12 @@ def assessment_payload():
 
 
 def test_health():
-    response = client.get("/health")
+    response = client.get("/health", headers={"X-Request-ID": "test-request-01"})
     assert response.status_code == 200
     assert response.json()["status"] == "ok"
+    assert response.headers["x-request-id"] == "test-request-01"
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert response.headers["cache-control"] == "no-store"
 
 
 def test_assessment_calculates_maturity_gaps_and_roadmap(tmp_path, monkeypatch):
@@ -72,3 +75,10 @@ def test_assessment_report_is_persisted(tmp_path, monkeypatch):
 def test_missing_assessment_returns_404(tmp_path, monkeypatch):
     use_database(tmp_path, monkeypatch)
     assert client.get("/v1/assessments/not-found").status_code == 404
+
+
+def test_malformed_request_id_is_replaced():
+    response = client.get("/health", headers={"X-Request-ID": "invalid request id"})
+    assert response.status_code == 200
+    assert response.headers["x-request-id"] != "invalid request id"
+    assert len(response.headers["x-request-id"]) == 32
