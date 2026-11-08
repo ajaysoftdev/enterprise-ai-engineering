@@ -4,7 +4,7 @@
 
 **Domain:** Enterprise integration, API management, event-driven architecture and workflow orchestration.  
 **Technology direction:** REST APIs, asynchronous messaging, canonical contracts and adapter-based connectors; specific broker/runtime choices will be documented as ADRs.  
-**Status:** Current prototype CI + Docker + security verified — 7 tests passed on Python 3.12 (GitHub Actions run 42461086815, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Status:** CI + Docker build verified — 8 tests passed on Python 3.12 (GitHub Actions run 42477967270, commit d87d8d8). Authentication is enforced for protected API routes; the test suite includes a missing-key rejection check. This verifies synthetic/local prototype behaviour only, not production readiness.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
@@ -37,7 +37,7 @@ Keep business rules out of transport adapters where possible. Version contracts 
 
 The current prototype includes a versioned event envelope, schema allow-list, idempotency-key handling, SQLite message persistence, bounded delivery retries, dead-letter routing, explicit replay and delivery audit events. It includes API tests, OpenAPI, a synthetic order event, Docker and a GitHub Actions workflow.
 
-**Limitations:** delivery is simulated by an API call; there is no Kafka, Service Bus, RabbitMQ, API gateway, schema registry, external producer/consumer, distributed transaction, outbox relay, authentication, authorization, tenant isolation or production-grade broker semantics. Retry and DLQ state is local SQLite state, and replay is not concurrency-safe. Exactly-once delivery is not claimed. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning.
+**Limitations:** delivery is simulated by an API call; there is no Kafka, Service Bus, RabbitMQ, API gateway, schema registry, external producer/consumer, distributed transaction, outbox relay, authentication, authorization, tenant isolation or production-grade broker semantics. Retry and DLQ state is local SQLite state, and replay is not concurrency-safe. Exactly-once delivery is not claimed. GitHub Actions executed the API suite successfully: 8 passed, 0 failed, including the protected-route authentication test. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning.
 
 ## Run locally
 
