@@ -4,7 +4,7 @@
 
 **Domain:** Agentic AI, workflow orchestration and enterprise operations.  
 **Technology direction:** Provider-neutral LLM and tool adapters, policy enforcement, durable workflow state and auditable APIs; concrete choices will be captured in ADRs.  
-**Status:** Prototype CI verified — 7 tests passed on Python 3.12 (GitHub Actions run 42454738128, commit 7e0e5a2). This verifies the synthetic allow-list and approval workflow only; it does not validate an LLM agent or production automation.
+**Status:** Prototype CI verified — 7 tests passed on Python 3.12 (GitHub Actions run 42456144856, commit 91d7620). This verifies the synthetic allow-list and approval workflow only; it does not validate an LLM agent or production automation.
 
 ## Business capabilities
 - Register agents, tools, scopes and permitted actions.
