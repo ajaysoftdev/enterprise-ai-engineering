@@ -1,0 +1,1 @@
+"""Enterprise architecture assessment demonstrator."""
