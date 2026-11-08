@@ -35,5 +35,6 @@ class SignalRecord(BaseModel):
     corroboration: int
     business_impact: int
     risk_score: int
+    risk_factors: dict[str, int]
     priority: Literal["P1", "P2", "P3"]
     created_at: str
