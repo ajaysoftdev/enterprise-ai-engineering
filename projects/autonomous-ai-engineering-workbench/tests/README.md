@@ -15,5 +15,8 @@ Create synthetic Task, RepositorySnapshot, AgentProfile, Run, ToolCall, Patch, T
 ## Definition of done
 Tasks are reproducible; tool policies are enforced; evidence is retained; scores can be recomputed from versioned rubrics; unsafe actions are blocked; CI retains test results.
 
+## Current executable test slice
+The current API suite covers health/task discovery, full static acceptance scoring, missing acceptance files, secret-pattern detection, unsafe execution-pattern detection, unknown task rejection and report persistence. No source code is executed; agent/model, sandbox escape, real test runner, cost budget and merge-control tests remain unimplemented.
+
 ## Evidence
 Record commit, environment, agent/model version when used, tool policy, command, budgets, results and exclusions. Untested scenarios remain planned.
