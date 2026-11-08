@@ -1,0 +1,5 @@
+Supplier: Northwind Supplies
+Invoice Number: INV-2026-0042
+Date: 2026-11-08
+Total: USD 1250.00
+Description: Synthetic sample document for local testing only.
