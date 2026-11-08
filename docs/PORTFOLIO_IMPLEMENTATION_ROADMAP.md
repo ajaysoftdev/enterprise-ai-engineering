@@ -75,7 +75,7 @@ Avoid creating a central framework prematurely. Extract shared libraries only af
 
 - The 15 core domain projects retain their project-specific scope, reference sources, implementation architecture, domain contracts and delivery guidance; the sixteenth portfolio integration project now has its own architecture and first vertical slice.
 - All 16 projects now have a first executable local prototype slice, API contracts, Docker configuration, automated tests and project-specific GitHub Actions workflows.
-- All 15 current-revision GitHub Actions test workflows completed successfully on Python 3.12: **119 tests passed across the portfolio**.
+- All 16 current-revision GitHub Actions test workflows completed successfully on Python 3.12: **119 tests passed across the portfolio**.
 - All 16 Docker images built successfully in their respective CI workflows.
 - This evidence verifies the current synthetic/local prototype slices only. It does not establish production readiness, live enterprise integration, security certification, GxP validation, cloud deployment, performance or regulatory compliance.
 - Every project README records its own CI run, test count and explicit limitations.
@@ -84,7 +84,7 @@ Avoid creating a central framework prematurely. Extract shared libraries only af
 - Request correlation middleware, bounded caller-provided IDs, generated fallback IDs and baseline response headers have been added across all 15 core APIs; the new regression tests passed in the current CI runs.
 - MDM stewardship decisions now use a single SQLite transaction for candidate state, decision record and golden-record update; a regression test covers duplicate decisions without partial mutation and passed in CI.
 - The sixteenth project's first vertical slice connects Document Intelligence to MDM through an idempotent supplier-onboarding workflow. Its 10-test suite and Docker build passed, but tests use fake adapters; live HTTP interoperability between the three local services remains pending.
-- Next engineering milestone: resolve security-scan findings, add authentication/authorization and tenant-isolation controls, test concurrent requests and recovery, and add operational telemetry and reproducible deployment verification. Do not create the sixteenth integration project until the fifteen interfaces and controls are sufficiently stable.
+- Next engineering milestone: resolve security-scan findings, add authentication/authorization and tenant-isolation controls, test concurrent requests and recovery, and add operational telemetry and reproducible deployment verification. Expand the sixteenth integration project only as each domain interface and control becomes sufficiently stable.
 
 ## Current official architecture references
 
