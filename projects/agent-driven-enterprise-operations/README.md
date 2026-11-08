@@ -35,7 +35,7 @@ Treat retrieved content and tool output as untrusted. Prevent prompt injection f
 
 The current prototype implements an allow-listed procurement workflow planner, a fixed tool registry, risk classification, policy decisions, SQLite workflow/audit persistence and human approval/rejection. Read-only supplier lookup can be prepared; purchase-order drafting/submission pauses for approval; destructive supplier deletion is blocked. Approval changes state to `APPROVED_DRY_RUN` only and never submits an order.
 
-**Limitations:** there is no LLM/agent runtime, live tool execution, enterprise identity, role-based approver authorization, tenant isolation, durable distributed orchestration, budget enforcement, external procurement connector or production kill switch. The policy is a deterministic prototype. Request text is stored as untrusted input and does not grant tools or permissions. Tests have been added but have not yet been executed in CI.
+**Limitations:** there is no LLM/agent runtime, live tool execution, enterprise identity, role-based approver authorization, tenant isolation, durable distributed orchestration, budget enforcement, external procurement connector or production kill switch. The policy is a deterministic prototype. Request text is stored as untrusted input and does not grant tools or permissions. GitHub Actions executed the API suite successfully: 7 passed, 0 failed. One Starlette/httpx deprecation warning remains.
 
 ## Run locally
 
