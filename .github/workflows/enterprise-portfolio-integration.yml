@@ -1,0 +1,41 @@
+name: Enterprise Portfolio Integration Prototype CI
+
+on:
+  push:
+    paths:
+      - "projects/enterprise-portfolio-integration/src/**"
+      - "projects/enterprise-portfolio-integration/tests/**"
+      - "projects/enterprise-portfolio-integration/pyproject.toml"
+      - "projects/enterprise-portfolio-integration/Dockerfile"
+      - "projects/enterprise-portfolio-integration/docker-compose.yml"
+      - "projects/enterprise-portfolio-integration/openapi.yaml"
+      - ".github/workflows/enterprise-portfolio-integration.yml"
+  pull_request:
+    paths:
+      - "projects/enterprise-portfolio-integration/src/**"
+      - "projects/enterprise-portfolio-integration/tests/**"
+      - "projects/enterprise-portfolio-integration/pyproject.toml"
+      - "projects/enterprise-portfolio-integration/Dockerfile"
+      - "projects/enterprise-portfolio-integration/docker-compose.yml"
+      - "projects/enterprise-portfolio-integration/openapi.yaml"
+      - ".github/workflows/enterprise-portfolio-integration.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/enterprise-portfolio-integration
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: projects/enterprise-portfolio-integration/pyproject.toml
+      - run: python -m pip install --upgrade pip
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
+      - name: Build Docker image
+        run: docker build -t enterprise-portfolio-integration:ci .
