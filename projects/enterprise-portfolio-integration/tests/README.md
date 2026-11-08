@@ -8,5 +8,6 @@
 - Refresh after confirmed/rejected stewardship.
 - Downstream unavailable and malformed responses.
 - Workflow audit and invalid state transitions.
+- A separate real-HTTP smoke script under scripts/ starts the domain services in CI, submits two invoices, confirms an MDM steward decision and refreshes the integration workflow.
 
 Only synthetic data is permitted. Record actual CI run, Python version, command, test count and failures.
