@@ -1,0 +1,11 @@
+services:
+  life-sciences-supply:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      LIFESUPPLY_DB: /app/data/lifesupply.db
+    volumes:
+      - lifesupply-data:/app/data
+volumes:
+  lifesupply-data:
