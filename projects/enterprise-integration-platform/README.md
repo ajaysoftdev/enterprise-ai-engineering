@@ -4,8 +4,8 @@
 
 **Domain:** Enterprise integration, API management, event-driven architecture and workflow orchestration.  
 **Technology direction:** REST APIs, asynchronous messaging, canonical contracts and adapter-based connectors; specific broker/runtime choices will be documented as ADRs.  
-**Status:** Reliability prototype CI + Docker verified — 6 tests passed on Python 3.12 (GitHub Actions run 42456416432, commit 2bbc04f). This verifies local simulated delivery, retry, idempotency and DLQ tests only; it does not verify a production broker or exactly-once delivery.
-**Latest revision note:** Request correlation IDs and baseline security response headers have been added; the new middleware tests are awaiting CI verification.
+**Status:** Current prototype CI + Docker verified — 7 tests passed on Python 3.12 (GitHub Actions run 42461086815, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
 - Expose and consume versioned APIs with consistent error contracts.
