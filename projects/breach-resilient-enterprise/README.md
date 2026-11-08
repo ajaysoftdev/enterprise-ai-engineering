@@ -4,7 +4,7 @@
 
 **Domain:** Zero-trust security architecture, attack-path containment and cyber resilience.  
 **Planned stack:** Python 3.12, FastAPI, OPA/Rego policy examples, Docker Compose and OpenTelemetry.  
-**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+**Status:** First executable defensive simulation added — CI execution pending.
 
 ## Business capabilities
 - Represent identities, workloads, resources, trust boundaries and access paths.
@@ -30,6 +30,24 @@ Use a synthetic enterprise topology to simulate a compromised identity, trace re
 
 ## Guardrails
 This is a defensive engineering project. Use isolated synthetic environments only. Never include real credentials, exploit third-party systems or represent a simulated control as a deployed security capability.
+
+## First executable slice
+
+The current prototype includes a FastAPI service, a synthetic identity/workload/resource graph, deterministic attack-path traversal, default-deny policy evaluation, human-gated containment planning, an OpenAPI contract, synthetic topology fixture, API tests, Dockerfile and GitHub Actions workflow.
+
+**Limitations:** the topology is hard-coded in Python and represents synthetic examples only. Policy evaluation is a simplified demonstration, not an enterprise policy engine. Containment is always simulation-only; no identity provider, cloud, network, endpoint, secrets or SOC control is connected. Authentication, authorisation, tenant isolation, persistence, real event ingestion, telemetry, OPA/Rego integration and security testing remain pending. Tests have been added but have not yet been executed in CI. This is not a deployed security control.
+
+## Run locally
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+uvicorn breach.main:app --reload --app-dir src
+pytest
+```
+
+Docker: `docker compose up --build`. API contract: [openapi.yaml](openapi.yaml). Synthetic graph: [examples/synthetic-topology.json](examples/synthetic-topology.json).
 
 ## Project documentation
 - [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
