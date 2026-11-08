@@ -39,3 +39,7 @@ Do not fabricate scientific observations or alter source evidence. Preserve prov
 
 ## Delivery status
 Use synthetic research data. No validated laboratory integration, regulatory qualification or clinical decision support is claimed.
+
+## Reference sources
+
+See [SOURCES.md](SOURCES.md) for curated official documentation, standards, reference architectures and implementation resources, with notes on how each applies to this project.
