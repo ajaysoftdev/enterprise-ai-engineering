@@ -24,6 +24,7 @@ class FakeDocumentAdapter:
 
     def submit(self, payload, request_id=None):
         self.calls += 1
+        self.last_request_id = request_id
         if self.error:
             raise self.error
         return self.response
@@ -44,11 +45,13 @@ class FakeMdmAdapter:
 
     def create_supplier(self, payload, request_id=None):
         self.calls += 1
+        self.last_request_id = request_id
         self.payload = payload
         return self.response
 
     def refresh(self, candidate_id, source_record_id, request_id=None):
         self.refresh_args = (candidate_id, source_record_id)
+        self.last_request_id = request_id
         return self.refresh_response
 
 
@@ -77,13 +80,15 @@ def test_health_and_request_context():
 def test_valid_invoice_completes_document_to_mdm_flow(tmp_path, monkeypatch):
     mdm = FakeMdmAdapter()
     configure(tmp_path, monkeypatch, mdm=mdm)
-    response = client.post("/v1/supplier-onboarding", headers={"Idempotency-Key": "invoice-1001"}, json=request_body())
+    response = client.post("/v1/supplier-onboarding", headers={"Idempotency-Key": "invoice-1001", "X-Request-ID": "portfolio-flow-001"}, json=request_body())
     assert response.status_code == 202
     workflow = response.json()["workflow"]
     assert workflow["state"] == "COMPLETED"
     assert workflow["document_id"] == "doc-001"
     assert workflow["source_record_id"] == "source-001"
     assert workflow["golden_record_id"] == "golden-001"
+    assert workflow["correlation_id"] == "portfolio-flow-001"
+    assert mdm.last_request_id == "portfolio-flow-001"
     assert mdm.payload["legal_name"] == "Northwind Supplies"
     assert mdm.payload["tax_id"] == "GST-AB1234"
 
@@ -129,11 +134,12 @@ def test_possible_mdm_match_waits_for_steward_and_refreshes(tmp_path, monkeypatc
     configure(tmp_path, monkeypatch, mdm=mdm)
     started = client.post("/v1/supplier-onboarding", headers={"Idempotency-Key": "invoice-1005"}, json=request_body()).json()["workflow"]
     assert started["state"] == "WAITING_FOR_STEWARD"
-    refreshed = client.post(f"/v1/workflows/{started['id']}/refresh")
+    refreshed = client.post("/v1/workflows/" + started["id"] + "/refresh", headers={"X-Request-ID": "portfolio-refresh-001"})
     assert refreshed.status_code == 200
     assert refreshed.json()["state"] == "COMPLETED"
     assert refreshed.json()["outcome"] == "MATCH_CONFIRMED"
     assert mdm.refresh_args == ("candidate-002", "source-002")
+    assert mdm.last_request_id == "portfolio-refresh-001"
 
 
 def test_downstream_failure_is_recorded_not_marked_complete(tmp_path, monkeypatch):
