@@ -23,9 +23,12 @@ def payload(key="MIG-001", records=None):
 
 
 def test_health():
-    response = client.get("/health")
+    response = client.get("/health", headers={"X-Request-ID": "test-request-01"})
     assert response.status_code == 200
     assert response.json()["status"] == "ok"
+    assert response.headers["x-request-id"] == "test-request-01"
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert response.headers["cache-control"] == "no-store"
 
 
 def test_valid_records_map_to_canonical_target(tmp_path, monkeypatch):
@@ -80,3 +83,10 @@ def test_migration_report_is_retrievable(tmp_path, monkeypatch):
     response = client.get(f"/v1/migrations/{created['id']}")
     assert response.status_code == 200
     assert response.json()["mapping_version"] == "2026.1"
+
+
+def test_malformed_request_id_is_replaced():
+    response = client.get("/health", headers={"X-Request-ID": "invalid request id"})
+    assert response.status_code == 200
+    assert response.headers["x-request-id"] != "invalid request id"
+    assert len(response.headers["x-request-id"]) == 32
