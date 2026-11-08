@@ -5,6 +5,7 @@
 **Domain:** Business-impact observability, event correlation and decision prioritisation.  
 **Planned stack:** Python 3.12, FastAPI, PostgreSQL, Redis, event adapters and OpenTelemetry.  
 **Status:** Prototype CI + Docker verified — 6 tests passed on Python 3.12 (GitHub Actions run 42456388670, commit 1858067). This verifies synthetic signal-scoring and correlation tests only; it does not establish production observability or measured incident improvement.
+**Latest revision note:** Request correlation IDs and baseline security response headers have been added; the new middleware tests are awaiting CI verification.
 
 ## Business capabilities
 - Ingest alerts, service metrics, business KPIs and operational events.
