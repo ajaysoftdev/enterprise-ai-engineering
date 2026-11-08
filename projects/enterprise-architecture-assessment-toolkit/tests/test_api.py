@@ -2,7 +2,7 @@ from fastapi.testclient import TestClient
 from eatoolkit.main import app
 from eatoolkit import repository
 
-client = TestClient(app)
+client = TestClient(app, headers={"X-API-Key": "ci-test-key"})
 
 
 def use_database(tmp_path, monkeypatch):
