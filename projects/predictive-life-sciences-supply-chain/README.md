@@ -4,7 +4,7 @@
 
 **Domain:** Life-sciences operations, supply chain analytics and predictive risk.  
 **Technology direction:** Domain APIs, event ingestion, governed analytical data and explainable risk models; implementation choices will be recorded as ADRs.  
-**Status:** CI + Docker build verified — 8 tests passed on Python 3.12 (GitHub Actions run 42477970815, commit 3ba8ab0). Authentication is enforced for protected API routes; the test suite includes a missing-key rejection check. This verifies synthetic/local prototype behaviour only, not production readiness.
+**Status:** CI + Docker build verified — 9 tests passed on Python 3.12 (GitHub Actions run 42478856948). Authentication rejects missing/incorrect keys and fails closed when the server key is not configured. This verifies synthetic/local prototype behaviour only, not production readiness.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
