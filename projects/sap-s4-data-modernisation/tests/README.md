@@ -15,5 +15,8 @@ Create BusinessPartner, MaterialMaster, Plant, CompanyCode, SourceExtract, Mappi
 ## Definition of done
 Mapping is deterministic; invalid records are quarantined; loads are idempotent; source/target reconciliation is repeatable; lineage identifies mapping version; CI retains reports.
 
+## Current executable test slice
+The current API suite covers health, canonical Business Partner and Material mapping, required-field quarantine, duplicate source-key quarantine, count reconciliation, idempotent batch submission and report retrieval. It does not test real SAP adapters, CDC, MDG, cross-object dependencies, incremental restart or production target loading.
+
 ## Evidence
 Record commit, fixture version, command, source/target counts, rejected rows, reconciliation results and test counts. Untested checks remain planned.
