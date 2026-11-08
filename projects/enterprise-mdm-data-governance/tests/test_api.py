@@ -74,3 +74,20 @@ def test_unknown_candidate_returns_404(tmp_path, monkeypatch):
         "decision": "CONFIRM_MATCH", "steward": "steward@example.test"
     })
     assert response.status_code == 404
+
+
+def test_second_steward_decision_is_rejected_without_partial_change(tmp_path, monkeypatch):
+    use_database(tmp_path, monkeypatch)
+    client.post("/v1/source-records", json=source("SUP-1", "GST-AB1234"))
+    second = client.post("/v1/source-records", json=source("SUP-2", "GST-AB1234", "Northwind Ltd")).json()
+    candidate_id = second["match_candidate"]["id"]
+    body = {
+        "decision": "CONFIRM_MATCH", "steward": "steward@example.test",
+        "note": "Reviewed exact identifier",
+    }
+    assert client.post(f"/v1/match-candidates/{candidate_id}/decision", json=body).status_code == 200
+    repeated = client.post(f"/v1/match-candidates/{candidate_id}/decision", json=body)
+    assert repeated.status_code == 409
+    golden = client.get("/v1/golden-records").json()
+    assert len(golden) == 1
+    assert len(golden[0]["source_record_ids"]) == 2
