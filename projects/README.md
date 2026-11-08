@@ -20,7 +20,7 @@ The project folders are maintained inside this repository; they are not separate
 | 10 | [Pharma R&D Data Spine](pharma-rnd-data-spine/README.md) | Research data harmonisation, traceability and lineage | CI verified — 6 synthetic metadata/lineage tests passed; no GxP validation |
 | 11 | [Cloud Data Engineering Platform](cloud-data-engineering-platform/README.md) | Ingestion, lakehouse transformations, quality and FinOps | CI verified — 6 local batch/quality tests passed; no cloud deployment |
 | 12 | [Autonomous AI Engineering Workbench](autonomous-ai-engineering-workbench/README.md) | Sandboxed coding-agent evaluation and evidence reporting | CI verified — 7 static evaluation tests passed; no sandbox/agent execution |
-| 13 | [Third-Party Risk Management](third-party-risk-management/README.md) | Vendor lifecycle, due diligence and fourth-party risk | Specified |
+| 13 | [Third-Party Risk Management](third-party-risk-management/README.md) | Vendor lifecycle, due diligence and fourth-party risk | CI verified — 6 synthetic vendor/evidence tests passed; no external evidence integration |
 | 14 | [SAP S/4HANA Data Modernisation](sap-s4-data-modernisation/README.md) | SAP-like master data migration and reconciliation | Specified |
 | 15 | [Enterprise Architecture Assessment Toolkit](enterprise-architecture-assessment-toolkit/README.md) | Capability-led assessment and target-state roadmapping | Specified |
 
