@@ -16,6 +16,9 @@ on:
   pull_request:
     paths:
       - "projects/enterprise-portfolio-integration/src/**"
+      - "projects/enterprise-portfolio-integration/scripts/**"
+      - "projects/enterprise-document-intelligence/src/**"
+      - "projects/enterprise-mdm-data-governance/src/**"
       - "projects/enterprise-portfolio-integration/tests/**"
       - "projects/enterprise-portfolio-integration/pyproject.toml"
       - "projects/enterprise-portfolio-integration/Dockerfile"
