@@ -2,6 +2,10 @@
 
 ```text
 src/
+  integration/
+    main.py              # message intake, delivery, retry, DLQ and replay endpoints
+    models.py            # versioned event and process contracts
+    repository.py        # SQLite message, deduplication and audit persistence
   app/                  # composition, configuration, health
   api/                  # REST routes and request schemas
   contracts/
