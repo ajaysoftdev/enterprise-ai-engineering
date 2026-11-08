@@ -1,0 +1,29 @@
+name: AI Engineering Workbench Prototype CI
+
+on:
+  push:
+    paths:
+      - "projects/autonomous-ai-engineering-workbench/**"
+      - ".github/workflows/ai-engineering-workbench.yml"
+  pull_request:
+    paths:
+      - "projects/autonomous-ai-engineering-workbench/**"
+      - ".github/workflows/ai-engineering-workbench.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/autonomous-ai-engineering-workbench
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: projects/autonomous-ai-engineering-workbench/pyproject.toml
+      - run: python -m pip install --upgrade pip
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
