@@ -76,3 +76,10 @@ def test_report_is_persisted(tmp_path, monkeypatch):
     fetched = client.get(f"/v1/evaluations/{created['id']}")
     assert fetched.status_code == 200
     assert fetched.json()["score"] == 100
+
+
+def test_malformed_request_id_is_replaced():
+    response = client.get("/health", headers={"X-Request-ID": "invalid request id"})
+    assert response.status_code == 200
+    assert response.headers["x-request-id"] != "invalid request id"
+    assert len(response.headers["x-request-id"]) == 32
