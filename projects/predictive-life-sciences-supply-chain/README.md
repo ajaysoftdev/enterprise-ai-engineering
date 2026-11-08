@@ -5,6 +5,7 @@
 **Domain:** Life-sciences operations, supply chain analytics and predictive risk.  
 **Technology direction:** Domain APIs, event ingestion, governed analytical data and explainable risk models; implementation choices will be recorded as ADRs.  
 **Status:** Synthetic supply-risk prototype CI + Docker verified — 6 tests passed on Python 3.12 (GitHub Actions run 42456424911, commit d727693). This verifies deterministic synthetic risk rules only; no validated forecasting or GxP use is claimed.
+**Latest revision note:** Request correlation IDs and baseline security response headers have been added; the new middleware tests are awaiting CI verification.
 
 ## Business capabilities
 - Represent materials, suppliers, purchase orders, inventory, lots and shipments.
