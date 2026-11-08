@@ -4,7 +4,7 @@
 
 **Domain:** Enterprise integration, API management, event-driven architecture and workflow orchestration.  
 **Technology direction:** REST APIs, asynchronous messaging, canonical contracts and adapter-based connectors; specific broker/runtime choices will be documented as ADRs.  
-**Status:** Current prototype CI + Docker verified — 7 tests passed on Python 3.12 (GitHub Actions run 42461086815, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Status:** Current prototype CI + Docker + security verified — 7 tests passed on Python 3.12 (GitHub Actions run 42461086815, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
