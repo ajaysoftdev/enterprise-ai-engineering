@@ -1,0 +1,53 @@
+openapi: 3.1.0
+info:
+  title: Predictive Life Sciences Supply Chain
+  version: 0.1.0
+  description: Synthetic lot availability and supply-risk API.
+servers:
+  - url: http://127.0.0.1:8000
+paths:
+  /health:
+    get:
+      summary: Service health
+      responses:
+        "200": {description: Healthy}
+  /v1/scenarios:
+    post:
+      summary: Assess a synthetic supply scenario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/ScenarioCreate"}
+      responses:
+        "201": {description: Risk assessment created}
+    get:
+      summary: List supply scenarios
+      responses:
+        "200": {description: Scenario list}
+  /v1/scenarios/{scenario_id}:
+    get:
+      summary: Retrieve a risk assessment
+      parameters:
+        - in: path
+          name: scenario_id
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Supply risk assessment}
+        "404": {description: Not found}
+components:
+  schemas:
+    ScenarioCreate:
+      type: object
+      required: [material, lot_id, site, available_quantity, daily_demand, replenishment_lead_days, production_order_due_days, quality_status, planner_owner]
+      properties:
+        material: {type: string}
+        lot_id: {type: string}
+        site: {type: string}
+        available_quantity: {type: number, minimum: 0}
+        daily_demand: {type: number, exclusiveMinimum: 0}
+        replenishment_lead_days: {type: integer, minimum: 0}
+        production_order_due_days: {type: integer, minimum: 0}
+        quality_status: {type: string, enum: [RELEASED, HOLD, QUARANTINED]}
+        planner_owner: {type: string}
