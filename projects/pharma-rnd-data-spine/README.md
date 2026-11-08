@@ -4,7 +4,7 @@
 
 **Domain:** Pharmaceutical R&D data architecture, scientific traceability and governed analytics.  
 **Technology direction:** Metadata-driven ingestion, domain contracts, lineage and governed data products; implementation choices will be documented as ADRs.  
-**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+**Status:** First executable synthetic provenance prototype added — CI execution pending.
 
 ## Business capabilities
 - Register studies, experiments, samples, materials, methods and batches.
@@ -30,6 +30,24 @@ Load synthetic experiment, sample and assay records from separate systems, resol
 
 ## Guardrails
 Do not fabricate scientific observations or alter source evidence. Preserve provenance, version transformations and distinguish synthetic demonstration records from regulated records.
+
+## First executable slice
+
+The current prototype ingests synthetic experiment, sample, method and assay-result metadata; validates type-specific required fields; quarantines incomplete records; stores parent-child lineage; exposes upstream lineage queries; and records ingestion audit events. It includes API tests, OpenAPI, Docker and a GitHub Actions workflow.
+
+**Limitations:** source adapters, ELN/LIMS/MES connectors, scientific identity resolution, unit conversion, transformation pipelines, immutable raw evidence, access controls, lineage versioning, regulated audit trails and validated GxP operation are not implemented. The metadata checks are a small demonstrator, not a scientific data-quality standard. Tests have been added but have not yet been executed in CI. Synthetic research records only.
+
+## Run locally
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+uvicorn rndspine.main:app --reload --app-dir src
+pytest
+```
+
+Docker: `docker compose up --build`. API contract: [openapi.yaml](openapi.yaml). Synthetic example: [examples/synthetic-assay-result.json](examples/synthetic-assay-result.json).
 
 ## Project documentation
 - [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
