@@ -4,7 +4,7 @@
 
 **Domain:** Cloud data engineering, lakehouse architecture and data operations.  
 **Technology direction:** Python-based pipeline components, object-storage/lakehouse patterns, SQL transformations and orchestration adapters; concrete services will be selected through ADRs.  
-**Status:** Current prototype CI + Docker verified — 7 tests passed on Python 3.12 (GitHub Actions run 42461086770, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Status:** Current prototype CI + Docker + security verified — 7 tests passed on Python 3.12 (GitHub Actions run 42461086770, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
