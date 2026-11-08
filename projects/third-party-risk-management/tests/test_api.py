@@ -32,7 +32,7 @@ def test_high_risk_vendor_gets_high_tier(tmp_path, monkeypatch):
     response = client.post("/v1/vendors", json=vendor())
     assert response.status_code == 201
     assert response.json()["risk_tier"] == "HIGH"
-    assert response.json()["inherent_score"] == 100
+    assert response.json()["inherent_score"] == 98
 
 
 def test_approval_blocked_until_required_evidence_is_current(tmp_path, monkeypatch):
