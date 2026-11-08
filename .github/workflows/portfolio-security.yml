@@ -1,0 +1,51 @@
+name: Portfolio Security Baseline
+
+on:
+  push:
+    paths:
+      - "projects/**"
+      - ".github/workflows/portfolio-security.yml"
+  pull_request:
+    paths:
+      - "projects/**"
+      - ".github/workflows/portfolio-security.yml"
+  workflow_dispatch:
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - enterprise-information-resilience
+          - enterprise-document-intelligence
+          - breach-resilient-enterprise
+          - enterprise-data-protection
+          - enterprise-attention-intelligence-hub
+          - enterprise-mdm-data-governance
+          - agent-driven-enterprise-operations
+          - enterprise-integration-platform
+          - predictive-life-sciences-supply-chain
+          - pharma-rnd-data-spine
+          - cloud-data-engineering-platform
+          - autonomous-ai-engineering-workbench
+          - third-party-risk-management
+          - sap-s4-data-modernisation
+          - enterprise-architecture-assessment-toolkit
+    defaults:
+      run:
+        working-directory: projects/${{ matrix.project }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: projects/${{ matrix.project }}/pyproject.toml
+      - run: python -m pip install --upgrade pip
+      - run: pip install -e ".[dev]" bandit pip-audit
+      - name: Static security scan
+        run: bandit -q -r src
+      - name: Dependency vulnerability audit
+        run: pip-audit
