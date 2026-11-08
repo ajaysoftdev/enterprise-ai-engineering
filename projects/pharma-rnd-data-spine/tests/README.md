@@ -15,5 +15,8 @@ Generate Study, Experiment, Sample, Material, Method, Result, Formulation, Batch
 ## Definition of done
 Schema checks run before processing; invalid rows are quarantined; reruns are idempotent; lineage is queryable; output is deterministic; CI retains test and quality reports.
 
+## Current executable test slice
+The current API suite covers health, parent-child and multi-level upstream lineage, missing scientific metadata quarantine, missing-parent rejection, duplicate source-key rejection and ingestion audit. It does not test real laboratory integrations, scientific identity resolution, unit harmonisation, regulated records or GxP controls.
+
 ## Evidence
 Record commit, runtime versions, command, input fixture version, output counts, test results and exclusions. Untested checks remain planned.
