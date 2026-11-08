@@ -17,11 +17,11 @@ A green run means only that these two automated checks completed for the scanned
 
 ## Implemented baseline in the current prototype revision
 
-All 15 FastAPI services now attach a bounded `X-Request-ID` correlation value (accepting only 1–64 safe characters or generating a random replacement) and return `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer` and `Cache-Control: no-store`. New tests cover valid and malformed request IDs. These controls improve traceability and response hygiene; they do not provide authentication, authorization, tenant isolation or rate limiting. CI verification of this revision is pending.
+All 16 FastAPI services now require a configured API key on every non-health route. Missing server configuration fails closed with HTTP 503; a missing or incorrect caller key receives HTTP 401. The 15 core service test clients and the portfolio integration test client use disposable CI-only keys, and each suite tests rejection of an unauthenticated request. The integration adapters forward separate `DOCINT_API_KEY` and `MDM_API_KEY` credentials to the two downstream services. All 16 services also attach a bounded `X-Request-ID` correlation value (accepting only 1–64 safe characters or generating a random replacement) and return `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer` and `Cache-Control: no-store`. This is a prototype shared-key gate, not an enterprise identity provider, fine-grained authorization, tenant isolation, key rotation, rate limiting or mTLS.
 
 ## Minimum API and service controls before external exposure
 
-1. **Identity:** authenticate every non-health endpoint using an enterprise identity provider or a short-lived service credential.
+1. **Identity:** replace prototype shared API keys with an enterprise identity provider or short-lived workload credentials, backed by managed secret storage and key rotation.
 2. **Authorization:** enforce tenant, resource and action-level authorization on the server; do not trust caller-supplied actor or tenant identifiers.
 3. **Secrets:** load secrets from a managed secret store; never commit credentials or use static production secrets in environment examples.
 4. **Transport:** require TLS at the ingress and service-to-service boundaries; use mTLS where workload identity and risk warrant it.
@@ -64,7 +64,7 @@ All 15 FastAPI services now attach a bounded `X-Request-ID` correlation value (a
 - Bandit static analysis completed successfully for all 15 projects in the initial portfolio scan.
 - The first dependency audit identified a known vulnerability in the previously pinned `pytest 8.4.2` release (fixed upstream in `9.0.3`). All 15 projects have been updated to `pytest>=9.0.3,<10.0`.
 - The audit command now uses `pip-audit --skip-editable` so the locally installed portfolio package is not incorrectly looked up as a published PyPI dependency.
-- The clean security matrix completed successfully for **all 16 projects**: 16/16 jobs passed Bandit and pip-audit in GitHub Actions run 42462914239 on main commit 9676021.
-- Request correlation middleware and its tests have been added across all 16 APIs and passed in CI. The portfolio integration adapters restrict downstream URLs to HTTP(S), use parameterised SQL updates and passed Bandit and pip-audit.
+- The latest clean security matrix completed successfully for **all 16 projects**: 16/16 jobs passed Bandit and pip-audit in GitHub Actions run 42478610160 on commit 7fa4c4a02ffcaeb3e75527069ad962ec07f05d37.
+- API-key rejection, request correlation and security-header tests passed across all 16 APIs. The portfolio integration adapters forward downstream service keys, restrict downstream URLs to HTTP(S), use parameterised SQL updates and passed Bandit and pip-audit.
 
 Existing test and Docker evidence remains limited to the exact synthetic prototype revisions described in each project README.
