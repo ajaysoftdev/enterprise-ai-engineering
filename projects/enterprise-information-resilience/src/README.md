@@ -4,6 +4,11 @@ Intended implementation boundary:
 
 ```text
 src/
+  inforesilience/
+    main.py              # signal intake, case correlation, human review and audit API
+    models.py            # typed evidence, signal and review contracts
+    scoring.py           # explainable synthetic risk and case aggregation
+    repository.py        # SQLite signal, review and audit persistence
   app/
     main.py              # application composition/startup
     config.py            # typed environment configuration
