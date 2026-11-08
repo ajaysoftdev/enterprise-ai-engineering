@@ -22,9 +22,12 @@ def run_payload(key="BATCH-001", rows=None):
 
 
 def test_health():
-    response = client.get("/health")
+    response = client.get("/health", headers={"X-Request-ID": "test-request-01"})
     assert response.status_code == 200
     assert response.json()["status"] == "ok"
+    assert response.headers["x-request-id"] == "test-request-01"
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert response.headers["cache-control"] == "no-store"
 
 
 def test_pipeline_transforms_silver_rows_and_gold_summary(tmp_path, monkeypatch):
@@ -76,3 +79,10 @@ def test_pipeline_run_can_be_retrieved(tmp_path, monkeypatch):
     fetched = client.get(f"/v1/pipelines/{created['id']}")
     assert fetched.status_code == 200
     assert fetched.json()["raw_count"] == 1
+
+
+def test_malformed_request_id_is_replaced():
+    response = client.get("/health", headers={"X-Request-ID": "invalid request id"})
+    assert response.status_code == 200
+    assert response.headers["x-request-id"] != "invalid request id"
+    assert len(response.headers["x-request-id"]) == 32
