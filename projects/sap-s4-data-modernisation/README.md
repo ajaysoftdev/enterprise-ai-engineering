@@ -4,7 +4,7 @@
 
 **Domain:** SAP S/4HANA data architecture, migration, data quality and integration.  
 **Technology direction:** Synthetic SAP-like extracts, mapping/validation services, API or CDC-style adapters and reconciliation controls. No live SAP connection is assumed.  
-**Status:** Current prototype CI + Docker + security verified — 7 tests passed on Python 3.12 (GitHub Actions run 42461086801, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Status:** CI + Docker build verified — 8 tests passed on Python 3.12 (GitHub Actions run 42478002325, commit d080828). Authentication is enforced for protected API routes; the test suite includes a missing-key rejection check. This verifies synthetic/local prototype behaviour only, not production readiness.
 **Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 ## Business capabilities
@@ -37,7 +37,7 @@ Do not imply access to SAP systems or SAP certification. Use synthetic SAP-like 
 
 The current prototype accepts synthetic Business Partner and Material Master records, applies versioned canonical mappings, validates required fields, quarantines invalid/duplicate source keys, simulates target-shaped records and produces source/loaded/quarantined count reconciliation. It includes API tests, OpenAPI, SQLite report persistence, Docker and GitHub Actions.
 
-**Limitations:** there is no SAP tenant connection, RFC/OData/IDoc adapter, CDC, real MDG workflow, cross-object dependency validation, data cleansing, stewardship UI, delta migration, checkpoint/restart, production target load or enterprise audit. The mapping rules cover only a small synthetic subset. GitHub Actions executed the API suite successfully: 6 passed, 0 failed. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. No SAP certification or production migration is claimed.
+**Limitations:** there is no SAP tenant connection, RFC/OData/IDoc adapter, CDC, real MDG workflow, cross-object dependency validation, data cleansing, stewardship UI, delta migration, checkpoint/restart, production target load or enterprise audit. The mapping rules cover only a small synthetic subset. GitHub Actions executed the API suite successfully: 8 passed, 0 failed, including the protected-route authentication test. The latest CI run uses httpx2 and completes without the Starlette TestClient deprecation warning. No SAP certification or production migration is claimed.
 
 ## Run locally
 
