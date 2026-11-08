@@ -47,7 +47,7 @@ The fifteen core projects are maintained as independent workstreams, with a sixt
 | 13 | [Third-Party Risk Management](projects/third-party-risk-management/README.md) | Vendor lifecycle, evidence, access and fourth-party risk | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086751) |
 | 14 | [SAP S/4HANA Data Modernisation](projects/sap-s4-data-modernisation/README.md) | SAP master data, migration, CDC and reconciliation | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086801) |
 | 15 | [Enterprise Architecture Assessment Toolkit](projects/enterprise-architecture-assessment-toolkit/README.md) | Capability-led assessment and target-state roadmap | CI + Docker verified — 7 tests passed (GitHub Actions run 42461086760) |
-| 16 | [Enterprise Portfolio Integration](projects/enterprise-portfolio-integration/README.md) | Cross-project orchestration, idempotency and workflow traceability | CI + Docker + HTTP E2E verified — 10 tests passed (GitHub Actions run 42462904962) |
+| 16 | [Enterprise Portfolio Integration](projects/enterprise-portfolio-integration/README.md) | Cross-project orchestration, idempotency and workflow traceability | CI + Docker + HTTP E2E + security verified — 11 tests passed (GitHub Actions run 42462914331) |
 
 **Status meaning:** CI + Docker verified means the project's current synthetic prototype test suite passed and its container image built in GitHub Actions. It does not mean production readiness, live enterprise integration, penetration-test clearance, regulatory validation or deployment to a customer environment.
 
@@ -108,7 +108,7 @@ See [third-party notices](docs/THIRD_PARTY_NOTICES.md) for attribution informati
 
 ## Current status
 
-All sixteen current-revision prototype CI suites passed: 119 tests across the portfolio, and all sixteen Docker images built successfully in GitHub Actions. Each API now includes request correlation and baseline security response headers. The first three-service HTTP vertical slice (Document Intelligence → MDM → Portfolio Integration) also passed, including a steward decision and workflow refresh. Bandit static analysis passed across all 15 projects. The dependency audit initially identified an older pytest vulnerability; all projects were upgraded to 9.0.3, and the portfolio-wide Bandit plus pip-audit matrix passed for the 15 core projects (GitHub Actions run 42461092337; the sixteenth project's security scan is pending). The prototypes use synthetic data and local SQLite-backed demonstrations where applicable. No production deployment, external system connection, independent security assessment or compliance validation is claimed.
+All sixteen current-revision prototype CI suites passed: 120 tests across the portfolio, and all sixteen Docker images built successfully in GitHub Actions. Each API now includes request correlation and baseline security response headers. The first three-service HTTP vertical slice (Document Intelligence → MDM → Portfolio Integration) also passed, including a steward decision and workflow refresh. Bandit static analysis and pip-audit passed for all 16 projects in GitHub Actions security matrix run 42462914239 (16/16 jobs). The initial pytest vulnerability was resolved by upgrading the development dependency to the patched release range. The prototypes use synthetic data and local SQLite-backed demonstrations where applicable. No production deployment, external system connection, independent security assessment or compliance validation is claimed.
 
 ## Portfolio implementation roadmap
 
