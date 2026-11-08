@@ -58,17 +58,18 @@ docker compose up --build
 ## Next implementation milestones
 
 1. Execute tests and fix any failures.
-2. Add authentication, authorization, audit events and idempotency.
+2. Add authentication, authorization, idempotency keys and stronger audit integrity controls.
 3. Add file quarantine, file-size limits, MIME/signature checks and malware scanning.
 4. Add OCR adapter interfaces and a PDF/image processing path.
 5. Add explicit field-level evidence locations, extraction versioning and review history.
 6. Add PostgreSQL/object-storage adapters, retention controls and observability.
-7. Add CI, dependency scanning and security tests.
+7. Verify the configured CI workflow, then add dependency scanning and security tests.
 
 ## Project documentation
 
 - [Implementation architecture](IMPLEMENTATION_ARCHITECTURE.md)
 - [Reference sources](SOURCES.md)
+- [OpenAPI contract](openapi.yaml)
 - [Project blueprint](docs/PROJECT_BLUEPRINT.md)
 
 ## Domain contracts and data model
