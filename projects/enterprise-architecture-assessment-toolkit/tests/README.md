@@ -15,5 +15,8 @@ Create Assessment, BusinessDriver, Capability, Process, InformationObject, Appli
 ## Definition of done
 Mapping is deterministic; invalid records are quarantined; loads are idempotent; source/target reconciliation is repeatable; lineage identifies mapping version; CI retains reports.
 
+## Current executable test slice
+The current API suite covers health, current/target maturity calculations, capability gap and roadmap prioritisation, duplicate capability rejection, duplicate dependency findings, unresolved references and report persistence. It does not test a full architecture inventory, stakeholder evidence quality, cost/value scoring, target-state modelling, standards exports or client assessments.
+
 ## Evidence
 Record commit, fixture version, command, source/target counts, rejected rows, reconciliation results and test counts. Untested checks remain planned.
