@@ -4,7 +4,7 @@ This section contains practical Java software-engineering exercises using an exi
 
 ## Codebase
 
-The starting codebase is the [Spring PetClinic portfolio fork](https://github.com/ajaysoftdev/spring-petclinic), based on the [canonical Spring PetClinic repository](https://github.com/spring-projects/spring-petclinic).
+The starting codebase is a personal fork of the [canonical Spring PetClinic repository](https://github.com/spring-projects/spring-petclinic).
 
 Spring PetClinic is an existing open-source Spring Boot sample application. The fork is used as a learning and engineering exercise base; it should not be represented as an application originally authored for this portfolio. See [third-party notices](../docs/THIRD_PARTY_NOTICES.md).
 
