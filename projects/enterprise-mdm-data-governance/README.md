@@ -4,8 +4,8 @@
 
 **Domain:** Master data management, data quality, stewardship and governance.  
 **Technology direction:** API-based domain services, relational persistence, configurable matching and survivorship rules; concrete implementation choices will be recorded as architecture decisions.  
-**Status:** Prototype CI + Docker verified — 6 tests passed on Python 3.12 (GitHub Actions run 42456406930, commit 35b00db). This verifies the current synthetic API test slice only; it does not establish production readiness.
-**Latest revision note:** Request correlation IDs and baseline security response headers have been added; the new middleware tests are awaiting CI verification.
+**Status:** Current prototype CI + Docker verified — 8 tests passed on Python 3.12 (GitHub Actions run 42461086839, commit 05b8198). This verifies the synthetic prototype scope only; production readiness is not claimed.
+**Latest revision verified:** Request correlation IDs, malformed-ID replacement and baseline security response headers passed in the latest CI run.
 
 The initial code slice provides:
 - FastAPI health, source-record ingestion, candidate listing, steward decision and golden-record listing endpoints
