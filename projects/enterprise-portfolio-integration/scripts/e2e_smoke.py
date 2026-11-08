@@ -8,13 +8,13 @@ from urllib.request import Request, urlopen
 BASE = os.getenv("INTEGRATION_URL", "http://127.0.0.1:8003")
 
 
-def call(path: str, method: str = "GET", payload: dict | None = None, headers: dict | None = None):
+def call(path: str, method: str = "GET", payload: dict | None = None, headers: dict | None = None, base: str = BASE):
     body = json.dumps(payload).encode("utf-8") if payload is not None else None
     request_headers = {"Accept": "application/json"}
     if body is not None:
         request_headers["Content-Type"] = "application/json"
     request_headers.update(headers or {})
-    request = Request(BASE + path, data=body, method=method, headers=request_headers)
+    request = Request(base.rstrip("/") + path, data=body, method=method, headers=request_headers)
     try:
         with urlopen(request, timeout=10) as response:
             return response.status, json.loads(response.read() or b"{}")
@@ -85,6 +85,7 @@ def main():
             "steward": "e2e-steward@example.test",
             "note": "Confirmed during synthetic integration smoke test",
         },
+        base=os.getenv("MDM_URL", "http://127.0.0.1:8002"),
     )
     assert decision_status == 200, decision
 
