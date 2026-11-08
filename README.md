@@ -26,38 +26,64 @@ See the [engineering documentation portal](docs/README.md) for architecture refe
 | [Evaluation Reports](evaluation-reports/README.md) | Reproducible engineering and agent reports | Evidence from each project |
 | [Architecture](architecture/README.md) | Context, components, data flows, trade-offs and ADRs | [Enterprise integration case study](projects/enterprise-integration-architecture/README.md) |
 
-## Project catalogue
+## Independent project catalogue
 
-| Project | Main skills | Status |
-|---|---|---|
-| [Spring PetClinic service enhancement](projects/java-spring-petclinic/README.md) | Java, Spring Boot, REST, persistence, debugging, tests | Proposed |
-| [Python batch data pipeline](projects/python-batch-data-pipeline/README.md) | Python, ingestion, transformation, error handling, tests | Proposed |
-| [Data quality framework](projects/data-quality-framework/README.md) | Profiling, validation, data contracts, quarantine, reporting | Proposed |
-| [AI agent evaluation workbench](projects/ai-agent-evaluation-workbench/README.md) | Task design, agent runs, diff review, evaluation metrics | Proposed |
-| [Quality automation pipeline](projects/quality-automation-pipeline/README.md) | CI, automated tests, static checks, dependency hygiene | Proposed |
-| [Enterprise integration architecture case study](projects/enterprise-integration-architecture/README.md) | Architecture, APIs, events, reliability, security, ADRs | Proposed |
+The portfolio is being built as fifteen independently scoped projects. Each project has its own blueprint, code-module boundaries, test strategy, and local deployment/operations plan. The projects will be developed and verified individually before a separate final project is designed to connect them.
 
-These are project specifications, not claims that the implementations or tests are already complete. Status will change only when supported by commits and execution evidence.
+| # | Independent project | Main capability | Status |
+|---:|---|---|---|
+| 1 | [Enterprise Information Resilience](projects/enterprise-information-resilience/README.md) | Digital trust, information integrity, reputation resilience | Specified |
+| 2 | [Enterprise Document Intelligence](projects/enterprise-document-intelligence/README.md) | Document extraction, validation, human exception handling | Specified |
+| 3 | [Breach-Resilient Enterprise](projects/breach-resilient-enterprise/README.md) | Zero trust, attack-path containment, response | Specified |
+| 4 | [Enterprise Data Protection](projects/enterprise-data-protection/README.md) | Classification, minimisation, masking, access governance | Specified |
+| 5 | [Enterprise Attention and Intelligence Hub](projects/enterprise-attention-intelligence-hub/README.md) | Business-impact observability and prioritisation | Specified |
+| 6 | [Enterprise MDM and Data Governance](projects/enterprise-mdm-data-governance/README.md) | Matching, survivorship, stewardship, golden records | Specified |
+| 7 | [Agent-Driven Enterprise Operations](projects/agent-driven-enterprise-operations/README.md) | Bounded agents, tool policy, human approvals | Specified |
+| 8 | [Enterprise Integration Platform](projects/enterprise-integration-platform/README.md) | APIs, events, routing, orchestration, reliability | Specified |
+| 9 | [Predictive Life Sciences Supply Chain](projects/predictive-life-sciences-supply-chain/README.md) | Supply visibility, traceability, risk prediction | Specified |
+| 10 | [Pharma R&D Data Spine](projects/pharma-rnd-data-spine/README.md) | Research data harmonisation and lineage | Specified |
+| 11 | [Cloud Data Engineering Platform](projects/cloud-data-engineering-platform/README.md) | Ingestion, lakehouse patterns, quality, FinOps | Specified |
+| 12 | [Autonomous AI Engineering Workbench](projects/autonomous-ai-engineering-workbench/README.md) | Sandboxed coding-agent evaluation | Specified |
+| 13 | [Third-Party Risk Management](projects/third-party-risk-management/README.md) | Vendor lifecycle, evidence, access and fourth-party risk | Specified |
+| 14 | [SAP S/4HANA Data Modernisation](projects/sap-s4-data-modernisation/README.md) | SAP master data, migration, CDC and reconciliation | Specified |
+| 15 | [Enterprise Architecture Assessment Toolkit](projects/enterprise-architecture-assessment-toolkit/README.md) | Capability-led assessment and target-state roadmap | Specified |
+
+**Status meaning:** Specified means architecture and implementation guidance are documented. It does not mean executable implementation, tests, deployment or client integration are complete.
+
+The earlier six project briefs remain in the repository as additional engineering exercises. They are not substitutes for the fifteen independent projects above.
+
+## Project build sequence
+
+1. Establish the individual project structure, domain contracts and acceptance criteria.
+2. Implement each project independently, including source code, tests, security and local deployment.
+3. Run and record project-level verification and demo evidence.
+4. Only after the individual projects are stable, create the final portfolio integration project with explicit contracts and adapters between them.
 
 ## Repository structure
 
 ```text
 enterprise-ai-engineering/
+├── projects/
+│   ├── enterprise-information-resilience/
+│   ├── enterprise-document-intelligence/
+│   ├── breach-resilient-enterprise/
+│   ├── enterprise-data-protection/
+│   ├── enterprise-attention-intelligence-hub/
+│   ├── enterprise-mdm-data-governance/
+│   ├── agent-driven-enterprise-operations/
+│   ├── enterprise-integration-platform/
+│   ├── predictive-life-sciences-supply-chain/
+│   ├── pharma-rnd-data-spine/
+│   ├── cloud-data-engineering-platform/
+│   ├── autonomous-ai-engineering-workbench/
+│   ├── third-party-risk-management/
+│   ├── sap-s4-data-modernisation/
+│   └── enterprise-architecture-assessment-toolkit/
+├── architecture/
 ├── java-engineering/
 ├── python-data-engineering/
 ├── ai-coding-agent-evaluation/
-├── code-review/
 ├── testing-and-quality/
-├── engineering-tickets/
-├── evaluation-reports/
-├── architecture/
-├── projects/
-│   ├── java-spring-petclinic/
-│   ├── python-batch-data-pipeline/
-│   ├── data-quality-framework/
-│   ├── ai-agent-evaluation-workbench/
-│   ├── quality-automation-pipeline/
-│   └── enterprise-integration-architecture/
 └── docs/
 ```
 
