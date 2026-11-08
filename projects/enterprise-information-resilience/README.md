@@ -39,3 +39,7 @@ Do not automate public statements or consequential reputational decisions. Prese
 
 ## Delivery status
 The documents define the intended design and acceptance criteria. No live monitoring, production integration or verified runtime capability is claimed.
+
+## Reference sources
+
+See [SOURCES.md](SOURCES.md) for curated official documentation, standards, reference architectures and implementation resources, with notes on how each applies to this project.
