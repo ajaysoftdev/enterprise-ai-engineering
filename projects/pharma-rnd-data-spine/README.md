@@ -1,49 +1,41 @@
 # Pharma R&D Data Spine
 
-**Domain:** Research-to-clinical data lineage and traceability  
-**Status:** Architecture specification; implementation and runtime verification pending.
+**Purpose:** Establish traceable links across research, laboratory, formulation, manufacturing and clinical data so scientific evidence can be discovered and interpreted in context.
 
-## Start here
-- [Project blueprint](docs/PROJECT_BLUEPRINT.md)
-- [Source-code structure and implementation boundaries](src/README.md)
-- [Test strategy and definition of done](tests/README.md)
+**Domain:** Pharmaceutical R&D data architecture, scientific traceability and governed analytics.  
+**Technology direction:** Metadata-driven ingestion, domain contracts, lineage and governed data products; implementation choices will be documented as ADRs.  
+**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+
+## Business capabilities
+- Register studies, experiments, samples, materials, methods and batches.
+- Ingest metadata from ELN, LIMS, formulation, MES and clinical-like sources.
+- Resolve identities and relationships across systems.
+- Track sample, method, experiment and batch lineage.
+- Apply data quality, provenance and access controls.
+- Publish curated, traceable research datasets for analytics.
+
+## Reference workflow
+Source registration → metadata ingestion → identity resolution → schema and quality validation → relationship/lineage construction → governed data product → scientific discovery and audit.
+
+## Key modules
+- **Source registry:** system, dataset, owner and refresh metadata.
+- **Scientific model:** study, experiment, sample, material, method and batch.
+- **Identity resolution:** cross-system identifiers and mapping rules.
+- **Lineage:** transformation and evidence relationships.
+- **Governance:** quality rules, access, classification and audit.
+- **Data products:** curated datasets and documented interfaces.
+
+## Expected demonstration
+Load synthetic experiment, sample and assay records from separate systems, resolve their identifiers and trace a reported result back to its source sample, method and experiment.
+
+## Guardrails
+Do not fabricate scientific observations or alter source evidence. Preserve provenance, version transformations and distinguish synthetic demonstration records from regulated records.
+
+## Project documentation
+- [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
+- [Source-code boundaries](src/README.md)
+- [Test strategy](tests/README.md)
 - [Local deployment and operations](infra/README.md)
 
-## Planned repository layout
-```text
-pharma-rnd-data-spine/
-├── docs/PROJECT_BLUEPRINT.md
-├── docs/adr/
-├── src/
-│   ├── app/
-│   ├── api/
-│   ├── domain/
-│   ├── application/
-│   ├── infrastructure/
-│   └── observability/
-├── tests/
-│   ├── unit/
-│   ├── integration/
-│   ├── contract/
-│   └── e2e/
-├── infra/
-│   ├── Dockerfile
-│   ├── compose.yaml
-│   └── deploy/
-├── scripts/
-├── .github/workflows/
-├── .env.example
-├── pyproject.toml
-└── README.md
-```
-
-The layout is a target structure. Implementation increments will add tracked source and deployment files; empty folders cannot be committed by Git alone.
-
-## Engineering status
-- Architecture and module boundaries: documented.
-- Executable application: pending.
-- Automated tests: planned; not yet run.
-- Container/CI verification: pending.
-- Production deployment: not claimed.
-
-See the [project blueprint](docs/PROJECT_BLUEPRINT.md) for business flow, domain model, interfaces, security, NFRs, delivery increments and acceptance criteria.
+## Delivery status
+Use synthetic research data. No validated laboratory integration, regulatory qualification or clinical decision support is claimed.
