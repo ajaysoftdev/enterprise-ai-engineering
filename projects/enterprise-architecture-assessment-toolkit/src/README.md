@@ -2,6 +2,11 @@
 
 ```text
 src/
+  eatoolkit/
+    main.py              # assessment creation and report API
+    models.py            # capability, dependency and report contracts
+    analyzer.py          # maturity-gap, dependency and roadmap analysis
+    repository.py        # SQLite report persistence
   app/                  # config, composition and health
   contracts/
     sap/                # SAP-facing interface schemas
