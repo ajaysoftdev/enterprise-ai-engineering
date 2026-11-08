@@ -1,4 +1,5 @@
 Supplier: Northwind Supplies
+GSTIN: GST-AB1234
 Invoice Number: INV-2026-0042
 Date: 2026-11-08
 Total: USD 1250.00
