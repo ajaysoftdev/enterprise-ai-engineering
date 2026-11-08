@@ -1,0 +1,69 @@
+openapi: 3.1.0
+info:
+  title: Enterprise Architecture Assessment Toolkit
+  version: 0.1.0
+  description: Synthetic capability maturity, dependency and roadmap assessment API.
+servers:
+  - url: http://127.0.0.1:8000
+paths:
+  /health:
+    get:
+      summary: Service health
+      responses:
+        "200": {description: Healthy}
+  /v1/assessments:
+    post:
+      summary: Create an architecture assessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/AssessmentCreate"}
+      responses:
+        "201": {description: Assessment report}
+    get:
+      summary: List assessment reports
+      responses:
+        "200": {description: Assessment list}
+  /v1/assessments/{assessment_id}:
+    get:
+      summary: Retrieve assessment report
+      parameters:
+        - in: path
+          name: assessment_id
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Assessment report}
+        "404": {description: Not found}
+components:
+  schemas:
+    AssessmentCreate:
+      type: object
+      required: [assessment_name, business_objectives, capabilities]
+      properties:
+        assessment_name: {type: string}
+        business_objectives:
+          type: array
+          items: {type: string}
+        capabilities:
+          type: array
+          items:
+            type: object
+            required: [name, current_maturity, target_maturity]
+            properties:
+              name: {type: string}
+              current_maturity: {type: integer, minimum: 1, maximum: 5}
+              target_maturity: {type: integer, minimum: 1, maximum: 5}
+              evidence_references:
+                type: array
+                items: {type: string}
+        dependencies:
+          type: array
+          items:
+            type: object
+            required: [source_capability, target_capability, relationship]
+            properties:
+              source_capability: {type: string}
+              target_capability: {type: string}
+              relationship: {type: string, enum: [DEPENDS_ON, SUPPORTS, DUPLICATES]}
