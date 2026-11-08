@@ -53,7 +53,7 @@ def main():
 
     key = "e2e-invoice-001"
     first_payload = invoice("SUP-E2E-001", "INV-E2E-001", "Northwind Supplies")
-    status, first = call("/v1/supplier-onboarding", "POST", first_payload, {"Idempotency-Key": key})
+    status, first = call("/v1/supplier-onboarding", "POST", first_payload, {"Idempotency-Key": key, "X-Request-ID": "e2e-flow-001"})
     assert status == 202, first
     workflow = first["workflow"]
     assert workflow["state"] == "COMPLETED", workflow
