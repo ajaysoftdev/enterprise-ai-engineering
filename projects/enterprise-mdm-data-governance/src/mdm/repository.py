@@ -96,3 +96,29 @@ def save_decision(decision: dict) -> None:
 
 def update_candidate(candidate_id: str, status: str) -> None:
     execute("UPDATE match_candidates SET status=? WHERE id=?", (status,candidate_id))
+
+
+def get_source(record_id: str) -> dict | None:
+    return row("SELECT * FROM source_records WHERE id=?", (record_id,))
+
+
+def get_candidate(candidate_id: str) -> dict | None:
+    return row("SELECT * FROM match_candidates WHERE id=?", (candidate_id,))
+
+
+def list_candidates(status: str | None = None) -> list[dict]:
+    if status:
+        return rows("SELECT * FROM match_candidates WHERE status=? ORDER BY created_at", (status,))
+    return rows("SELECT * FROM match_candidates ORDER BY created_at")
+
+
+def list_golden() -> list[dict]:
+    return rows("SELECT * FROM golden_records ORDER BY created_at")
+
+
+def golden_for_source(source_id: str) -> dict | None:
+    import json
+    for item in list_golden():
+        if source_id in json.loads(item["source_record_ids"]):
+            return item
+    return None
