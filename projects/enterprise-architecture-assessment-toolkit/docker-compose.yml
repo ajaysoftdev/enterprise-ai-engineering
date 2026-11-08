@@ -4,6 +4,7 @@ services:
     ports:
       - "8000:8000"
     environment:
+      API_KEY: ${API_KEY:?Set API_KEY in the project .env file}
       EA_TOOLKIT_DB: /app/data/ea-toolkit.db
     volumes:
       - ea-toolkit-data:/app/data
