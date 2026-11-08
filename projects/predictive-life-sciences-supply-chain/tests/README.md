@@ -15,5 +15,8 @@ Generate Material, Lot, Batch, Shipment, InventoryPosition, PurchaseOrder, Study
 ## Definition of done
 Schemas validate; transformations have positive/negative tests; delivery is idempotent; retry/DLQ/replay are tested; end-to-end run is reproducible; CI retains evidence. Do not claim delivery guarantees without tests.
 
+## Current executable test slice
+The current API suite covers health, quality-hold escalation, shortage before replenishment, low-risk supply position, invalid demand rejection and risk-assessment audit. It does not test real source adapters, forecasting accuracy, lot genealogy, GxP controls or production planning outcomes.
+
 ## Evidence
 Record commit, tool versions, commands, test counts, results and exclusions. Untested checks remain planned.
