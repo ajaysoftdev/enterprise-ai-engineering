@@ -4,7 +4,7 @@
 
 **Domain:** Enterprise integration, API management, event-driven architecture and workflow orchestration.  
 **Technology direction:** REST APIs, asynchronous messaging, canonical contracts and adapter-based connectors; specific broker/runtime choices will be documented as ADRs.  
-**Status:** Architecture specification documented. Executable implementation, automated test runs and deployment verification are pending.
+**Status:** First executable reliability prototype added — CI execution pending.
 
 ## Business capabilities
 - Expose and consume versioned APIs with consistent error contracts.
@@ -31,6 +31,24 @@ Integrate synthetic order, inventory and shipment services. Demonstrate synchron
 
 ## Guardrails
 Keep business rules out of transport adapters where possible. Version contracts deliberately, protect sensitive payloads, avoid logging secrets and define delivery guarantees explicitly.
+
+## First executable slice
+
+The current prototype includes a versioned event envelope, schema allow-list, idempotency-key handling, SQLite message persistence, bounded delivery retries, dead-letter routing, explicit replay and delivery audit events. It includes API tests, OpenAPI, a synthetic order event, Docker and a GitHub Actions workflow.
+
+**Limitations:** delivery is simulated by an API call; there is no Kafka, Service Bus, RabbitMQ, API gateway, schema registry, external producer/consumer, distributed transaction, outbox relay, authentication, authorization, tenant isolation or production-grade broker semantics. Retry and DLQ state is local SQLite state, and replay is not concurrency-safe. Exactly-once delivery is not claimed. Tests have been added but have not yet been executed in CI.
+
+## Run locally
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+uvicorn integration.main:app --reload --app-dir src
+pytest
+```
+
+Docker: `docker compose up --build`. API contract: [openapi.yaml](openapi.yaml). Example event: [examples/order-created.json](examples/order-created.json).
 
 ## Project documentation
 - [Detailed blueprint](docs/PROJECT_BLUEPRINT.md)
