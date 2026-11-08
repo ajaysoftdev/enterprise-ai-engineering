@@ -1,0 +1,1 @@
+"""Breach-resilient enterprise demonstrator."""
