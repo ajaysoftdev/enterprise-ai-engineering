@@ -1,0 +1,11 @@
+services:
+  ea-assessment-toolkit:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      EA_TOOLKIT_DB: /app/data/ea-toolkit.db
+    volumes:
+      - ea-toolkit-data:/app/data
+volumes:
+  ea-toolkit-data:
