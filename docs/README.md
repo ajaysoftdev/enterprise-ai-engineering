@@ -31,4 +31,4 @@ This portal describes portfolio projects, engineering standards and architecture
 - Proposed: design or exercise not yet implemented.
 - To verify: requires local execution or further inspection.
 
-Do not describe a proposed design as a deployed capability. Do not claim tests passed without captured execution evidence.
+Do not describe proposed designs as deployed. Do not claim tests passed without execution evidence.
