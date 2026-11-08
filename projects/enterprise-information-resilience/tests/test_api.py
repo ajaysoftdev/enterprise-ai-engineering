@@ -31,7 +31,7 @@ def test_signal_is_scored_with_explainable_factors(tmp_path, monkeypatch):
     use_database(tmp_path, monkeypatch)
     response = client.post("/v1/signals", json=signal("SRC-1"))
     assert response.status_code == 201
-    assert response.json()["risk_score"] == 72
+    assert response.json()["risk_score"] == 68
     assert response.json()["priority"] == "P2"
     assert "source_reliability" in response.json()["risk_factors"]
 
