@@ -17,7 +17,7 @@ The project folders are maintained inside this repository; they are not separate
 | 7 | [Agent-Driven Enterprise Operations](agent-driven-enterprise-operations/README.md) | Bounded agents, policy checks and human approvals | CI verified — 7 policy/approval tests passed; no live agent tools connected |
 | 8 | [Enterprise Integration Platform](enterprise-integration-platform/README.md) | APIs, events, routing, orchestration and reliability | CI verified — 6 delivery/retry/DLQ tests passed; no live broker connected |
 | 9 | [Predictive Life Sciences Supply Chain](predictive-life-sciences-supply-chain/README.md) | Supply visibility, lot traceability and risk prediction | CI verified — 6 synthetic risk tests passed; no GxP or live source integration |
-| 10 | [Pharma R&D Data Spine](pharma-rnd-data-spine/README.md) | Research data harmonisation, traceability and lineage | Specified |
+| 10 | [Pharma R&D Data Spine](pharma-rnd-data-spine/README.md) | Research data harmonisation, traceability and lineage | CI verified — 6 synthetic metadata/lineage tests passed; no GxP validation |
 | 11 | [Cloud Data Engineering Platform](cloud-data-engineering-platform/README.md) | Ingestion, lakehouse transformations, quality and FinOps | Specified |
 | 12 | [Autonomous AI Engineering Workbench](autonomous-ai-engineering-workbench/README.md) | Sandboxed coding-agent evaluation and evidence reporting | Specified |
 | 13 | [Third-Party Risk Management](third-party-risk-management/README.md) | Vendor lifecycle, due diligence and fourth-party risk | Specified |
