@@ -40,6 +40,7 @@ The sequence groups projects by reusable foundations and business dependencies. 
 | 13 | Pharma R&D Data Spine | Scientific metadata, sample identity and lineage |
 | 14 | Predictive Life Sciences Supply Chain | Event traceability, features, prediction and planner feedback |
 | 15 | Enterprise Information Resilience | Source evidence, claims, assessments and response governance |
+| 16 | Enterprise Portfolio Integration | Cross-project adapters, idempotent orchestration, stewardship handoff and end-to-end traceability |
 
 ## Shared engineering standards
 
@@ -72,16 +73,17 @@ Avoid creating a central framework prematurely. Extract shared libraries only af
 
 ## Current status
 
-- All 15 project folders retain their project-specific scope, reference sources, implementation architecture, domain contracts and delivery guidance.
-- All 15 projects now have a first executable local prototype slice, API contracts, Docker configuration, automated tests and project-specific GitHub Actions workflows.
-- All 15 current-revision GitHub Actions test workflows completed successfully on Python 3.12: **109 tests passed across the portfolio**.
-- All 15 Docker images built successfully in their respective CI workflows, on the same current prototype revision.
+- The 15 core domain projects retain their project-specific scope, reference sources, implementation architecture, domain contracts and delivery guidance; the sixteenth portfolio integration project now has its own architecture and first vertical slice.
+- All 16 projects now have a first executable local prototype slice, API contracts, Docker configuration, automated tests and project-specific GitHub Actions workflows.
+- All 15 current-revision GitHub Actions test workflows completed successfully on Python 3.12: **119 tests passed across the portfolio**.
+- All 16 Docker images built successfully in their respective CI workflows.
 - This evidence verifies the current synthetic/local prototype slices only. It does not establish production readiness, live enterprise integration, security certification, GxP validation, cloud deployment, performance or regulatory compliance.
 - Every project README records its own CI run, test count and explicit limitations.
 - The Starlette TestClient deprecation warning was resolved by adding `httpx2` to the development dependencies; the latest CI reruns complete without that warning.
-- Portfolio Bandit and `pip-audit --skip-editable` scans passed for all 15 projects in GitHub Actions run 42461092337 after upgrading pytest to 9.0.3. This run was on the Dependabot workflow-update branch based on main commit 5fd42f7; the main-branch rerun is pending. See [Portfolio Security Baseline](PORTFOLIO_SECURITY_BASELINE.md).
-- Request correlation middleware, bounded caller-provided IDs, generated fallback IDs and baseline response headers have been added across all 15 APIs; the new regression tests passed in the current CI runs.
-- MDM stewardship decisions now use a single SQLite transaction for candidate state, decision record and golden-record update; a regression test covers duplicate decisions without partial mutation. CI rerun is pending.
+- Portfolio Bandit and `pip-audit --skip-editable` scans passed for the 15 core projects in GitHub Actions run 42461092337 after upgrading pytest to 9.0.3. The integration project's security scan is pending. See [Portfolio Security Baseline](PORTFOLIO_SECURITY_BASELINE.md).
+- Request correlation middleware, bounded caller-provided IDs, generated fallback IDs and baseline response headers have been added across all 15 core APIs; the new regression tests passed in the current CI runs.
+- MDM stewardship decisions now use a single SQLite transaction for candidate state, decision record and golden-record update; a regression test covers duplicate decisions without partial mutation and passed in CI.
+- The sixteenth project's first vertical slice connects Document Intelligence to MDM through an idempotent supplier-onboarding workflow. Its 10-test suite and Docker build passed, but tests use fake adapters; live HTTP interoperability between the three local services remains pending.
 - Next engineering milestone: resolve security-scan findings, add authentication/authorization and tenant-isolation controls, test concurrent requests and recovery, and add operational telemetry and reproducible deployment verification. Do not create the sixteenth integration project until the fifteen interfaces and controls are sufficiently stable.
 
 ## Current official architecture references
